@@ -121,16 +121,18 @@ class PublicReleaseBuilderTests(unittest.TestCase):
 
     def test_reference_sanitizer_removes_private_roadmap_panel(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
-            path = Path(tmp) / "reference.html"
-            path.write_text(
-                "<main>\n"
-                "    <!-- ==================== ROADMAP TAB ==================== -->\n"
-                "private planning\n"
-                "  </main>\n",
-                encoding="utf-8",
-            )
-            MODULE.sanitize_release_file(path, Path("docs/reference.html"))
-            self.assertEqual(path.read_text(encoding="utf-8"), "<main>\n\n  </main>\n")
+            for filename in ("reference.html", "index.html"):
+                with self.subTest(filename=filename):
+                    path = Path(tmp) / filename
+                    path.write_text(
+                        "<main>\n"
+                        "    <!-- ==================== ROADMAP TAB ==================== -->\n"
+                        "private planning\n"
+                        "  </main>\n",
+                        encoding="utf-8",
+                    )
+                    MODULE.sanitize_release_file(path, Path("docs") / filename)
+                    self.assertEqual(path.read_text(encoding="utf-8"), "<main>\n\n  </main>\n")
 
     def test_build_creates_history_free_filtered_manifest(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

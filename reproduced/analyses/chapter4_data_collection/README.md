@@ -10,7 +10,7 @@ key, or participant records.
 
 For the study design, REDCap/MySQL stack, identity-separation workflow,
 recruitment and retention operations, incentive automation, and field-level
-reference, open the [Study & REDCap Reference](../../../docs/reference.html).
+reference, open the [Study & REDCap Reference](../../../docs/index.html).
 
 ## Input Contract
 

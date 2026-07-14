@@ -24,7 +24,7 @@ Chapter 6 extends this to injunctive norms — perceived approval of risky drink
 
 A Stochastic Actor-Oriented Model (SAOM) jointly models network tie change and behaviour change over time, separating two mechanisms that observational data normally confounds: social selection (do similar drinkers become friends?) and social influence (do friends become similar drinkers?).
 
-The answer is unambiguous in this cohort:
+In this cohort, the fitted model produced these estimates:
 
 | Effect | β | SE | p | Interpretation |
 |---|---|---|---|---|
@@ -36,7 +36,7 @@ The answer is unambiguous in this cohort:
 | Blockmate proximity | 0.80 | 0.22 | <0.001 | Shared block drives tie formation |
 | Density | −2.91 | 0.52 | <0.001 | Network is sparse and selective |
 
-Peer influence is operating, but in a selective social graph — not random mixing. Friendship formation is driven by reciprocity, transitivity, and residential proximity. Strategy should not assume a fully connected population; behaviour change propagates through specific reciprocal clusters.
+The model estimates peer influence within a selective social graph, not random mixing. Friendship formation is associated with reciprocity, transitivity, and residential proximity. Any intervention inference should therefore account for specific reciprocal clusters rather than assume a fully connected population.
 
 ## Annotated Visual
 
@@ -46,7 +46,7 @@ Peer influence is operating, but in a selective social graph — not random mixi
 
 ## Caveats
 
-- Behaviour goodness-of-fit is poor (p<0.001 across all periods), largely because the SAOM cannot capture the bimodal AUDIT-C distribution — non-drinkers (score 0) behave differently from the continuous-drinking majority.
-- Network measurement began one month after arrival. Early preferential attachment dynamics may have already resolved by Wave 2. The negative indegree popularity effect (β=−0.32, p=0.09) may be an artefact of this timing.
-- Single residence hall in South Yorkshire (255 of 375 invited, 68% response rate; 87% retention across 6 waves). UK binge-drinking rates (80% monthly at the October peak) far exceed comparable US cohorts, limiting cross-cultural generalisability.
+- Behaviour goodness-of-fit is poor (p<0.001 across all periods). The model poorly captures the zero-heavy, non-evenly distributed AUDIT-C outcome, especially non-drinker dynamics.
+- Network measurement began one month after arrival, so the analysis cannot test drinking-based friendship selection during the first days and weeks.
+- Single residence hall in South Yorkshire (255 of 375 invited enrolled; Chapter 7 analytic cohort N=247; 223 Wave 6 respondents, or 87% final-wave retention). UK binge-drinking rates (80% monthly at the October peak) far exceed comparable US cohorts, limiting cross-cultural generalisability.
 - Self-reported alcohol data introduce possible social-desirability and recall bias despite confidentiality and pseudonymisation controls.

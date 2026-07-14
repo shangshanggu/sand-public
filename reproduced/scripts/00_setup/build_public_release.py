@@ -178,7 +178,7 @@ def audit_tree(root: Path) -> list[str]:
 
 def sanitize_release_file(path: Path, rel: Path) -> None:
     """Remove private-only sections from files that also serve public readers."""
-    if rel.as_posix() != "docs/reference.html":
+    if rel.as_posix() not in {"docs/reference.html", "docs/index.html"}:
         return
     text = path.read_text(encoding="utf-8")
     start_marker = "    <!-- ==================== ROADMAP TAB ==================== -->"
@@ -188,7 +188,7 @@ def sanitize_release_file(path: Path, rel: Path) -> None:
         return
     end = text.find(end_marker, start)
     if end == -1:
-        raise SystemExit("Could not locate the private roadmap section in docs/reference.html")
+        raise SystemExit(f"Could not locate the end of the private roadmap section in {rel.as_posix()}")
     path.write_text(text[:start] + text[end:], encoding="utf-8")
 
 

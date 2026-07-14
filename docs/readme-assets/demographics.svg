@@ -11,7 +11,7 @@
   <text x="140" y="155" text-anchor="middle" font-size="11" fill="#666">enrolled</text>
   <line x1="80" y1="168" x2="200" y2="168" stroke="#f0f0f0" stroke-width="1"/>
   <text x="140" y="186" text-anchor="middle" font-size="10" fill="#aaa">375 targeted (68%)</text>
-  <text x="140" y="202" text-anchor="middle" font-size="10" fill="#59A14F">87% retention</text>
+  <text x="140" y="202" text-anchor="middle" font-size="10" fill="#59A14F">87% final-wave retention</text>
 
   <!-- Card 2: Age -->
   <rect x="265" y="70" width="200" height="150" rx="6" fill="none" stroke="#e0e0e0" stroke-width="1"/>

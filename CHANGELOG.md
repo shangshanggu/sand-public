@@ -1,7 +1,7 @@
 # Changelog
 
 All notable changes to the public SAND research object will be documented here.
-The project has not yet issued a public release.
+The project has not yet issued a versioned release.
 
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
@@ -23,6 +23,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - A reviewer-facing SAND study book and thesis-to-code crosswalk.
 - Visible and machine-readable provenance on generated network HTML, with a
   privacy guard that rejects unlabelled network pages.
+- Post-publication evidence for the successful first hosted CI run and
+  signed-out repository and website checks.
 
 ### Changed
 
@@ -38,6 +40,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Moved optional `networkDynamic`/`ndtv` animation tooling out of the Conda core
   after confirming that `r-networkdynamic` is unavailable from the declared
   channels; the maintained Chapters 4–7 environment now resolves cleanly.
+- Split the MIT code licence from the CC BY 4.0 documentation licence so the
+  repository's software licence is machine-detectable.
 
 ### Fixed
 
@@ -51,6 +55,13 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   concrete environment and output checks.
 - Aligned README study values and chapter status with the thesis and maintained
   code paths.
+- Aligned the public baseline AUDIT-C value with Chapter 5 Table 1 and the
+  submitted writing sample (4.8 rather than 4.9).
+- Distinguished the 255 enrolled participants from the Chapter 7 analytic
+  cohort of 247 full participants.
+- Removed the internal roadmap panel from the public site and made the release
+  sanitizer recognise both the legacy `docs/reference.html` and current
+  `docs/index.html` filenames.
 
 ### Security
 

@@ -2,7 +2,7 @@
 
 ## Public Materials
 
-The intended public release contains analysis code, configuration, environment definitions, documentation, a schema inventory, and a generator for synthetic proxy data. These materials support inspection and execution without distributing participant records.
+The public repository contains analysis code, configuration, environment definitions, documentation, a schema inventory, and a generator for synthetic proxy data. These materials support inspection and execution without distributing participant records.
 
 ## Protected Participant Data
 
@@ -11,8 +11,8 @@ The repository does not distribute the SAND participant dataset. It contains sen
 The analysis expects approved users to stage the protected analysis-facing wave
 bundle locally under `reproduced/data/raw/`. That bundle is assembled downstream
 of controlled REDCap CSV exports. Git ignores the directory. The public
-repository will not promise a data-access route until the data controller,
-consent conditions, and review procedure have been confirmed.
+repository does not promise a data-access route because the data controller,
+consent conditions, and review procedure have not been confirmed.
 
 ## Ethics and Governance
 

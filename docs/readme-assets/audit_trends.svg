@@ -2,7 +2,7 @@
 
   <!-- Title -->
   <text x="600" y="28" text-anchor="middle" font-size="15" font-weight="600" fill="#333" letter-spacing="0.3">AUDIT-C Scores Across Survey Waves</text>
-  <text x="600" y="46" text-anchor="middle" font-size="11" fill="#888">Mean surged from 4.9 to 7.4 in the first month, then gradually declined but never returned to baseline</text>
+  <text x="600" y="46" text-anchor="middle" font-size="11" fill="#888">Mean surged from 4.8 to 7.4 in the first month, then gradually declined but never returned to baseline</text>
 
   <!-- Chart area: y-axis 70–420, x-axis 140–1080 -->
   <!-- Scale: 0–12, height 350px, each unit = 29.17px -->
@@ -29,30 +29,30 @@
 
   <!-- X positions: W1=220, W2=380, W3=530, W4=680, W5=830, W6=1020 -->
   <!-- Y = 420 - score * 29.17 -->
-  <!-- W1: 4.9 → 277.1, W2: 7.4 → 204.1, W3: 6.7 → 224.6, W4: 6.5 → 230.4, W5: 6.4 → 233.3, W6: 6.7 → 224.6 -->
+  <!-- W1: 4.8 → 280.0, W2: 7.4 → 204.1, W3: 6.7 → 224.6, W4: 6.5 → 230.4, W5: 6.4 → 233.3, W6: 6.7 → 224.6 -->
   <!-- Medians: W1: 5 → 274.2, W2: 8 → 186.7, W3-6: 7 → 215.8 -->
 
   <!-- SD band (mean +/- 1 SD) -->
-  <!-- W1: 4.9±2.8 → upper=2.1(358.7) lower=7.7(195.3) -->
+  <!-- W1: 4.8±2.8 → upper=2.0(361.7) lower=7.6(198.3) -->
   <!-- W2: 7.4±3.0 → upper=4.4(291.6) lower=10.4(116.6) -->
   <!-- W3: 6.7±3.0 → upper=3.7(312.1) lower=9.7(137.1) -->
   <!-- W4: 6.5±3.1 → upper=3.4(320.8) lower=9.6(140.0) -->
   <!-- W5: 6.4±3.1 → upper=3.3(323.7) lower=9.5(142.9) -->
   <!-- W6: 6.7±2.9 → upper=3.8(309.2) lower=9.6(140.0) -->
-  <polygon points="220,195.3 380,116.6 530,137.1 680,140.0 830,142.9 1020,140.0 1020,309.2 830,323.7 680,320.8 530,312.1 380,291.6 220,358.7" fill="#4E79A7" fill-opacity="0.07" stroke="none"/>
+  <polygon points="220,198.3 380,116.6 530,137.1 680,140.0 830,142.9 1020,140.0 1020,309.2 830,323.7 680,320.8 530,312.1 380,291.6 220,361.7" fill="#4E79A7" fill-opacity="0.07" stroke="none"/>
 
   <!-- Mean area fill -->
-  <polygon points="220,277.1 380,204.1 530,224.6 680,230.4 830,233.3 1020,224.6 1020,420 830,420 680,420 530,420 380,420 220,420" fill="#4E79A7" fill-opacity="0.05" stroke="none"/>
+  <polygon points="220,280.0 380,204.1 530,224.6 680,230.4 830,233.3 1020,224.6 1020,420 830,420 680,420 530,420 380,420 220,420" fill="#4E79A7" fill-opacity="0.05" stroke="none"/>
 
   <!-- Mean line -->
-  <polyline points="220,277.1 380,204.1 530,224.6 680,230.4 830,233.3 1020,224.6" fill="none" stroke="#4E79A7" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+  <polyline points="220,280.0 380,204.1 530,224.6 680,230.4 830,233.3 1020,224.6" fill="none" stroke="#4E79A7" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
 
   <!-- Median line (dashed) -->
   <polyline points="220,274.2 380,186.7 530,215.8 680,215.8 830,215.8 1020,215.8" fill="none" stroke="#76B7B2" stroke-width="1.5" stroke-dasharray="5,3" stroke-linejoin="round"/>
 
   <!-- Data points -->
-  <circle cx="220" cy="277.1" r="5" fill="#4E79A7" stroke="#fff" stroke-width="1.5"/>
-  <text x="220" y="267" text-anchor="middle" font-size="11" font-weight="600" fill="#4E79A7">4.9</text>
+  <circle cx="220" cy="280.0" r="5" fill="#4E79A7" stroke="#fff" stroke-width="1.5"/>
+  <text x="220" y="270" text-anchor="middle" font-size="11" font-weight="600" fill="#4E79A7">4.8</text>
 
   <circle cx="380" cy="204.1" r="5" fill="#F28E2B" stroke="#fff" stroke-width="1.5"/>
   <text x="380" y="194" text-anchor="middle" font-size="11" font-weight="600" fill="#F28E2B">7.4</text>
@@ -85,7 +85,7 @@
 
   <!-- Spike annotation -->
   <path d="M 300,195 L 300,210" stroke="#E15759" stroke-width="1" stroke-dasharray="2,2"/>
-  <text x="300" y="190" text-anchor="middle" font-size="9" fill="#E15759" font-weight="500">+51%</text>
+  <text x="300" y="190" text-anchor="middle" font-size="9" fill="#E15759" font-weight="500">+54%</text>
 
   <!-- Legend -->
   <line x1="200" y1="490" x2="225" y2="490" stroke="#4E79A7" stroke-width="2.5"/>

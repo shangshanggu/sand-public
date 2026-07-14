@@ -8,7 +8,7 @@ This contract defines what “publishable and open science” means for SAND. Pu
 
 ## Release Object
 
-The clean public repository will include:
+The clean public repository includes:
 
 - maintained Chapters 4–7 code, with a verified Chapters 4–6 public fast path
   and Chapter 7 explicitly marked as a partial manual diagnostic;
@@ -21,7 +21,7 @@ The clean public repository will include:
 - a licence confirmed by the rights holder;
 - a release manifest, with a versioned archive planned after publication.
 
-It will exclude participant data, credentials, private Git history, internal project-management files, agent instructions, personal notes, and unvalidated Chapter 8 claims.
+It excludes participant data, credentials, private Git history, internal project-management files, agent instructions, personal notes, and unvalidated Chapter 8 claims.
 
 This is a retrospective reproducibility release, not a preregistration. The
 repository must not imply that the study or analyses were registered before
@@ -67,9 +67,13 @@ data collection or inspection.
 - [x] Build a curated public tree without development history.
 - [x] Test relative links, citation metadata, and the locked installation and
       Chapters 4–6 commands in the exact history-free public tree.
-- [ ] Run the hosted fast CI workflow after the repository is published.
+- [x] Run the hosted fast CI workflow after publication; the first public run
+      passed environment restore, tests, and Chapters 4–6 proxy verification
+      ([run 29366951200](https://github.com/shangshanggu/sand-public/actions/runs/29366951200)).
 - [ ] Build and test the optional Docker image when a daemon is available.
-- [ ] Test the public repository and website while signed out.
+- [x] Test the public repository and website while signed out; both returned
+      successfully on 14 July 2026, and the hosted page matched
+      `docs/index.html` byte for byte.
 - [ ] Create and test the versioned release archive after publication.
 - [ ] Tag and archive after the applicable publication gates above pass.
 

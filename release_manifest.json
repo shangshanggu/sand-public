@@ -1,6 +1,6 @@
 {
-  "release_state": "unversioned-candidate",
-  "file_count": 130,
+  "release_state": "public-unversioned",
+  "file_count": 132,
   "files": [
     {
       "path": ".Rprofile",
@@ -24,7 +24,7 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "c0344598c070b839c25769984bf2357e782de7aedb89582d2c84953a527bcb07"
+      "sha256": "66cedb78e8289e1907fe840395567dc3b3bdfbc540bf1d621d6f92cdee493e2e"
     },
     {
       "path": "CITATION.cff",
@@ -36,7 +36,7 @@
     },
     {
       "path": "DATA_AVAILABILITY.md",
-      "sha256": "22e4e862e8391c23cfc722b678a9d5dd89eebbc119d9a4100efec56f9917f6c1"
+      "sha256": "435495b74afb489ef72a34328239f22af845e11751f8e35e193124e2e62c9d7c"
     },
     {
       "path": "Dockerfile",
@@ -44,7 +44,11 @@
     },
     {
       "path": "LICENSE",
-      "sha256": "6ad9107eae71dfd7119adeb1c92818f282c0ae3ccca8d0ca07cb5554fe91d3d9"
+      "sha256": "37fdd20dc297cba2a7e39301a83cd956ff973888f6ce3b8321a873d8b2488a33"
+    },
+    {
+      "path": "LICENSE-docs",
+      "sha256": "694b75823bc4386d9639b430bd041cffcc6f1c5059e3d055ae2ec7388ae6df31"
     },
     {
       "path": "Makefile",
@@ -52,19 +56,27 @@
     },
     {
       "path": "README.md",
-      "sha256": "f7ff539c2928a9f2388d3e3b8a60374814ca3bc2953ca2aed721617a6db90846"
+      "sha256": "f26309e1185bc10244ff616f99c2601d6b207959afc2c84e8cd0312126b13264"
     },
     {
       "path": "SECURITY.md",
       "sha256": "dad23345557ac179f4e5e4e0a478f0d0ac3eb79b4415835a0bd6e8982c2838f1"
     },
     {
+      "path": "docs/CNAME",
+      "sha256": "38c84b0f1c3971a8aa1ece5a4de46af7b66c3d4b25e875994aadc609c6d3b016"
+    },
+    {
+      "path": "docs/index.html",
+      "sha256": "272045f0ab934e4dc4df32bec815d450bf34cbc81f274cc13eec6d5f54ffcaf2"
+    },
+    {
       "path": "docs/readme-assets/audit_trends.svg",
-      "sha256": "8a5d2e2ae183d53a4d01f665c23f4e233a7dce93274d74db15b213b30f3faf29"
+      "sha256": "3494bd73b0ecb884cf760ca721f5838c9cffce377b6cd23fda620b8e39e4d614"
     },
     {
       "path": "docs/readme-assets/demographics.svg",
-      "sha256": "ee9eb3b95ef530d348ebac8af8831d322b979c38f90d2a8b2af0e293ec0c7aa8"
+      "sha256": "e9dc84104e9a8fbbd2c058c7a22c99094a39b12a83e063fa78e1b589b2c3d175"
     },
     {
       "path": "docs/readme-assets/misperception_shifts.svg",
@@ -76,11 +88,7 @@
     },
     {
       "path": "docs/readme-assets/study_timeline.svg",
-      "sha256": "77106a0dde3ea92da017913c83e93be0f8fe4ff73407d44d4266ffbf5efa712a"
-    },
-    {
-      "path": "docs/reference.html",
-      "sha256": "48b47e28f8a0c227be45965464f3210f41f38b1886e5b11fe97abc8eda0855fb"
+      "sha256": "3c36be1a4a43e9e8424cce4a899275d4eba3a9f512e7fef7699e2046eb2e9205"
     },
     {
       "path": "reproduced/.Rprofile",
@@ -108,7 +116,7 @@
     },
     {
       "path": "reproduced/analyses/chapter4_data_collection/README.md",
-      "sha256": "62bb3ad6f1e6b1c25c45bad94ac7ece61b7ed09dae5aaafb6d683faf5058351d"
+      "sha256": "fd36b8b1fb07c0bbcc98e57b784828ec43cf25b910e196c9ec0c2b32acaa2bff"
     },
     {
       "path": "reproduced/analyses/chapter4_data_collection/scripts/01_data_preparation_norms.R",
@@ -292,15 +300,15 @@
     },
     {
       "path": "reproduced/docs/portfolio/case_study.md",
-      "sha256": "89b9555701e5528d465ba342ec98462bbb0479e2b2173f04a3912e6b1b5be299"
+      "sha256": "15a72a93cf833eb8fa61c63c508dd3ff098abe7da58ab6b00f2fc056923880db"
     },
     {
       "path": "reproduced/docs/portfolio/findings_summary.md",
-      "sha256": "673c451fd145fef4ff20cf5336ecaeb4946a4eeaae104569a2d865510fb59c60"
+      "sha256": "879bddc375ed006936766cbfa27fb25079e36e1198ad36943e739400ef7c9943"
     },
     {
       "path": "reproduced/docs/portfolio/sand_study_book.md",
-      "sha256": "e8a0daf1df9a3c9c4084a62fd5c11df1a13ec459eeb5e6c7aeb50755b1cbe77f"
+      "sha256": "981b96055b13fde740fffd5f59f5f9b6e9fbb2f0e0e92e36a3558c70546723d1"
     },
     {
       "path": "reproduced/docs/references/README.md",
@@ -324,7 +332,7 @@
     },
     {
       "path": "reproduced/docs/references/open_science_release_contract.md",
-      "sha256": "3f37b081c47439c1bfa1bc67bf8a2128bbcb02fb95912e01ebae80873b4f2e62"
+      "sha256": "35e267b0322a46592a82cc31dafb1781bdd43ab4f4af2dc3f9a7e432d5a850f9"
     },
     {
       "path": "reproduced/docs/references/quan_results.md",
@@ -336,7 +344,7 @@
     },
     {
       "path": "reproduced/docs/status/2026-07-14_public_release_verification.md",
-      "sha256": "48fc522133b3baa6b11bba48916249db97c8f47c3d6e8641e185e4c6ae0e3516"
+      "sha256": "edcd4d4108f1fc8ba4ac9aedbb5b8f2bc3f9120f036fe47feb81d1febd2ae86b"
     },
     {
       "path": "reproduced/environment.yml",
@@ -364,7 +372,7 @@
     },
     {
       "path": "reproduced/scripts/00_setup/build_public_release.py",
-      "sha256": "ac0f97826977df2c9ef0c1d66e10ff2ba47993b2226584d49c00b5b7bd45a2a4"
+      "sha256": "36c7d8889f1e5bf4db26fd66545bc770941880bb1c0f919443b1140faee1c538"
     },
     {
       "path": "reproduced/scripts/00_setup/create_realistic_proxy_data.R",
@@ -516,7 +524,7 @@
     },
     {
       "path": "reproduced/tests/test_build_public_release.py",
-      "sha256": "5694d29843ec77fa1000810fb3e1edc1a3e0b7ee3951cb09e6c9d12d1a4daf7a"
+      "sha256": "0522acf041a5e6fe47825c004f8bd1c8d9ca6d455abe2235dfb0e237e9fcc265"
     },
     {
       "path": "reproduced/tests/test_verify_outputs.py",

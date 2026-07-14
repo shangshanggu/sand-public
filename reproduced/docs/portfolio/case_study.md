@@ -8,7 +8,7 @@ University students make decisions about drinking in a social environment where 
 
 This matters because interventions are designed differently depending on the answer. If behaviour change is mostly selection — people choosing similar friends — then interventions should target early grouping conditions. If change is mostly influence — friends shifting each other after ties form — then interventions should target network-level diffusion and timing.
 
-The thesis data follows 255 first-year students (68% of 375 invited; 87% retention across all six waves) in a single UK residence hall (8 blocks, 45 flats) across six survey waves from September 2022 to October 2023, with repeated measurements of friendship nominations (up to 10 per wave via the Important People Instrument), AUDIT-C drinking scores (0–12), and perceived norms at both peer and global levels. That longitudinal structure allows the pipeline to move beyond cross-sectional correlation and model behaviour as a dynamic social process.
+The study enrolled 255 first-year students (68% of 375 invited) in a single UK residence hall (8 blocks, 45 flats) across six survey waves from September 2022 to October 2023. Wave 6 included 223 respondents, giving 87% final-wave retention; participation across follow-up waves ranged from 84% to 88%. Eight supplied no alcohol-use or social-network data, so the Chapter 7 SAOM focuses on 247 full participants; 238–244 contributed observations in each modelled wave. Repeated friendship nominations (up to 10 per wave via the Important People Instrument), AUDIT-C drinking scores (0–12), and perceived norms at peer and global levels allow the pipeline to model behaviour as a dynamic social process rather than a cross-sectional correlation.
 
 ## What the Pipeline Reproduces
 
@@ -37,14 +37,14 @@ The Chapter 7 SAOM jointly models network tie change and behaviour change, separ
 - Average similarity effect: β=1.88 (SE=0.68, p<0.01), standardised OR=1.17 (95% CI: 1.05–1.31). Students were 17% more likely to adjust their drinking one unit closer to their friends' average than to maintain their current level.
 - Social selection on AUDIT-C: not significant (ego β=−0.04, p=0.18; alter β=0.03, p=0.35; similarity β=−0.08, p=0.88). Drinking habits did not predict friendship formation.
 
-The network itself is shaped by structural forces: reciprocity (β=2.70, p<0.001), transitive triplets (β=0.78, p<0.001), flatmate proximity (β=0.76, p<0.001), and blockmate proximity (β=0.80, p<0.001). A negative indegree popularity effect (β=−0.32, p=0.09) suggests network consolidation rather than preferential attachment — though this may reflect the study's first measurement occurring one month after arrival, after initial formation dynamics had already played out.
+The network itself is shaped by structural forces: reciprocity (β=2.70, p<0.001), transitive triplets (β=0.78, p<0.001), flatmate proximity (β=0.76, p<0.001), and blockmate proximity (β=0.80, p<0.001). Because network measurement began one month after arrival, the model cannot test drinking-based selection during the first days and weeks when many relationships formed.
 
 Convergence was good: overall max convergence ratio ≤0.10, Jaccard indices 0.66–0.81 between consecutive waves.
 
 ## Honest Limitations
 
-- Behaviour goodness-of-fit is poor across all periods (p<0.001), driven by the model's inability to capture non-drinker dynamics. AUDIT-C has a bimodal distribution with a substantial zero mass that violates SAOM's continuous-behaviour assumption.
-- Network data collection began in October (Wave 2), missing the critical first-week formation period where preferential attachment may have operated. The negative indegree popularity effect may be an artefact of this timing.
+- Behaviour goodness-of-fit is poor across all periods (p<0.001). The model poorly captures the zero-heavy, non-evenly distributed AUDIT-C outcome, especially non-drinker dynamics.
+- Network data collection began in October (Wave 2), missing the first days and weeks when drinking-based friendship selection may have occurred.
 - Single-hall design in South Yorkshire. UK drinking culture differs substantially from US campus norms — 80% monthly binge drinking at the October peak — so findings may not generalise to other residential settings or universities with different drinking cultures.
 - 68% response rate (255 of 375 invited). Missing network data could bias tie-formation estimates.
 - Self-reported alcohol data introduce possible social-desirability and recall bias despite confidentiality, pseudonymisation, and REDCap access controls.

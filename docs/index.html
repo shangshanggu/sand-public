@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SAND — Sheffield Alcohol &amp; Network Dynamics</title>
+<title>The SAND Study</title>
 <link rel="icon" href="https://www.shangshanggu.com/favicon.ico">
 <link rel="icon" type="image/png" href="https://www.shangshanggu.com/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -61,7 +61,7 @@
     display: flex; align-items: center; justify-content: space-between;
   }
   .sidebar-header-left { display: flex; flex-direction: column; }
-  .sidebar-header h1 { font-size: 16px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); }
+  .sidebar-header h1 { font-size: 16px; font-weight: 700; letter-spacing: 0.3px; color: var(--accent); }
   .sidebar-header .subtitle { font-size: 11px; color: var(--text-muted); margin-top: 3px; letter-spacing: 0.3px; }
   .sidebar-links { display: flex; gap: 10px; margin-top: 8px; }
   .sidebar-links a { color: var(--text-muted); text-decoration: none; transition: color 0.15s; display: inline-flex; }
@@ -192,7 +192,7 @@
   <nav class="sidebar">
     <div class="sidebar-header">
       <div class="sidebar-header-left">
-        <h1>SAND</h1>
+        <h1>The SAND Study</h1>
         <div class="subtitle">Sheffield Alcohol &amp; Network Dynamics</div>
         <div class="sidebar-links">
           <a href="https://github.com/shangshanggu/sand-public" target="_blank" rel="noopener" title="GitHub repository"><svg viewBox="0 0 16 16" fill="currentColor" width="16" height="16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
@@ -209,8 +209,8 @@
 
       <!-- Study TOC -->
       <div class="sidebar-toc" data-sidebar="study">
-<a href="#study-sand" class="toc-item toc-level-1">Study</a>
-<a href="#my-contribution" class="toc-item toc-level-2">My Contribution</a>
+<a href="#overview-sand" class="toc-item toc-level-1">Overview</a>
+<a href="#project-context" class="toc-item toc-level-2">Project Context</a>
 <a href="#overview" class="toc-item toc-level-2">1. Overview</a>
 <a href="#study-design" class="toc-item toc-level-2">2. Study Design</a>
 <a href="#wave-map" class="toc-item toc-level-3">2.1 Wave Map</a>
@@ -296,12 +296,6 @@
 <a href="#check-inventory" class="toc-item toc-level-2">7. Check Inventory</a>
 <a href="#determinism" class="toc-item toc-level-2">8. Determinism</a>
       </div>
-      <!-- Roadmap TOC -->
-      <div class="sidebar-toc hidden" data-sidebar="roadmap">
-<a href="#roadmap-sand" class="toc-item toc-level-1">Roadmap</a>
-<a href="#rm-completed" class="toc-item toc-level-2">1. Completed</a>
-<a href="#rm-next" class="toc-item toc-level-2">2. Next</a>
-      </div>
     </div>
   </nav>
 
@@ -309,14 +303,13 @@
     <div class="content-header">
       <div class="content-tabs">
         <div class="content-tabs-left">
-          <button class="content-tab-study active" data-tab="study">Study</button>
+          <button class="content-tab-study active" data-tab="study">Overview</button>
         </div>
         <div class="content-tabs-sep"></div>
         <div class="content-tabs-right">
           <button class="content-tab" data-tab="infra">Infra</button>
           <button class="content-tab" data-tab="pipeline">Pipeline</button>
           <button class="content-tab" data-tab="release">Release</button>
-          <button class="content-tab" data-tab="roadmap">Roadmap</button>
         </div>
       </div>
     </div>
@@ -324,16 +317,15 @@
     <!-- ==================== STUDY TAB ==================== -->
     <div class="tab-panel active" data-panel="study">
 
-<h1 id="study-sand" class="section-header" data-level="1">Study</h1>
-<blockquote>255 students &middot; 6 survey waves &middot; 87% retention &middot; Sep 2022 &ndash; Oct 2023<br>Social networks, alcohol use, and norm perceptions in a UK residence hall.<br><em>A narrative study book is available at <a href="https://shangshanggu.com/sand">shangshanggu.com/sand</a>. This tab provides the compact technical reference.</em></blockquote>
+<h1 id="overview-sand" class="section-header" data-level="1">Overview</h1>
 <hr>
 
-<h2 id="my-contribution" class="section-header" data-level="2">My Contribution</h2>
-<p>SAND is the product of my PhD research at the University of Sheffield (2021&ndash;2025). I designed the study, built the data-collection infrastructure from bare university VMs, recruited and retained 255 participants across six longitudinal waves, conducted all analysis, and wrote the thesis. Every component documented here&mdash;the REDCap architecture, the identity-separation protocol, the recruitment operations, the reproducible analysis pipeline, and this open-science release&mdash;is my own work as a sole researcher, supervised but not co-developed.</p>
+<h2 id="project-context" class="section-header" data-level="2">Project Context</h2>
+<p>SAND is the product of my PhD research at the University of Sheffield (2021&ndash;2025). I designed the study, built the data-collection infrastructure from bare university VMs, recruited 255 participants, achieved 87% final-wave retention (223 of 255 baseline participants), conducted all analysis, and wrote the thesis. Every component documented here&mdash;the REDCap architecture, the identity-separation protocol, the recruitment operations, the reproducible analysis pipeline, and this open-science release&mdash;was developed through my PhD research and subsequent Wellcome-funded Transition Grant position, with supervisory guidance.</p>
 <hr>
 
 <h2 id="overview" class="section-header" data-level="2">1. Overview</h2>
-<p>SAND followed 255 first-year students (from 375 invited) in one UK residence hall across six survey waves. Repeated alcohol-use measures and sociocentric important-peer nominations answered three questions:</p>
+<p>SAND enrolled 255 first-year students (from 375 invited) in one UK residence hall across six survey waves. Eight supplied no alcohol-use or social-network data, so the Chapter 7 SAOM focuses on 247 full participants; 238&ndash;244 contributed observations in each modelled wave. Repeated alcohol-use measures and sociocentric important-peer nominations answered three questions:</p>
 <ol>
   <li>How does drinking change after students move into halls?</li>
   <li>How do perceived norms (what students think peers drink and approve of) relate to personal consumption?</li>
@@ -349,6 +341,7 @@
 <tr><td>Setting</td><td>One university-managed residence hall in a UK city</td></tr>
 <tr><td>Invited population</td><td>375 first-year residents</td></tr>
 <tr><td>Enrolled sample</td><td>255 students</td></tr>
+<tr><td>Chapter 7 analytic cohort</td><td>247 full participants; 238&ndash;244 observed per modelled wave</td></tr>
 <tr><td>Survey waves</td><td>6 waves, September 2022 &ndash; October 2023</td></tr>
 <tr><td>Network nominations</td><td>Up to 10 important-peer nominations per participant from Wave 2</td></tr>
 <tr><td>Behaviour outcome</td><td>AUDIT-C score (range 0&ndash;12)</td></tr>
@@ -381,7 +374,7 @@
 <div style="overflow-x:auto; margin:12px 0;">
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 380" width="100%" style="max-width:1000px;" font-family="'Source Sans 3', 'Segoe UI', sans-serif">
   <text x="600" y="30" text-anchor="middle" font-size="15" font-weight="600" fill="currentColor" letter-spacing="0.3">Study Timeline</text>
-  <text x="600" y="50" text-anchor="middle" font-size="11" fill="var(--text-muted)">375 targeted &middot; 255 enrolled (68%) &middot; 87% retention &middot; Single residence hall, a UK university town</text>
+  <text x="600" y="50" text-anchor="middle" font-size="11" fill="var(--text-muted)">375 targeted &middot; 255 enrolled (68%) &middot; 87% final-wave retention &middot; Single residence hall, a UK university town</text>
   <rect x="80" y="65" width="620" height="250" fill="var(--table-stripe)" rx="4"/>
   <rect x="700" y="65" width="420" height="250" fill="var(--bg)" rx="4"/>
   <text x="390" y="82" text-anchor="middle" font-size="10" fill="var(--text-muted)" font-weight="500">Year 1</text>
@@ -412,7 +405,7 @@
   <text x="1050" y="147" text-anchor="middle" font-size="9" fill="var(--text-muted)">NAM T3</text>
   <text x="1050" y="205" text-anchor="middle" font-size="9" fill="var(--text-muted)">Oct 2023</text>
   <path d="M 150,130 Q 230,105 310,130" fill="none" stroke="#E15759" stroke-width="1.2" stroke-dasharray="3,2"/>
-  <text x="230" y="100" text-anchor="middle" font-size="9" fill="#E15759" font-weight="500">Freshers&rsquo; spike (4.9 &rarr; 7.4)</text>
+  <text x="230" y="100" text-anchor="middle" font-size="9" fill="#E15759" font-weight="500">Freshers&rsquo; spike (4.8 &rarr; 7.4)</text>
   <line x1="310" y1="240" x2="310" y2="252" stroke="var(--text-muted)" stroke-width="1"/>
   <line x1="610" y1="240" x2="610" y2="252" stroke="var(--text-muted)" stroke-width="1"/>
   <line x1="800" y1="240" x2="800" y2="252" stroke="var(--text-muted)" stroke-width="1"/>
@@ -432,14 +425,14 @@
 <div class="table-wrap"><table>
 <thead><tr><th>Wave</th><th>Timing</th><th>NAM N</th><th>Jaccard</th><th>Mean AUDIT-C</th><th>SD</th></tr></thead>
 <tbody>
-<tr><td>W1 (baseline)</td><td>Sep 2022</td><td>255</td><td>&mdash;</td><td>4.9</td><td>2.8</td></tr>
+<tr><td>W1 (baseline)</td><td>Sep 2022</td><td>255</td><td>&mdash;</td><td>4.8</td><td>2.8</td></tr>
 <tr><td>W2</td><td>Oct 2022</td><td>218</td><td>&mdash;</td><td>7.4</td><td>3.0</td></tr>
 <tr><td>W3</td><td>Nov 2022</td><td>&mdash;</td><td>&mdash;</td><td>6.7</td><td>3.0</td></tr>
 <tr><td>W4</td><td>Dec 2022</td><td>&mdash;</td><td>0.67</td><td>6.5</td><td>3.1</td></tr>
 <tr><td>W5</td><td>Mar 2023</td><td>213</td><td>0.81</td><td>6.4</td><td>3.1</td></tr>
 <tr><td>W6</td><td>Oct 2023</td><td>215</td><td>0.66</td><td>6.7</td><td>2.9</td></tr>
 </tbody></table></div>
-<p>NAM N is the analysis sample after listwise deletion for the descriptive norm models (Chapter 5). Jaccard indices measure wave-to-wave network stability; all exceed RSiena&rsquo;s 0.30 threshold. Overall retention across the study was 87%.</p>
+<p>NAM N is the analysis sample after listwise deletion for the descriptive norm models (Chapter 5). Jaccard indices measure wave-to-wave network stability; all exceed RSiena&rsquo;s 0.30 threshold. Final-wave retention was 87% (223 Wave 6 respondents divided by 255 baseline participants); participation across follow-up waves ranged from 84% to 88%.</p>
 
 <h3 id="data-infrastructure" class="section-header" data-level="3">2.5 Data Collection Infrastructure</h3>
 <p>Data were collected via REDCap hosted on a university-managed Linux/Apache/MySQL/SSL stack. Two linked REDCap projects separated contact data from survey responses. The identity manager resolved names to pseudonymous IDs; the researcher exported only coded, de-identified data. The staged export (<code>list_by_wave.RData</code>) is the single input to the analysis pipeline.</p>
@@ -449,7 +442,7 @@
 <h2 id="key-findings" class="section-header" data-level="2">3. Key Findings</h2>
 
 <h3 id="ch4-drinking-trends" class="section-header" data-level="3">3.1 Drinking Trends and Demographics (Chapter 4)</h3>
-<p>In this sample, mean AUDIT-C rose from 4.9 (pre-university baseline) to 7.4 one month after arrival. At the October peak, 80% reported monthly binge drinking and 60% weekly. Scores declined over the academic year but did not return to baseline.</p>
+<p>In this sample, mean AUDIT-C rose from 4.8 (pre-university baseline) to 7.4 one month after arrival. At the October peak, 80% reported monthly binge drinking and 60% weekly. Scores declined over the academic year but did not return to baseline.</p>
 
 <h3 id="ch5-descriptive-norms" class="section-header" data-level="3">3.2 Descriptive Norm Misperception (Chapter 5)</h3>
 <p>In all waves, participants overestimated typical-resident drinking by 1.5&ndash;1.7 AUDIT-C points. NAM estimates showed a shift in which referent predicted personal consumption:</p>
@@ -482,7 +475,7 @@
 <h3 id="ch7-selection-influence" class="section-header" data-level="3">3.4 Social Selection &amp; Influence (Chapter 7)</h3>
 <p>The SAOM models network tie change and behaviour change jointly, separating two processes:</p>
 <p><strong>Social selection</strong> (similar drinkers become friends?): AUDIT-C similarity (&beta;=&minus;0.08, p=0.88), ego (&beta;=&minus;0.04, p=0.18), and alter (&beta;=0.03, p=0.35) were all non-significant. The model found no evidence that drinking similarity predicted tie formation.</p>
-<p><strong>Social influence</strong> (friends become similar drinkers?): The average similarity effect was significant (&beta;=1.88, p&lt;0.01), yielding an odds ratio of 1.17 (95% CI: 1.05&ndash;1.31). Under the model, students were 17% more likely to shift their drinking one unit toward their friends&rsquo; average than to hold steady.</p>
+<p><strong>Social influence</strong> (friends become similar drinkers?): The fitted model found evidence of influence. The average similarity effect was significant (&beta;=1.88, p&lt;0.01), yielding an odds ratio of 1.17 (95% CI: 1.05&ndash;1.31). Under the model, students were 17% more likely to shift their drinking one unit toward their friends&rsquo; average than to hold steady.</p>
 <div class="table-wrap"><table>
 <thead><tr><th>Effect</th><th>&beta;</th><th>SE</th><th>p</th><th>Interpretation</th></tr></thead>
 <tbody>
@@ -566,7 +559,7 @@
 <div class="table-wrap"><table>
 <thead><tr><th>Limitation</th><th>Impact</th></tr></thead>
 <tbody>
-<tr><td>Behaviour GoF is poor (p&lt;0.001)</td><td>Bimodal AUDIT-C distribution violates SAOM&rsquo;s continuous-behaviour assumption</td></tr>
+<tr><td>Behaviour GoF is poor (p&lt;0.001)</td><td>The model poorly captures the zero-heavy, non-evenly distributed AUDIT-C outcome, especially non-drinker dynamics</td></tr>
 <tr><td>Missing first-week data</td><td>Network measurement began one month after arrival; early formation period is unobserved</td></tr>
 <tr><td>Single-hall design</td><td>One residence hall in a UK university town; UK binge rates (80%) far exceed US cohorts (~28%)</td></tr>
 <tr><td>68% response rate</td><td>Missing network data could bias tie-formation estimates</td></tr>
@@ -579,8 +572,8 @@
 <p>This research was funded by a <strong>Wellcome Trust</strong> Research and Training Support Grant (224&nbsp;850/Z/21/Z) through the <a href="https://www.pheds-dtc.ac.uk/">PHEDS Doctoral Training Centre</a> at the University of Sheffield. The funder had no role in study design, data collection, analysis, or the decision to publish.</p>
 <p><strong>Supervisors:</strong></p>
 <ul>
-<li>Professor Robin Purshouse, School of Electrical and Electronic Engineering, University of Sheffield</li>
 <li>Professor John Holmes, School of Medicine and Population Health, University of Sheffield</li>
+<li>Professor Robin Purshouse, School of Electrical and Electronic Engineering, University of Sheffield</li>
 <li>Professor Paul Norman, Department of Psychology, University of Sheffield</li>
 </ul>
 <p><strong>Contact</strong><br>
@@ -859,7 +852,7 @@ Shangshang Gu<br>
   <text x="705" y="100" text-anchor="middle" font-size="9" fill="var(--text-muted, #6b6b6b)">Oct 2023</text>
 
   <!-- Retention -->
-  <text x="400" y="140" text-anchor="middle" font-size="11" fill="var(--text, #1a1a1a)">Overall retention: <tspan font-weight="700">87%</tspan> &middot; 101,017 follow-up data rows</text>
+  <text x="400" y="140" text-anchor="middle" font-size="11" fill="var(--text, #1a1a1a)">Final-wave retention: <tspan font-weight="700">87% (223/255)</tspan> &middot; 101,017 follow-up data rows</text>
   <text x="400" y="156" text-anchor="middle" font-size="10" fill="var(--text-muted, #6b6b6b)">Unique survey links &middot; Up to 3 reminders per wave &middot; &pound;10 eGift per completion</text>
 </svg>
 </div>
@@ -1269,7 +1262,7 @@ wave6  day_offset=5</code></pre></li>
   <text x="401" y="409" text-anchor="middle" font-size="11" fill="var(--text-muted, #5f6c7b)">Validation &middot; Reproducibility Manifests &middot; SHA-256 Checksums &middot; Portfolio</text>
 
   <!-- Tech stack note -->
-  <text x="401" y="452" text-anchor="middle" font-size="10" fill="var(--text-muted, #5f6c7b)">R 4.3.2 + Python 3.11 &middot; GNU Make &middot; Conda + renv &middot; RSiena 1.4.7 &middot; testthat + pytest</text>
+  <text x="401" y="452" text-anchor="middle" font-size="10" fill="var(--text-muted, #5f6c7b)">R 4.3.2 + Python 3.11 &middot; GNU Make &middot; Conda + renv &middot; RSiena 1.4.7 &middot; testthat + unittest</text>
   <text x="401" y="468" text-anchor="middle" font-size="10" fill="var(--text-muted, #5f6c7b)">Config: reproduced/config/thesis.yml &middot; Proxy or real data modes</text>
 </svg>
 </div>
@@ -1282,9 +1275,9 @@ wave6  day_offset=5</code></pre></li>
 <tr><td>Environment</td><td>Conda (system packages) + renv (R library lock)</td></tr>
 <tr><td>R dependency lock</td><td><code>renv.lock</code> with 90 packages including RSiena 1.4.7</td></tr>
 <tr><td>SAOM estimation</td><td>RSiena 1.4.7 (exact pinned from CRAN Archive)</td></tr>
-<tr><td>Container</td><td>Dockerfile (optional, for CI and clean-room runs)</td></tr>
+<tr><td>Container</td><td>Dockerfile (optional clean-room path; not used by the hosted fast CI)</td></tr>
 <tr><td>Privacy scanning</td><td>R-based portfolio privacy guard + Python release-builder secret scanner</td></tr>
-<tr><td>Testing</td><td>testthat (R), pytest (Python)</td></tr>
+<tr><td>Testing</td><td>testthat (R), unittest (Python)</td></tr>
 </tbody></table></div>
 <hr>
 
@@ -1292,7 +1285,8 @@ wave6  day_offset=5</code></pre></li>
 <pre><code>SAND/
 ├── Makefile                         Top-level proxy to reproduced/Makefile
 ├── Dockerfile                       Optional container build
-├── LICENSE                          MIT (code) + CC BY 4.0 (docs)
+├── LICENSE                          MIT software licence
+├── LICENSE-docs                     CC BY 4.0 documentation licence
 ├── CITATION.cff                     Citation metadata
 ├── README.md                        Entry point with findings and quick start
 ├── DATA_AVAILABILITY.md             What is public, protected, and synthetic
@@ -1301,7 +1295,7 @@ wave6  day_offset=5</code></pre></li>
 ├── CHANGELOG.md                     Release history
 │
 ├── docs/
-│   ├── reference.html               This file
+│   ├── index.html                   This file
 │   └── readme-assets/               SVG figures for README
 │
 └── reproduced/                      The reproduction workspace
@@ -1335,6 +1329,7 @@ wave6  day_offset=5</code></pre></li>
     ├── scripts/
     │   ├── 00_setup/                 Environment, proxy generation, verification, release
     │   ├── portfolio/                Data dictionary, privacy guard, dashboard
+    │   ├── thesis/                   Thesis rendering helper
     │   ├── visualisation/            Network explorers, microstep animation
     │   └── utils/                    YAML loader, helpers
     │
@@ -1347,7 +1342,6 @@ wave6  day_offset=5</code></pre></li>
     │   ├── README.md                 Documentation hub
     │   ├── references/               Stable background: crosswalk, config guide, etc.
     │   ├── portfolio/                Public-facing study book, case study, findings
-    │   ├── roadmaps/                 Canonical execution plan
     │   ├── status/                   Release audit and verification records
     │   └── decisions/                Architectural decision records
     │
@@ -1547,7 +1541,7 @@ make verify-real  # Chapters 4-7 plus empirical benchmarks</code></pre>
 <div class="table-wrap"><table>
 <thead><tr><th>Target</th><th>What it does</th></tr></thead>
 <tbody>
-<tr><td><code>make verify-proxy-quick</code></td><td>Regenerate proxy data, run Chapters 4&ndash;6, verify 15 structural checks</td></tr>
+<tr><td><code>make verify-proxy-quick</code></td><td>Regenerate proxy data, run Chapters 4&ndash;6, verify 16 structural checks</td></tr>
 <tr><td><code>make verify-proxy</code></td><td>Full proxy path including Chapter 7 SAOM estimation (~2h)</td></tr>
 <tr><td><code>make verify-real</code></td><td>Protected data: Chapters 4&ndash;7 with empirical benchmarks and convergence checks</td></tr>
 <tr><td><code>make verify</code></td><td>Dispatches to the appropriate target for the current data mode</td></tr>
@@ -1623,20 +1617,21 @@ make verify-real  # Chapters 4-7 plus empirical benchmarks</code></pre>
 <hr>
 
 <h2 id="release-status" class="section-header" data-level="2">1. Verification Status</h2>
-<p>Verified on 14 July 2026 &middot; macOS 15.6 (arm64) &middot; Apple M4 &middot; R 4.3.2 &middot; RSiena 1.4.7</p>
+<p>Verified on 14 July 2026 &middot; local path: macOS 15.6 (arm64), Apple M4 &middot; hosted fast path: GitHub-hosted Ubuntu &middot; R 4.3.2 &middot; RSiena 1.4.7</p>
 <div class="table-wrap"><table>
 <thead><tr><th>Check</th><th>Result</th><th>Detail</th></tr></thead>
 <tbody>
 <tr><td>Secret/credential scan</td><td><span class="tag tag-pass">Pass</span></td><td>No protected paths, known secret forms, local absolute paths, or unsafe symlinks</td></tr>
 <tr><td>Conda environment solve</td><td><span class="tag tag-pass">Pass</span></td><td><code>environment.yml</code> resolves from declared channels on macOS arm64</td></tr>
 <tr><td>Locked R library restore</td><td><span class="tag tag-pass">Pass</span></td><td><code>renv.lock</code> restored into clean project library</td></tr>
-<tr><td>Python test suite</td><td><span class="tag tag-pass">Pass</span></td><td>11 tests: release-builder, verifier behaviour</td></tr>
+<tr><td>Python test suite</td><td><span class="tag tag-pass">Pass</span></td><td>13 tests: release-builder, disclosure/link audits, verifier behaviour</td></tr>
 <tr><td>R portfolio/integration suite</td><td><span class="tag tag-pass">Pass</span></td><td>Dictionary, limits, explorer, integration, privacy, manifest, dashboard</td></tr>
-<tr><td>Fast proxy pipeline (Ch 4&ndash;6)</td><td><span class="tag tag-pass">Pass</span></td><td>15 structural checks, 0 failures, 2 expected proxy-vs-empirical warnings</td></tr>
+<tr><td>Fast proxy pipeline (Ch 4&ndash;6)</td><td><span class="tag tag-pass">Pass</span></td><td>16 structural checks, 0 failures, 2 expected proxy-vs-empirical warnings</td></tr>
 <tr><td>Portfolio generation &amp; privacy</td><td><span class="tag tag-pass">Pass</span></td><td>Dictionary, manifest, dashboard, 5 labelled network pages; privacy scans pass</td></tr>
-<tr><td>Full Chapter 7 (corrected proxy)</td><td><span class="tag tag-open">Open</span></td><td>First proxy run completed but did not converge (ratio=1.10); corrected proxy data produced but rerun not completed</td></tr>
+<tr><td>Full Chapter 7 (corrected proxy)</td><td><span class="tag tag-open">Open</span></td><td>First proxy diagnostic completed but did not converge (<code>tconv.max=8.9481</code>); the corrected rerun was stopped after about 52 minutes, so no corrected fit is claimed</td></tr>
 <tr><td>Docker image</td><td><span class="tag tag-open">Open</span></td><td>Dockerfile exists; daemon was unavailable during verification</td></tr>
-<tr><td>Hosted CI</td><td><span class="tag tag-open">Open</span></td><td>Workflows prepared but not run in a published repository</td></tr>
+<tr><td>Hosted fast CI</td><td><span class="tag tag-pass">Pass</span></td><td>First public R-CI run passed environment restore, tests, and Chapters 4&ndash;6 proxy verification (<a href="https://github.com/shangshanggu/sand-public/actions/runs/29366951200">run 29366951200</a>)</td></tr>
+<tr><td>Signed-out public access</td><td><span class="tag tag-pass">Pass</span></td><td>Repository and website both returned without authentication; hosted page matched <code>docs/index.html</code> byte for byte</td></tr>
 </tbody></table></div>
 <hr>
 
@@ -1693,8 +1688,9 @@ make verify-real  # Chapters 4-7 plus empirical benchmarks</code></pre>
 <tr><td>Run Chapters 4&ndash;6 from clean checkout</td><td><span class="tag tag-pass">Done</span></td></tr>
 <tr><td>Complete Chapter 7 from corrected proxy data</td><td><span class="tag tag-open">Open</span></td></tr>
 <tr><td>Confirm code and documentation licence</td><td><span class="tag tag-pass">Done</span></td></tr>
-<tr><td>Test links, citation metadata, installation commands</td><td><span class="tag tag-open">Open</span></td></tr>
-<tr><td>CI/Docker verification</td><td><span class="tag tag-open">Open</span></td></tr>
+<tr><td>Test links, citation metadata, installation commands</td><td><span class="tag tag-pass">Done</span></td></tr>
+<tr><td>Run hosted fast CI and verify signed-out access</td><td><span class="tag tag-pass">Done</span></td></tr>
+<tr><td>Build and test optional Docker image</td><td><span class="tag tag-open">Open</span></td></tr>
 <tr><td>Tag and archive</td><td><span class="tag tag-open">Open</span></td></tr>
 </tbody></table></div>
 
@@ -1706,7 +1702,7 @@ make verify-real  # Chapters 4-7 plus empirical benchmarks</code></pre>
 <p><strong>Code:</strong> MIT License &copy; 2025 Shangshang Gu</p>
 <p><strong>Documentation &amp; diagrams:</strong> CC BY 4.0</p>
 <p><strong>Data:</strong> Not distributed. Synthetic proxy data are covered by the MIT License.</p>
-<p>See <code>LICENSE</code> for full text and <code>CITATION.cff</code> for machine-readable citation metadata.</p>
+<p>See <code>LICENSE</code> for the MIT software licence, <code>LICENSE-docs</code> for the CC BY 4.0 documentation licence, and <code>CITATION.cff</code> for machine-readable citation metadata.</p>
 <hr>
 
 <h2 id="repro-fidelity" class="section-header" data-level="2">6. Reproduction Fidelity</h2>
@@ -1764,48 +1760,6 @@ make verify-real  # Chapters 4-7 plus empirical benchmarks</code></pre>
 <tr><td>SAOM RNG seed</td><td><code>2022</code></td></tr>
 <tr><td>SAOM Phase 3 iterations</td><td><code>10000</code></td></tr>
 <tr><td>RSiena version</td><td><code>1.4.7</code> (exact CRAN Archive pin)</td></tr>
-</tbody></table></div>
-
-    </div>
-
-    <!-- ==================== ROADMAP TAB ==================== -->
-    <div class="tab-panel" data-panel="roadmap">
-
-<h1 id="roadmap-sand" class="section-header" data-level="1">Roadmap</h1>
-<blockquote>What has been completed and what comes next. Updated July 2026.</blockquote>
-<hr>
-
-<h2 id="rm-completed" class="section-header" data-level="2">1. Completed</h2>
-<div class="table-wrap"><table>
-<thead><tr><th>Item</th><th>Status</th><th>Detail</th></tr></thead>
-<tbody>
-<tr><td>REDCap/MySQL server stack</td><td><span class="tag tag-pass">Done</span></td><td>Built two-server architecture from bare university VMs: Apache/SSL web server + dedicated MySQL database VM with scoped access and network isolation.</td></tr>
-<tr><td>Two-project identity separation</td><td><span class="tag tag-pass">Done</span></td><td>Implemented baseline + follow-up REDCap projects with role-based access separation, <code>@HIDDEN-SURVEY</code>/<code>@HIDDEN-FORM</code> action tags, and calculated fields for pseudonymised linkage.</td></tr>
-<tr><td>Six-wave data collection</td><td><span class="tag tag-pass">Done</span></td><td>Recruited 255 of 375 invited residents, achieved 87% retention across six waves (Sep 2022&ndash;Oct 2023), with automated incentive distribution and up to three reminders per wave.</td></tr>
-<tr><td>R/Make analysis pipeline</td><td><span class="tag tag-pass">Done</span></td><td>Config-driven pipeline covering Chapters 4&ndash;7: data preparation, network autocorrelation models, injunctive norm models, and stochastic actor-oriented models.</td></tr>
-<tr><td>Proxy data generator</td><td><span class="tag tag-pass">Done</span></td><td>Deterministic synthetic data generator producing 255 students &times; 6 waves with network ties, AUDIT-C scores, norm perceptions, and residence structure.</td></tr>
-<tr><td>Environment locks</td><td><span class="tag tag-pass">Done</span></td><td>Conda environment + <code>renv.lock</code> (90 packages) + RSiena 1.4.7 pinned from CRAN Archive. Clean solve and restore verified.</td></tr>
-<tr><td>Chapters 4&ndash;6 proxy verification</td><td><span class="tag tag-pass">Done</span></td><td>15 structural checks, 0 failures, 2 expected proxy-vs-empirical warnings. Reproducible from a clean checkout.</td></tr>
-<tr><td>Portfolio and privacy generation</td><td><span class="tag tag-pass">Done</span></td><td>Data dictionary, reproducibility manifest, validation dashboard, 5 labelled network pages with embedded <code>SYNTHETIC PROXY DATA</code> provenance. Privacy scans pass.</td></tr>
-<tr><td>Secret and credential scan</td><td><span class="tag tag-pass">Done</span></td><td>Release candidate scanned for protected paths, known secret patterns, local absolute paths, and unsafe symlinks. No findings.</td></tr>
-<tr><td>History-free release candidate</td><td><span class="tag tag-pass">Done</span></td><td>Built clean export without private Git history. Private commits do not carry into the public repository.</td></tr>
-<tr><td>Thesis coefficient reproduction</td><td><span class="tag tag-pass">Done</span></td><td>Chapters 5&ndash;6 reproduce every coefficient to 3 decimal places on real data (69 checks). Three code fixes required for exact match documented in Release tab.</td></tr>
-<tr><td>Infrastructure evidence extraction</td><td><span class="tag tag-pass">Done</span></td><td>Database backup and server configuration archived. Python scripts parse the backup directly without requiring a running database.</td></tr>
-<tr><td>Portable data dictionaries</td><td><span class="tag tag-pass">Done</span></td><td>Generated REDCap-importable CSVs from the database backup: PIS portal (17 fields), baseline (231 fields, 28 instruments), follow-up (239 fields, 8 instruments, 151 branching rules).</td></tr>
-<tr><td>Licence and citation</td><td><span class="tag tag-pass">Done</span></td><td>MIT (code) + CC BY 4.0 (documentation). <code>CITATION.cff</code> with machine-readable metadata.</td></tr>
-</tbody></table></div>
-<hr>
-
-<h2 id="rm-next" class="section-header" data-level="2">2. Next</h2>
-<div class="table-wrap"><table>
-<thead><tr><th>Item</th><th>Status</th><th>Detail</th></tr></thead>
-<tbody>
-<tr><td>Chapter 7 (SAOM) code</td><td><span class="tag tag-warn">In progress</span></td><td>Analysis complete. Organising and updating pipeline code for public release.</td></tr>
-<tr><td>Chapter 8 (Interventions) code</td><td><span class="tag tag-warn">In progress</span></td><td>Analysis complete. 462 counterfactual scenarios &times; 3 chained periods. Organising pipeline code.</td></tr>
-<tr><td>Thesis compilation</td><td><span class="tag tag-warn">In progress</span></td><td>Chapters written. Integrating <code>make thesis</code> target into the reproducible pipeline.</td></tr>
-<tr><td>Data access procedure</td><td><span class="tag tag-warn">In progress</span></td><td>Formal data-sharing agreements and institutional governance under development.</td></tr>
-<tr><td>DOI and archived release</td><td><span class="tag tag-warn">In progress</span></td><td>Version tag and archived release bundle in preparation.</td></tr>
-<tr><td>Cross-platform reproducibility</td><td><span class="tag tag-open">Open</span></td><td>All verification performed on macOS arm64. Linux and x86_64 behaviour is untested.</td></tr>
 </tbody></table></div>
 
     </div>

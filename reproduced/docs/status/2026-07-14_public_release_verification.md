@@ -40,7 +40,8 @@ history. The public repository begins from this curated snapshot.
 | First full Chapter 7 diagnostic | Completed with warnings | The old proxy fixture produced a 105 MB fit and all expected artefacts in 8,480 seconds, but did not converge and did not exercise residence dyads |
 | Corrected full Chapter 7 proxy path | Intentionally stopped | The corrected path ran for about 52 minutes before being stopped to prioritise the time-bounded public release; no corrected fit is claimed |
 | Docker image | Not tested | Docker CLI is installed locally, but the daemon is unavailable |
-| Hosted CI | Not tested | Workflows are prepared but have not run in a published repository |
+| Hosted fast CI | Pass | The first public R-CI run completed successfully on GitHub-hosted Ubuntu and passed environment restore, tests, and Chapters 4–6 proxy verification ([run 29366951200](https://github.com/shangshanggu/sand-public/actions/runs/29366951200)) |
+| Signed-out public access | Pass | The repository and `https://sand.shangshanggu.com` both returned successfully without authentication on 14 July 2026; the hosted page matched `docs/index.html` byte for byte |
 
 ## Residence-Covariate Correction Found During Chapter 7
 
@@ -113,7 +114,5 @@ Conda solve then passed, followed by a successful locked R-library restore.
 
 ## Release Gates Still Open
 
-- run hosted fast CI after publication;
 - build and test the optional Docker image when a daemon is available;
-- test the public repository and website while signed out;
 - tag and archive a versioned release after those publication checks.

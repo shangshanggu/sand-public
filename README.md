@@ -8,17 +8,19 @@
 
 ---
 
-**255 students** · **6 survey waves** · **87% retention** · **Chapters 4–7** · **Verified reproducible path: Chapters 4–6**
+**255 students** · **6 survey waves** · **87% final-wave retention** · **Chapters 4–7** · **Verified reproducible path: Chapters 4–6**
 
 [Interactive Reference](https://sand.shangshanggu.com) · [Key Findings](#key-findings) · [Pipeline](#pipeline) · [Quick Start](#quick-start) · [Documentation](#documentation)
+
+[Hosted CI: first public run passed](https://github.com/shangshanggu/sand-public/actions/runs/29366951200)
 
 </div>
 
 ---
 
-## My Contribution
+## Project Context
 
-SAND is the product of my PhD research at the University of Sheffield (2021–2025). I designed the study, built the data-collection infrastructure from bare university VMs, recruited and retained 255 participants across six longitudinal waves, conducted all analysis, and wrote the thesis. Every component in this repository — the REDCap architecture, the identity-separation protocol, the recruitment operations, the reproducible analysis pipeline, and this open-science release — is my own work as a sole researcher, supervised but not co-developed.
+SAND is the product of my PhD research at the University of Sheffield (2021–2025). I designed the study, built the data-collection infrastructure from bare university VMs, recruited 255 participants, achieved 87% final-wave retention (223 of 255 baseline participants), conducted all analysis, and wrote the thesis. Every component in this repository — the REDCap architecture, the identity-separation protocol, the recruitment operations, the reproducible analysis pipeline, and this open-science release — was developed through my PhD research and subsequent Wellcome-funded Transition Grant position, with supervisory guidance.
 
 ## Overview
 
@@ -28,7 +30,7 @@ This repository contains the maintained code and documentation for rebuilding th
 >
 > Shangshang Gu · Sheffield Centre for Health and Related Research · University of Sheffield · 2025
 
-The study followed 255 first-year students across six survey waves in a UK residence hall (Sep 2022 – Oct 2023). The protected-data workflow progresses from staged REDCap exports through network autocorrelation models of norm misperceptions to stochastic actor-oriented models that estimate social selection and social influence in drinking behaviour.
+The study enrolled 255 first-year students across six survey waves in a UK residence hall (Sep 2022 – Oct 2023). Eight supplied no alcohol-use or social-network data, so the Chapter 7 SAOM focuses on 247 full participants; 238–244 contributed observations in each modelled wave. The protected-data workflow progresses from staged REDCap exports through network autocorrelation models of norm misperceptions to stochastic actor-oriented models that estimate social selection and social influence in drinking behaviour.
 
 The **[interactive reference page](https://sand.shangshanggu.com)** provides the full technical documentation: study design, REDCap/MySQL infrastructure, identity separation, recruitment operations, data dictionaries, the analysis pipeline, and release verification.
 
@@ -41,7 +43,7 @@ The **[interactive reference page](https://sand.shangshanggu.com)** provides the
 
 ### Drinking Trends and Demographics (Chapter 4)
 
-Mean AUDIT-C increased from 4.9 (pre-university) to 7.4 in the first month — 80% of students reported monthly binge drinking and 60% weekly. The spike gradually declined but never returned to baseline.
+Mean AUDIT-C increased from 4.8 (pre-university) to 7.4 in the first month — 80% of students reported monthly binge drinking and 60% weekly. The spike gradually declined but never returned to baseline.
 
 ### Shifting Referents: Who Shapes Your Drinking? (Chapter 5)
 
@@ -63,7 +65,7 @@ The SAOM separates two competing explanations for why friends drink similarly:
 
 **Social selection** — do similar drinkers become friends? No. AUDIT-C similarity (β = −0.08, p = 0.88), ego (β = −0.04, p = 0.18), and alter (β = 0.03, p = 0.35) effects were all non-significant.
 
-**Social influence** — do friends become similar drinkers? Yes. The average similarity effect (β = 1.88, p < 0.01) translates to an odds ratio of 1.17 (95% CI: 1.05–1.31). Students were 17% more likely to adjust their drinking one unit closer to their friends' average than to maintain their current level.
+**Social influence** — do friends become similar drinkers? The fitted model found evidence of influence. The average similarity effect (β = 1.88, p < 0.01) translates to an odds ratio of 1.17 (95% CI: 1.05–1.31). Under the model, students were 17% more likely to adjust their drinking one unit closer to their friends' average than to maintain their current level.
 
 | Effect | β | SE | p | Interpretation |
 |--------|---:|---:|:---:|:--------|
@@ -123,7 +125,7 @@ The tracked scripts generate chapter-level logs, manifests, and selected checksu
 
 | Limitation | Impact |
 |------------|--------|
-| Behaviour GoF is poor (p < 0.001) | Bimodal AUDIT-C distribution violates SAOM's continuous-behaviour assumption; non-drinkers behave differently |
+| Behaviour GoF is poor (p < 0.001) | The model poorly captures the zero-heavy, non-evenly distributed AUDIT-C outcome, especially non-drinker dynamics |
 | Missing first-week data | Network measurement began one month after arrival; critical early formation period is unobserved |
 | Single-hall design | One residence hall in South Yorkshire; UK binge rates (80%) far exceed US cohorts (~28%) |
 | 68% response rate | Missing network data could bias tie-formation estimates |
@@ -147,6 +149,11 @@ The tracked scripts generate chapter-level logs, manifests, and selected checksu
 
 If you use the code, cite the repository using [`CITATION.cff`](CITATION.cff).
 
+## Licensing
+
+Code and synthetic proxy-data generator outputs use the [MIT License](LICENSE).
+Documentation and diagrams use [CC BY 4.0](LICENSE-docs).
+
 ## Ethics and Governance
 
 The University of Sheffield approved the study on ethics grounds on 8 June
@@ -166,8 +173,8 @@ This research was funded by a Wellcome Trust Research and Training Support Grant
 
 **Supervisors:**
 
-- **Professor Robin Purshouse**, School of Electrical and Electronic Engineering, University of Sheffield
 - **Professor John Holmes**, School of Medicine and Population Health, University of Sheffield
+- **Professor Robin Purshouse**, School of Electrical and Electronic Engineering, University of Sheffield
 - **Professor Paul Norman**, Department of Psychology, University of Sheffield
 
 ## Contact

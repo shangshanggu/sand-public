@@ -79,6 +79,7 @@ the evolving social graph in which those trajectories occur.
 | Setting | One university-managed residence hall in South Yorkshire, UK |
 | Invited population | 375 first-year residents |
 | Enrolled sample | 255 students |
+| Chapter 7 analytic cohort | 247 full participants; 238–244 observed per modelled wave |
 | Survey waves | 6 waves, September 2022 to October 2023 |
 | Network nominations | Up to 10 important-peer nominations per participant from Wave 2 onward |
 | Behaviour outcome | AUDIT-C score, range 0-12 |
