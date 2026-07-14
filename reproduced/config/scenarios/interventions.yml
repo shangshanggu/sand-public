@@ -1,0 +1,149 @@
+version: 1
+strategy_csv: config/scenarios/intervention_strategy_basecase.csv
+defaults:
+  description: "Base intervention grid derived from the 25 Sep 2024 SAOM runs."
+  iterations: 1000
+  input_proportions:
+    - 0
+    - 10
+    - 20
+    - 30
+    - 40
+    - 50
+    - 60
+    - 70
+    - 80
+    - 90
+    - 100
+  input_efficacies:
+    - 75
+    - 100
+    - 125
+  base_efficacy:
+    # Original code values (multiplicative: audit * (1 + base * efficacy/100))
+    # Type A (BI): -0.129 gives ~12.9% reduction at 100% efficacy
+    # Type B (DNMC): -0.072 gives ~7.2% reduction at 100% efficacy
+    # Type C (peer influence resistance): -0.50, scales avSim parameter
+    # Thesis text reports "10% for BI" and "5% for DNMC" as rounded descriptions
+    type_a: -0.129
+    type_b: -0.072
+    type_c: -0.50
+  seeds:
+    base: 2024092500
+    increment: 17
+  notes:
+    - "input_nthree parameter from legacy wrappers captured as iterations"
+    - "Seed increment keeps manifest deterministic across scenario ordering"
+overrides:
+  A-4-IT-ID:
+    id: type_a_wave4_it_id
+    description: "Type A intervention prioritising influential drinkers at the first intervention wave."
+    seed_offset: 0
+    tags:
+      - wave4
+      - type_a
+      - influential_drinkers
+  A-4-IT-NC:
+    id: type_a_wave4_it_nc
+    description: "Type A intervention targeting influential network connectors at wave 4."
+    seed_offset: 1
+    tags:
+      - wave4
+      - type_a
+      - network_connectors
+  A-4-ST-ID:
+    id: type_a_wave4_st_id
+    description: "Type A intervention, strategic targeting of influential drinkers at wave 4."
+    seed_offset: 2
+    tags:
+      - wave4
+      - type_a
+      - strategic
+  A-4-ST-NC:
+    id: type_a_wave4_st_nc
+    description: "Type A intervention targeting strategic network connectors during wave 4."
+    seed_offset: 3
+    tags:
+      - wave4
+      - type_a
+      - strategic
+  A-4-CT-HD:
+    id: type_a_wave4_ct_hd
+    description: "Type A counterfactual emphasising high-degree actors at wave 4."
+    seed_offset: 4
+    tags:
+      - wave4
+      - type_a
+      - counterfactual
+  A-4-CT-RS:
+    id: type_a_wave4_ct_rs
+    description: "Type A counterfactual focused on reinforcing social ties at wave 4."
+    seed_offset: 5
+    tags:
+      - wave4
+      - type_a
+      - counterfactual
+  A-5-IT-ID:
+    id: type_a_wave5_it_id
+    description: "Type A influential drinker targeting for the later intervention wave."
+    seed_offset: 6
+    tags:
+      - wave5
+      - type_a
+      - influential_drinkers
+  A-5-IT-NC:
+    id: type_a_wave5_it_nc
+    description: "Type A intervention emphasising network connectors at wave 5."
+    seed_offset: 7
+    tags:
+      - wave5
+      - type_a
+      - network_connectors
+  A-5-ST-ID:
+    id: type_a_wave5_st_id
+    description: "Type A strategic design prioritising influential drinkers at wave 5."
+    seed_offset: 8
+    tags:
+      - wave5
+      - type_a
+      - strategic
+  A-5-ST-NC:
+    id: type_a_wave5_st_nc
+    description: "Type A strategic network connector targeting in the final intervention wave."
+    seed_offset: 9
+    tags:
+      - wave5
+      - type_a
+      - strategic
+  A-5-CT-HD:
+    id: type_a_wave5_ct_hd
+    description: "Type A counterfactual built around high-degree actors at wave 5."
+    seed_offset: 10
+    tags:
+      - wave5
+      - type_a
+      - counterfactual
+  A-5-CT-RS:
+    id: type_a_wave5_ct_rs
+    description: "Type A counterfactual emphasising reinforcing social ties at wave 5."
+    seed_offset: 11
+    tags:
+      - wave5
+      - type_a
+      - counterfactual
+  B-2-CT-HD:
+    id: type_b_wave2_ct_hd
+    description: "Type B counterfactual focusing on high-degree actors ahead of the initial intervention period."
+    seed_offset: 12
+    tags:
+      - wave2
+      - type_b
+      - counterfactual
+  B-2-CT-RS:
+    id: type_b_wave2_ct_rs
+    description: "Type B counterfactual capturing reinforcement-focused outreach before interventions."
+    seed_offset: 13
+    tags:
+      - wave2
+      - type_b
+      - counterfactual

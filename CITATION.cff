@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it using the metadata below."
+title: "SAND: Reproducible Analysis Pipeline for the Sheffield Alcohol and Network Dynamics Study"
+type: software
+license: MIT
+version: 0.1.0
+repository-code: "https://github.com/shangshanggu/sand-public"
+authors:
+  - family-names: Gu
+    given-names: Shangshang
+abstract: >-
+  Reproducible analysis pipeline for the Sheffield Alcohol and Network Dynamics
+  Study (SAND). Covers data preparation, network autocorrelation models of
+  descriptive and injunctive norm misperception, and stochastic actor-oriented
+  models of social selection and influence in student drinking behaviour.
+  255 students, six survey waves, 87% retention.
+keywords:
+  - social networks
+  - alcohol
+  - descriptive norms
+  - injunctive norms
+  - SAOM
+  - RSiena
+  - reproducibility

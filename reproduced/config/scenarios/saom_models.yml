@@ -1,0 +1,105 @@
+version: 1
+updated: 2025-09-30
+notes:
+  - "SAOM model scaffolding derived from legacy 010111_09251109_base.RData specification."
+  - "Baseline cache regenerated under reproduced/analyses/chapter7_saom/outputs/cache/base_fit.RData for sample data runs."
+  - "Adjustments blocks document alternative scenarios for QA once full datasets are restored."
+defaults:
+  algorithm:
+    n3: 10000       # Legacy 010111_09251109 baseline setting
+    nsub: 4         # Legacy phase-2 subphases
+    firstg: 0.1
+    reduceg: 0.5
+    diagonalize: 0.2
+    dolby: true
+  diagnostics:
+    convergence_tolerance: 0.1
+    minimum_phase: 4
+models:
+  base:
+    label: "Thesis SAOM (Chapter 7 Table SAOM_results)"
+    description: "Replicates the thesis Chapter 7 SAOM specification reported in Table SAOM_results."
+    cached_results: reproduced/outputs/chapter7/cache/base_fit.RData
+    network_variable: SAOM_friendship
+    behavior_variable: SAOM_behaviour
+    network_effects:
+      - name: recip
+      - name: transTrip
+      - name: transRecTrip
+      - name: inPopSqrt
+      - name: outPopSqrt
+      - name: outActSqrt
+      - name: X
+        attribute: flatmates
+      - name: X
+        attribute: blockmates
+      - name: altX
+        attribute: majority_status
+      - name: egoX
+        attribute: majority_status
+      - name: simX
+        attribute: majority_status
+      - name: altX
+        attribute: sex
+      - name: egoX
+        attribute: sex
+      - name: simX
+        attribute: sex
+      - name: altX
+        attribute: SAOM_behaviour
+      - name: egoX
+        attribute: SAOM_behaviour
+      - name: simX
+        attribute: SAOM_behaviour
+    behavior_effects:
+      - name: avSim
+      - name: indeg
+      - name: linear
+      - name: outdeg
+      - name: quad
+      - name: effFrom
+        attribute: majority_status
+      - name: effFrom
+        attribute: sex
+    covariates:
+      actor:
+        - majority_status
+        - sex
+      dyadic:
+        - flatmates
+        - blockmates
+    targets:
+      peer_influence: 1.88
+      behaviour_linear_shape: -0.13
+  dense_reciprocity:
+    label: "Density-adjusted reciprocity sensitivity"
+    description: "Adds density and alternating k-star controls to test robustness of reciprocity estimates."
+    inherits: base
+    adjustments:
+      network_effects:
+        add:
+          - name: density
+          - name: altkStar
+            parameter: 2
+      behavior_effects:
+        remove:
+          - name: avSim
+        add:
+          - name: quadShape
+            variant: strengthened
+  covariate_dropout:
+    label: "Covariate exclusion diagnostic"
+    description: "Drops majority status covariates to evaluate reliance on demographic controls."
+    inherits: base
+    adjustments:
+      covariates:
+        actor:
+          remove:
+            - majority_status
+        dyadic:
+          add:
+            - sameAcademicProgram
+      behavior_effects:
+        add:
+          - name: linear
+            attribute: sameAcademicProgram

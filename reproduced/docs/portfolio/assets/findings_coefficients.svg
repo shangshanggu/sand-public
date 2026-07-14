@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="520" viewBox="0 0 980 520" role="img" aria-labelledby="title desc">
+  <title id="title">Key model effects from Chapters 5 and 7</title>
+  <desc id="desc">Annotated bars showing Chapter 5 NAM misperception effects and Chapter 7 SAOM effects.</desc>
+  <rect x="0" y="0" width="980" height="520" fill="#f6f7f9"/>
+
+  <text x="40" y="44" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="700" fill="#1f2937">Figure 1. Key coefficients used in portfolio findings</text>
+
+  <rect x="40" y="70" width="430" height="410" rx="10" fill="#ffffff" stroke="#d1d5db"/>
+  <text x="60" y="105" font-family="Helvetica, Arial, sans-serif" font-size="18" font-weight="700" fill="#111827">Chapter 5 NAM (descriptive norms)</text>
+  <line x1="60" y1="420" x2="440" y2="420" stroke="#9ca3af" stroke-width="1.5"/>
+
+  <text x="60" y="445" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#374151">T1 global 0.541</text>
+  <rect x="60" y="360" width="70" height="60" fill="#2563eb"/>
+
+  <text x="150" y="445" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#374151">T2 global 0.547</text>
+  <rect x="150" y="356" width="70" height="64" fill="#2563eb"/>
+
+  <text x="240" y="445" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#374151">T3 global 0.246</text>
+  <rect x="240" y="392" width="70" height="28" fill="#2563eb"/>
+
+  <text x="330" y="445" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#374151">Peer (T1-T3)</text>
+  <rect x="330" y="403" width="70" height="17" fill="#14b8a6"/>
+
+  <text x="60" y="160" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#111827">Global misperception effects are consistently positive.</text>
+  <text x="60" y="180" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#111827">Peer misperception is positive but smaller than global.</text>
+
+  <rect x="510" y="70" width="430" height="410" rx="10" fill="#ffffff" stroke="#d1d5db"/>
+  <text x="530" y="105" font-family="Helvetica, Arial, sans-serif" font-size="18" font-weight="700" fill="#111827">Chapter 7 SAOM (network-behavior co-evolution)</text>
+  <line x1="530" y1="420" x2="910" y2="420" stroke="#9ca3af" stroke-width="1.5"/>
+  <line x1="720" y1="150" x2="720" y2="420" stroke="#9ca3af" stroke-width="1" stroke-dasharray="4 4"/>
+
+  <text x="544" y="445" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#374151">Density -2.91</text>
+  <rect x="564" y="260" width="140" height="32" fill="#ef4444"/>
+
+  <text x="730" y="445" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#374151">avSim 1.88</text>
+  <rect x="724" y="300" width="110" height="32" fill="#16a34a"/>
+
+  <text x="850" y="445" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#374151">Reciprocity 2.70</text>
+  <rect x="834" y="240" width="86" height="32" fill="#16a34a"/>
+
+  <text x="530" y="160" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#111827">Positive avSim indicates behavioral similarity among connected peers.</text>
+  <text x="530" y="180" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#111827">Positive reciprocity and negative density indicate selective tie formation.</text>
+</svg>

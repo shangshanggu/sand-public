@@ -1,0 +1,67 @@
+name: Manual Full Proxy Diagnostic
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: full-proxy-reproduction
+  cancel-in-progress: false
+
+jobs:
+  reproduce:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    defaults:
+      run:
+        shell: bash -el {0}
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+
+      - name: Setup Miniconda
+        uses: conda-incubator/setup-miniconda@8ee1f361103df19b6f8c8655fd3967a8ecb162d5 # v4
+        with:
+          activate-environment: r_stable
+          environment-file: reproduced/environment.yml
+          conda-solver: libmamba
+          auto-update-conda: true
+          auto-activate: false
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update && sudo apt-get install -y libcurl4-openssl-dev libssl-dev libxml2-dev
+
+      - name: Cache renv packages
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: ~/.cache/R/renv
+          key: ${{ runner.os }}-renv-${{ hashFiles('reproduced/renv.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-renv-
+
+      - name: Restore locked R library
+        run: |
+          make -C reproduced env-renv
+          make -C reproduced rsiena
+          cd reproduced
+          conda run -n r_stable Rscript -e 'stopifnot(isTRUE(renv::status()$synchronized), as.character(packageVersion("RSiena")) == "1.4.7")'
+
+      - name: Reproduce and verify proxy Chapters 4-7
+        run: |
+          make -C reproduced DATA_MODE=proxy verify-proxy
+
+      - name: Upload logs and verification reports
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: full-proxy-reproduction-${{ github.run_id }}
+          path: |
+            reproduced/logs
+            reproduced/outputs/verify
+            reproduced/outputs/chapter4/logs
+            reproduced/outputs/chapter5/logs
+            reproduced/outputs/chapter6/logs
+            reproduced/outputs/chapter7/logs
+          if-no-files-found: warn

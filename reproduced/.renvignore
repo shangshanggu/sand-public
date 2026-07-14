@@ -1,0 +1,10 @@
+# Generated and protected material is never a source of runtime dependencies.
+data/
+outputs/
+docs/
+
+# Chapter 8 is experimental and disabled in the public Ch4--7 release.
+analyses/chapter8_interventions/
+
+# Optional animation tooling is outside the verified reproduction pipeline.
+scripts/visualisation/04_animate_microsteps.R

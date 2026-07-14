@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520" width="1200" height="520" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif">
+
+  <!-- Title -->
+  <text x="600" y="28" text-anchor="middle" font-size="15" font-weight="600" fill="#333" letter-spacing="0.3">Shifting Referents — From Community Norms to Peer Influence</text>
+  <text x="600" y="46" text-anchor="middle" font-size="11" fill="#888">NAM Model 4 coefficients: global misperception effect weakens as peer misperception effect strengthens</text>
+
+  <!-- Chart axes -->
+  <!-- Y: 0 to 0.6, chart area y=75 to y=375 (300px), each 0.1 = 50px -->
+  <!-- X: Time 1=280, Time 2=600, Time 3=920 -->
+  <line x1="140" y1="75" x2="140" y2="375" stroke="#ddd" stroke-width="1"/>
+  <line x1="140" y1="375" x2="1060" y2="375" stroke="#ddd" stroke-width="1"/>
+
+  <!-- Y-axis label -->
+  <text x="30" y="225" text-anchor="middle" font-size="11" fill="#666" transform="rotate(-90, 30, 225)">Effect on personal AUDIT-C (Beta)</text>
+
+  <!-- Y gridlines -->
+  <text x="128" y="379" text-anchor="end" font-size="10" fill="#aaa">0</text>
+  <line x1="140" y1="325" x2="1060" y2="325" stroke="#f0f0f0" stroke-width="0.5"/>
+  <text x="128" y="329" text-anchor="end" font-size="10" fill="#aaa">0.1</text>
+  <line x1="140" y1="275" x2="1060" y2="275" stroke="#f0f0f0" stroke-width="0.5"/>
+  <text x="128" y="279" text-anchor="end" font-size="10" fill="#aaa">0.2</text>
+  <line x1="140" y1="225" x2="1060" y2="225" stroke="#f0f0f0" stroke-width="0.5"/>
+  <text x="128" y="229" text-anchor="end" font-size="10" fill="#aaa">0.3</text>
+  <line x1="140" y1="175" x2="1060" y2="175" stroke="#f0f0f0" stroke-width="0.5"/>
+  <text x="128" y="179" text-anchor="end" font-size="10" fill="#aaa">0.4</text>
+  <line x1="140" y1="125" x2="1060" y2="125" stroke="#f0f0f0" stroke-width="0.5"/>
+  <text x="128" y="129" text-anchor="end" font-size="10" fill="#aaa">0.5</text>
+  <line x1="140" y1="75" x2="1060" y2="75" stroke="#f0f0f0" stroke-width="0.5"/>
+  <text x="128" y="79" text-anchor="end" font-size="10" fill="#aaa">0.6</text>
+
+  <!-- Global beta: 0.541 → 375-270.5=104.5, 0.547 → 375-273.5=101.5, 0.246 → 375-123=252 -->
+  <polyline points="280,104.5 600,101.5 920,252" fill="none" stroke="#E15759" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+  <circle cx="280" cy="104.5" r="5.5" fill="#E15759" stroke="#fff" stroke-width="1.5"/>
+  <circle cx="600" cy="101.5" r="5.5" fill="#E15759" stroke="#fff" stroke-width="1.5"/>
+  <circle cx="920" cy="252" r="5.5" fill="#E15759" stroke="#fff" stroke-width="1.5"/>
+
+  <text x="280" y="92" text-anchor="middle" font-size="11" font-weight="600" fill="#E15759">0.54***</text>
+  <text x="600" y="90" text-anchor="middle" font-size="11" font-weight="600" fill="#E15759">0.55***</text>
+  <text x="920" y="242" text-anchor="middle" font-size="11" font-weight="600" fill="#E15759">0.25**</text>
+
+  <!-- Peer beta: 0.045 → 375-22.5=352.5, 0.124 → 375-62=313, 0.192 → 375-96=279 -->
+  <polyline points="280,352.5 600,313 920,279" fill="none" stroke="#4E79A7" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+  <circle cx="280" cy="352.5" r="5.5" fill="#4E79A7" stroke="#fff" stroke-width="1.5"/>
+  <circle cx="600" cy="313" r="5.5" fill="#4E79A7" stroke="#fff" stroke-width="1.5"/>
+  <circle cx="920" cy="279" r="5.5" fill="#4E79A7" stroke="#fff" stroke-width="1.5"/>
+
+  <text x="280" y="370" text-anchor="middle" font-size="11" font-weight="600" fill="#4E79A7">0.05 n.s.</text>
+  <text x="600" y="305" text-anchor="middle" font-size="11" font-weight="600" fill="#4E79A7">0.12*</text>
+  <text x="920" y="271" text-anchor="middle" font-size="11" font-weight="600" fill="#4E79A7">0.19**</text>
+
+  <!-- Convergence annotation -->
+  <line x1="600" y1="140" x2="600" y2="280" stroke="#ddd" stroke-width="0.5" stroke-dasharray="3,3"/>
+  <path d="M 350,200 L 350,180 L 280,180" stroke="#E15759" stroke-width="0.8" stroke-dasharray="2,2" fill="none" opacity="0.4"/>
+  <path d="M 850,270 L 850,290 L 920,290" stroke="#4E79A7" stroke-width="0.8" stroke-dasharray="2,2" fill="none" opacity="0.4"/>
+
+  <!-- X-axis labels -->
+  <text x="280" y="400" text-anchor="middle" font-size="11" fill="#666">Time 1</text>
+  <text x="280" y="414" text-anchor="middle" font-size="9" fill="#aaa">Oct 2022</text>
+  <text x="600" y="400" text-anchor="middle" font-size="11" fill="#666">Time 2</text>
+  <text x="600" y="414" text-anchor="middle" font-size="9" fill="#aaa">Mar 2023</text>
+  <text x="920" y="400" text-anchor="middle" font-size="11" fill="#666">Time 3</text>
+  <text x="920" y="414" text-anchor="middle" font-size="9" fill="#aaa">Oct 2023</text>
+
+  <!-- Legend -->
+  <line x1="280" y1="455" x2="310" y2="455" stroke="#E15759" stroke-width="2.5"/>
+  <circle cx="295" cy="455" r="3.5" fill="#E15759"/>
+  <text x="318" y="459" font-size="10" fill="#666">Global misperception (overestimation of typical-resident drinking)</text>
+  <line x1="280" y1="475" x2="310" y2="475" stroke="#4E79A7" stroke-width="2.5"/>
+  <circle cx="295" cy="475" r="3.5" fill="#4E79A7"/>
+  <text x="318" y="479" font-size="10" fill="#666">Peer misperception (perception of friends' drinking)</text>
+
+  <!-- Interpretation -->
+  <text x="280" y="505" text-anchor="middle" font-size="9" fill="#bbb">Community norms dominate</text>
+  <text x="600" y="505" text-anchor="middle" font-size="9" fill="#bbb">Peer influence emerges</text>
+  <text x="920" y="505" text-anchor="middle" font-size="9" fill="#bbb">Both matter, peer gaining</text>
+
+  <text x="600" y="518" text-anchor="middle" font-size="9" fill="#ccc">*** p &lt; .001 · ** p &lt; .01 · * p &lt; .05</text>
+</svg>

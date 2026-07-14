@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520" width="1200" height="520" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif">
+
+  <!-- Title -->
+  <text x="600" y="28" text-anchor="middle" font-size="15" font-weight="600" fill="#333" letter-spacing="0.3">AUDIT-C Scores Across Survey Waves</text>
+  <text x="600" y="46" text-anchor="middle" font-size="11" fill="#888">Mean surged from 4.9 to 7.4 in the first month, then gradually declined but never returned to baseline</text>
+
+  <!-- Chart area: y-axis 70–420, x-axis 140–1080 -->
+  <!-- Scale: 0–12, height 350px, each unit = 29.17px -->
+  <line x1="140" y1="70" x2="140" y2="420" stroke="#ddd" stroke-width="1"/>
+  <line x1="140" y1="420" x2="1080" y2="420" stroke="#ddd" stroke-width="1"/>
+
+  <!-- Y-axis label -->
+  <text x="28" y="245" text-anchor="middle" font-size="11" fill="#666" transform="rotate(-90, 28, 245)">AUDIT-C Score (0–12)</text>
+
+  <!-- Y gridlines: 0, 2, 4, 6, 8, 10, 12 -->
+  <text x="128" y="424" text-anchor="end" font-size="10" fill="#aaa">0</text>
+  <line x1="140" y1="361.7" x2="1080" y2="361.7" stroke="#f0f0f0" stroke-width="0.5"/>
+  <text x="128" y="365" text-anchor="end" font-size="10" fill="#aaa">2</text>
+  <line x1="140" y1="303.3" x2="1080" y2="303.3" stroke="#f0f0f0" stroke-width="0.5"/>
+  <text x="128" y="307" text-anchor="end" font-size="10" fill="#aaa">4</text>
+  <line x1="140" y1="245" x2="1080" y2="245" stroke="#f0f0f0" stroke-width="0.5"/>
+  <text x="128" y="249" text-anchor="end" font-size="10" fill="#aaa">6</text>
+  <line x1="140" y1="186.7" x2="1080" y2="186.7" stroke="#f0f0f0" stroke-width="0.5"/>
+  <text x="128" y="190" text-anchor="end" font-size="10" fill="#aaa">8</text>
+  <line x1="140" y1="128.3" x2="1080" y2="128.3" stroke="#f0f0f0" stroke-width="0.5"/>
+  <text x="128" y="132" text-anchor="end" font-size="10" fill="#aaa">10</text>
+  <line x1="140" y1="70" x2="1080" y2="70" stroke="#f0f0f0" stroke-width="0.5"/>
+  <text x="128" y="74" text-anchor="end" font-size="10" fill="#aaa">12</text>
+
+  <!-- X positions: W1=220, W2=380, W3=530, W4=680, W5=830, W6=1020 -->
+  <!-- Y = 420 - score * 29.17 -->
+  <!-- W1: 4.9 → 277.1, W2: 7.4 → 204.1, W3: 6.7 → 224.6, W4: 6.5 → 230.4, W5: 6.4 → 233.3, W6: 6.7 → 224.6 -->
+  <!-- Medians: W1: 5 → 274.2, W2: 8 → 186.7, W3-6: 7 → 215.8 -->
+
+  <!-- SD band (mean +/- 1 SD) -->
+  <!-- W1: 4.9±2.8 → upper=2.1(358.7) lower=7.7(195.3) -->
+  <!-- W2: 7.4±3.0 → upper=4.4(291.6) lower=10.4(116.6) -->
+  <!-- W3: 6.7±3.0 → upper=3.7(312.1) lower=9.7(137.1) -->
+  <!-- W4: 6.5±3.1 → upper=3.4(320.8) lower=9.6(140.0) -->
+  <!-- W5: 6.4±3.1 → upper=3.3(323.7) lower=9.5(142.9) -->
+  <!-- W6: 6.7±2.9 → upper=3.8(309.2) lower=9.6(140.0) -->
+  <polygon points="220,195.3 380,116.6 530,137.1 680,140.0 830,142.9 1020,140.0 1020,309.2 830,323.7 680,320.8 530,312.1 380,291.6 220,358.7" fill="#4E79A7" fill-opacity="0.07" stroke="none"/>
+
+  <!-- Mean area fill -->
+  <polygon points="220,277.1 380,204.1 530,224.6 680,230.4 830,233.3 1020,224.6 1020,420 830,420 680,420 530,420 380,420 220,420" fill="#4E79A7" fill-opacity="0.05" stroke="none"/>
+
+  <!-- Mean line -->
+  <polyline points="220,277.1 380,204.1 530,224.6 680,230.4 830,233.3 1020,224.6" fill="none" stroke="#4E79A7" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+
+  <!-- Median line (dashed) -->
+  <polyline points="220,274.2 380,186.7 530,215.8 680,215.8 830,215.8 1020,215.8" fill="none" stroke="#76B7B2" stroke-width="1.5" stroke-dasharray="5,3" stroke-linejoin="round"/>
+
+  <!-- Data points -->
+  <circle cx="220" cy="277.1" r="5" fill="#4E79A7" stroke="#fff" stroke-width="1.5"/>
+  <text x="220" y="267" text-anchor="middle" font-size="11" font-weight="600" fill="#4E79A7">4.9</text>
+
+  <circle cx="380" cy="204.1" r="5" fill="#F28E2B" stroke="#fff" stroke-width="1.5"/>
+  <text x="380" y="194" text-anchor="middle" font-size="11" font-weight="600" fill="#F28E2B">7.4</text>
+
+  <circle cx="530" cy="224.6" r="5" fill="#E15759" stroke="#fff" stroke-width="1.5"/>
+  <text x="530" y="215" text-anchor="middle" font-size="11" font-weight="600" fill="#E15759">6.7</text>
+
+  <circle cx="680" cy="230.4" r="5" fill="#76B7B2" stroke="#fff" stroke-width="1.5"/>
+  <text x="680" y="221" text-anchor="middle" font-size="11" font-weight="600" fill="#76B7B2">6.5</text>
+
+  <circle cx="830" cy="233.3" r="5" fill="#59A14F" stroke="#fff" stroke-width="1.5"/>
+  <text x="830" y="224" text-anchor="middle" font-size="11" font-weight="600" fill="#59A14F">6.4</text>
+
+  <circle cx="1020" cy="224.6" r="5" fill="#B07AA1" stroke="#fff" stroke-width="1.5"/>
+  <text x="1020" y="215" text-anchor="middle" font-size="11" font-weight="600" fill="#B07AA1">6.7</text>
+
+  <!-- X-axis labels -->
+  <text x="220" y="440" text-anchor="middle" font-size="10" fill="#666">W1</text>
+  <text x="220" y="453" text-anchor="middle" font-size="9" fill="#aaa">Sep 22</text>
+  <text x="380" y="440" text-anchor="middle" font-size="10" fill="#666">W2</text>
+  <text x="380" y="453" text-anchor="middle" font-size="9" fill="#aaa">Oct 22</text>
+  <text x="530" y="440" text-anchor="middle" font-size="10" fill="#666">W3</text>
+  <text x="530" y="453" text-anchor="middle" font-size="9" fill="#aaa">Nov 22</text>
+  <text x="680" y="440" text-anchor="middle" font-size="10" fill="#666">W4</text>
+  <text x="680" y="453" text-anchor="middle" font-size="9" fill="#aaa">Dec 22</text>
+  <text x="830" y="440" text-anchor="middle" font-size="10" fill="#666">W5</text>
+  <text x="830" y="453" text-anchor="middle" font-size="9" fill="#aaa">Mar 23</text>
+  <text x="1020" y="440" text-anchor="middle" font-size="10" fill="#666">W6</text>
+  <text x="1020" y="453" text-anchor="middle" font-size="9" fill="#aaa">Oct 23</text>
+
+  <!-- Spike annotation -->
+  <path d="M 300,195 L 300,210" stroke="#E15759" stroke-width="1" stroke-dasharray="2,2"/>
+  <text x="300" y="190" text-anchor="middle" font-size="9" fill="#E15759" font-weight="500">+51%</text>
+
+  <!-- Legend -->
+  <line x1="200" y1="490" x2="225" y2="490" stroke="#4E79A7" stroke-width="2.5"/>
+  <circle cx="212" cy="490" r="3" fill="#4E79A7"/>
+  <text x="232" y="494" font-size="10" fill="#666">Mean</text>
+  <line x1="310" y1="490" x2="335" y2="490" stroke="#76B7B2" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="342" y="494" font-size="10" fill="#666">Median</text>
+  <rect x="420" y="483" width="18" height="12" fill="#4E79A7" fill-opacity="0.1" rx="2"/>
+  <text x="445" y="494" font-size="10" fill="#666">+/- 1 SD</text>
+  <text x="600" y="494" font-size="10" fill="#aaa">80% monthly binge · 60% weekly · AUDIT-C 0–12</text>
+</svg>

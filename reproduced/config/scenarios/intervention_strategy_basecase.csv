@@ -1,0 +1,15 @@
+intervention_type,intervention_wave,intervention_targeting
+A,4,IT-ID
+A,4,IT-NC
+A,4,ST-ID
+A,4,ST-NC
+A,4,CT-HD
+A,4,CT-RS
+A,5,IT-ID
+A,5,IT-NC
+A,5,ST-ID
+A,5,ST-NC
+A,5,CT-HD
+A,5,CT-RS
+B,2,CT-HD
+B,2,CT-RS

@@ -1,0 +1,1913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SAND — Sheffield Alcohol &amp; Network Dynamics</title>
+<link rel="icon" href="https://www.shangshanggu.com/favicon.ico">
+<link rel="icon" type="image/png" href="https://www.shangshanggu.com/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #f3f4f6; --bg-sidebar: #edf0f4; --text: #1f2933; --text-muted: #5f6c7b;
+    --border: #c8d1dc; --code-bg: #eef1f4; --pre-bg: #1b2129; --pre-text: #d4d4d4;
+    --accent: #243b53; --link: #243b53; --table-stripe: #f8f9fb;
+    --toc-hover: #e4e9ef; --toc-active: #1f2933; --tab-active: #243b53; --tab-inactive: #7b8a99;
+    --bq-border: #243b53; --bq-bg: #edf2f7;
+    --search-bg: #ffffff; --search-border: #c8d1dc;
+    --tag-bg: #e4e9ef; --tag-text: #334155;
+    --pass: #16794a; --warn: #b8860b; --fail: #c0392b; --open: #7f8c8d;
+    --h1-color: #1f2933; --h2-color: #243b53;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #14181d; --bg-sidebar: #1b2129; --text: #e4eaf1; --text-muted: #9aa8b6;
+      --border: #333e4b; --code-bg: #262f3a; --pre-bg: #0f141a; --pre-text: #d4d4d4;
+      --accent: #9dbcd9; --link: #9dbcd9; --table-stripe: #1b2129;
+      --toc-hover: #29323d; --toc-active: #e4eaf1; --tab-active: #9dbcd9; --tab-inactive: #7d95ac;
+      --bq-border: #9dbcd9; --bq-bg: #243040;
+      --search-bg: #1b2129; --search-border: #333e4b;
+      --tag-bg: #29323d; --tag-text: #c4d8ea;
+      --pass: #4ade80; --warn: #eab308; --fail: #ef4444; --open: #9ca3af;
+      --h1-color: #e4eaf1; --h2-color: #9dbcd9;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #14181d; --bg-sidebar: #1b2129; --text: #e4eaf1; --text-muted: #9aa8b6;
+    --border: #333e4b; --code-bg: #262f3a; --pre-bg: #0f141a; --pre-text: #d4d4d4;
+    --accent: #9dbcd9; --link: #9dbcd9; --table-stripe: #1b2129;
+    --toc-hover: #29323d; --toc-active: #e4eaf1; --tab-active: #9dbcd9; --tab-inactive: #7d95ac;
+    --bq-border: #9dbcd9; --bq-bg: #243040;
+    --search-bg: #1b2129; --search-border: #333e4b;
+    --tag-bg: #29323d; --tag-text: #c4d8ea;
+    --pass: #4ade80; --warn: #eab308; --fail: #ef4444; --open: #9ca3af;
+    --h1-color: #e4eaf1; --h2-color: #9dbcd9;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Source Sans 3', 'Segoe UI', -apple-system, sans-serif;
+    background: var(--bg); color: var(--text);
+    display: flex; height: 100vh; overflow: hidden;
+  }
+  .sidebar {
+    width: 280px; min-width: 280px; background: var(--bg-sidebar);
+    border-right: 1px solid var(--border); display: flex; flex-direction: column;
+    overflow: hidden;
+  }
+  .sidebar-header {
+    padding: 20px 16px 16px; border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .sidebar-header-left { display: flex; flex-direction: column; }
+  .sidebar-header h1 { font-size: 16px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); }
+  .sidebar-header .subtitle { font-size: 11px; color: var(--text-muted); margin-top: 3px; letter-spacing: 0.3px; }
+  .sidebar-links { display: flex; gap: 10px; margin-top: 8px; }
+  .sidebar-links a { color: var(--text-muted); text-decoration: none; transition: color 0.15s; display: inline-flex; }
+  .sidebar-links a:hover { color: var(--accent); }
+  .search-box { padding: 10px 16px; }
+  .search-box input {
+    width: 100%; padding: 7px 11px; font-size: 13px; border-radius: 6px;
+    border: 1px solid var(--search-border); background: var(--search-bg);
+    color: var(--text); outline: none;
+  }
+  .search-box input:focus { border-color: var(--link); }
+  .sidebar-scroll { flex: 1; overflow-y: auto; padding: 8px 0; }
+  .toc-item {
+    display: block; padding: 5px 16px; font-size: 13px; color: var(--text-muted);
+    text-decoration: none; border-left: 2px solid transparent; transition: all 0.1s;
+  }
+  .toc-item:hover { background: var(--toc-hover); color: var(--toc-active); }
+  .toc-item.active { border-left-color: var(--accent); color: var(--toc-active); font-weight: 600; }
+  .toc-level-1 { font-weight: 700; font-size: 14px; padding-top: 12px; color: var(--text); }
+  .toc-level-2 { padding-left: 24px; }
+  .toc-level-3 { padding-left: 36px; font-size: 12px; }
+  .hidden { display: none; }
+  .content { flex: 1; overflow-y: auto; padding: 0 48px 80px; max-width: 880px; position: relative; }
+  .content-header {
+    position: sticky; top: 0; z-index: 10; background: var(--bg);
+    display: flex; align-items: stretch;
+    padding: 0; margin-bottom: 0; border-bottom: 1px solid var(--border);
+  }
+  .theme-toggle {
+    width: 30px; height: 30px; border-radius: 6px; border: 1px solid var(--border);
+    background: var(--bg-sidebar); color: var(--text-muted); cursor: pointer;
+    display: flex; align-items: center; justify-content: center; font-size: 14px;
+    transition: all 0.15s; flex-shrink: 0;
+  }
+  .theme-toggle:hover { background: var(--toc-hover); color: var(--toc-active); }
+  .content-tabs {
+    display: flex; align-items: stretch; gap: 0; width: 100%;
+  }
+  .content-tabs-left { flex-shrink: 0; display: flex; }
+  .content-tabs-sep {
+    width: 1px; align-self: center; height: 18px; background: var(--border); margin: 0 14px; flex-shrink: 0;
+  }
+  .content-tabs-right { display: flex; gap: 0; }
+  .content-tab, .content-tab-study {
+    padding: 10px 16px 9px; font-size: 13px; font-weight: 600;
+    background: none; border: none; border-bottom: 2px solid transparent;
+    color: var(--tab-inactive); cursor: pointer; transition: all 0.15s;
+    margin-bottom: -1px;
+  }
+  .content-tab.active, .content-tab-study.active {
+    color: var(--accent); border-bottom-color: var(--accent);
+  }
+  .content-tab:hover:not(.active), .content-tab-study:hover:not(.active) {
+    color: var(--toc-active); border-bottom-color: var(--border);
+  }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+  h1 { font-size: 24px; font-weight: 700; margin: 28px 0 12px; letter-spacing: -0.3px; color: var(--h1-color); }
+  h2 { font-size: 18px; font-weight: 700; margin: 32px 0 12px; padding-top: 18px; border-top: 1px solid var(--border); color: var(--h2-color); }
+  h3 { font-size: 16px; font-weight: 600; margin: 24px 0 10px; }
+  h4 { font-size: 14px; font-weight: 600; margin: 16px 0 6px; }
+  p { font-size: 14px; line-height: 1.7; margin: 8px 0; }
+  strong { font-weight: 600; }
+  code {
+    font-family: 'SF Mono', Menlo, monospace; font-size: 12.5px;
+    background: var(--code-bg); padding: 2px 5px; border-radius: 3px;
+  }
+  pre {
+    background: var(--pre-bg); color: var(--pre-text); padding: 18px 20px;
+    border-radius: 8px; overflow-x: auto; margin: 14px 0; font-size: 12.5px; line-height: 1.6;
+    border: 1px solid var(--border);
+  }
+  pre code { background: none; padding: 0; }
+  a { color: var(--link); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  hr { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
+  blockquote {
+    border-left: 3px solid var(--bq-border); background: var(--bq-bg);
+    padding: 14px 18px; margin: 16px 0; border-radius: 0 6px 6px 0;
+    font-size: 13px; color: var(--text-muted); line-height: 1.7;
+  }
+  ul, ol { padding-left: 20px; margin: 8px 0; }
+  li { font-size: 14px; line-height: 1.7; margin: 2px 0; }
+  .table-wrap { overflow-x: auto; margin: 12px 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; border-radius: 6px; overflow: hidden; }
+  th { text-align: left; padding: 10px 14px; border-bottom: 2px solid var(--border); font-weight: 600; white-space: nowrap; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); }
+  td { padding: 8px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tr:nth-child(even) td { background: var(--table-stripe); }
+  tr:hover td { background: var(--toc-hover); }
+  .tag {
+    display: inline-block; font-size: 11px; font-weight: 600; padding: 3px 10px;
+    border-radius: 12px; background: var(--tag-bg); color: var(--tag-text);
+    letter-spacing: 0.3px;
+  }
+  .tag-pass { background: color-mix(in srgb, var(--pass) 12%, transparent); color: var(--pass); }
+  .tag-warn { background: color-mix(in srgb, var(--warn) 12%, transparent); color: var(--warn); }
+  .tag-fail { background: color-mix(in srgb, var(--fail) 12%, transparent); color: var(--fail); }
+  .tag-open { background: color-mix(in srgb, var(--open) 12%, transparent); color: var(--open); }
+  .script-list { list-style: none; padding: 0; margin: 10px 0; }
+  .script-list li {
+    padding: 8px 12px; margin: 4px 0; border-left: 3px solid var(--border);
+    font-size: 13px; line-height: 1.6; transition: border-color 0.15s;
+  }
+  .script-list li:hover { border-left-color: var(--accent); }
+  .script-list li code { font-size: 12px; }
+  .output-grid {
+    display: grid; grid-template-columns: auto 1fr; gap: 4px 16px;
+    font-size: 13px; margin: 10px 0; padding: 12px; background: var(--bq-bg);
+    border-radius: 6px; border: 1px solid var(--border);
+  }
+  .output-grid .og-path { font-family: 'SF Mono', Menlo, monospace; font-size: 12px; color: var(--accent); }
+  .output-grid .og-desc { color: var(--text-muted); }
+  .flow-arrow { color: var(--accent); font-size: 18px; text-align: center; margin: 4px 0; opacity: 0.5; }
+  details { margin: 8px 0; }
+  details summary {
+    cursor: pointer; font-size: 14px; font-weight: 600; padding: 4px 0;
+    color: var(--text-muted);
+  }
+  details summary:hover { color: var(--text); }
+  details[open] summary { margin-bottom: 8px; }
+  @media (max-width: 768px) {
+    .sidebar { display: none; }
+    .content { padding: 24px 16px 60px; }
+  }
+</style>
+</head>
+<body>
+  <nav class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-header-left">
+        <h1>SAND</h1>
+        <div class="subtitle">Sheffield Alcohol &amp; Network Dynamics</div>
+        <div class="sidebar-links">
+          <a href="https://github.com/shangshanggu/sand-public" target="_blank" rel="noopener" title="GitHub repository"><svg viewBox="0 0 16 16" fill="currentColor" width="16" height="16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+          <a href="https://shangshanggu.com" target="_blank" rel="noopener" title="shangshanggu.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
+        </div>
+      </div>
+      <button class="theme-toggle" id="theme-toggle" title="Toggle light/dark mode" aria-label="Toggle light/dark mode">&#9789;</button>
+    </div>
+    <!-- tabs are in the content header -->
+    <div class="search-box">
+      <input type="text" placeholder="Search..." id="search-input" />
+    </div>
+    <div class="sidebar-scroll">
+
+      <!-- Study TOC -->
+      <div class="sidebar-toc" data-sidebar="study">
+<a href="#study-sand" class="toc-item toc-level-1">Study</a>
+<a href="#my-contribution" class="toc-item toc-level-2">My Contribution</a>
+<a href="#overview" class="toc-item toc-level-2">1. Overview</a>
+<a href="#study-design" class="toc-item toc-level-2">2. Study Design</a>
+<a href="#wave-map" class="toc-item toc-level-3">2.1 Wave Map</a>
+<a href="#network-boundary" class="toc-item toc-level-3">2.2 Network Boundary</a>
+<a href="#study-timeline-fig" class="toc-item toc-level-3">2.3 Timeline</a>
+<a href="#participant-flow" class="toc-item toc-level-3">2.4 Participant Flow</a>
+<a href="#data-infrastructure" class="toc-item toc-level-3">2.5 Data Infrastructure</a>
+<a href="#key-findings" class="toc-item toc-level-2">3. Key Findings</a>
+<a href="#ch4-drinking-trends" class="toc-item toc-level-3">3.1 Drinking Trends (Ch 4)</a>
+<a href="#ch5-descriptive-norms" class="toc-item toc-level-3">3.2 Descriptive Norms (Ch 5)</a>
+<a href="#ch6-injunctive-norms" class="toc-item toc-level-3">3.3 Injunctive Norms (Ch 6)</a>
+<a href="#ch7-selection-influence" class="toc-item toc-level-3">3.4 Selection &amp; Influence (Ch 7)</a>
+<a href="#data-dictionary" class="toc-item toc-level-2">4. Data Dictionary</a>
+<a href="#dict-identifiers" class="toc-item toc-level-3">4.1 Identifiers</a>
+<a href="#dict-demographics" class="toc-item toc-level-3">4.2 Demographics</a>
+<a href="#dict-alcohol" class="toc-item toc-level-3">4.3 Alcohol Use</a>
+<a href="#dict-nominations" class="toc-item toc-level-3">4.4 Nominations</a>
+<a href="#dict-norms" class="toc-item toc-level-3">4.5 Norm Perceptions</a>
+<a href="#dict-derived" class="toc-item toc-level-3">4.6 Derived Measures</a>
+<a href="#known-limitations" class="toc-item toc-level-2">5. Known Limitations</a>
+<a href="#acknowledgements" class="toc-item toc-level-2">6. Acknowledgements &amp; Contact</a>
+      </div>
+
+      <!-- Infra TOC -->
+      <div class="sidebar-toc hidden" data-sidebar="infra">
+<a href="#infra-sand" class="toc-item toc-level-1">Infrastructure</a>
+<a href="#infra-server" class="toc-item toc-level-2">1. Server Stack</a>
+<a href="#infra-two-project" class="toc-item toc-level-2">2. Two-Project Model</a>
+<a href="#infra-identity" class="toc-item toc-level-2">3. Identity Separation</a>
+<a href="#infra-recruitment" class="toc-item toc-level-2">4. Recruitment Operations</a>
+<a href="#infra-incentives" class="toc-item toc-level-2">5. Incentive Automation</a>
+<a href="#infra-schema" class="toc-item toc-level-2">6. Database Schema</a>
+<a href="#infra-field-eng" class="toc-item toc-level-2">7. Field-Level Engineering</a>
+<a href="#infra-export" class="toc-item toc-level-2">8. Export Boundary</a>
+<a href="#infra-decisions" class="toc-item toc-level-2">9. Design Decisions</a>
+<a href="#infra-access" class="toc-item toc-level-2">10. Role-Based Access Control</a>
+<a href="#infra-audit" class="toc-item toc-level-2">11. Audit Trail</a>
+<a href="#infra-backup" class="toc-item toc-level-2">12. Backup &amp; Evidence Verification</a>
+<a href="#infra-reproduce" class="toc-item toc-level-2">13. Reproduction Guide</a>
+<a href="#infra-limitations" class="toc-item toc-level-2">14. Infrastructure Limitations</a>
+      </div>
+
+      <!-- Pipeline TOC -->
+      <div class="sidebar-toc hidden" data-sidebar="pipeline">
+<a href="#pipeline-sand" class="toc-item toc-level-1">Pipeline</a>
+<a href="#architecture" class="toc-item toc-level-2">1. Architecture</a>
+<a href="#directory-structure" class="toc-item toc-level-2">2. Directory Structure</a>
+<a href="#configuration" class="toc-item toc-level-2">3. Configuration</a>
+<a href="#config-keys" class="toc-item toc-level-3">3.1 Key Config Paths</a>
+<a href="#data-modes" class="toc-item toc-level-2">4. Data Modes</a>
+<a href="#proxy-generator" class="toc-item toc-level-3">4.1 Proxy Generator</a>
+<a href="#quick-start" class="toc-item toc-level-2">5. Quick Start</a>
+<a href="#qs-proxy" class="toc-item toc-level-3">5.1 Proxy Mode</a>
+<a href="#qs-real" class="toc-item toc-level-3">5.2 Real Data Mode</a>
+<a href="#chapter-walkthrough" class="toc-item toc-level-2">6. Chapter Walkthrough</a>
+<a href="#cw-ch4" class="toc-item toc-level-3">6.1 Chapter 4: Data Preparation</a>
+<a href="#cw-ch5" class="toc-item toc-level-3">6.2 Chapter 5: Descriptive Norms</a>
+<a href="#cw-ch6" class="toc-item toc-level-3">6.3 Chapter 6: Injunctive Norms</a>
+<a href="#cw-ch7" class="toc-item toc-level-3">6.4 Chapter 7: SAOM</a>
+<a href="#cw-ch8" class="toc-item toc-level-3">6.5 Chapter 8: Interventions</a>
+<a href="#thesis-crosswalk" class="toc-item toc-level-2">7. Thesis Crosswalk</a>
+<a href="#verification" class="toc-item toc-level-2">8. Verification</a>
+<a href="#setup-scripts" class="toc-item toc-level-2">9. Setup Scripts</a>
+<a href="#make-targets" class="toc-item toc-level-2">10. Make Targets</a>
+<a href="#failure-modes" class="toc-item toc-level-2">11. Failure Modes</a>
+      </div>
+
+      <!-- Release TOC -->
+      <div class="sidebar-toc hidden" data-sidebar="release">
+<a href="#release-sand" class="toc-item toc-level-1">Release</a>
+<a href="#release-status" class="toc-item toc-level-2">1. Verification Status</a>
+<a href="#environment" class="toc-item toc-level-2">2. Environment</a>
+<a href="#env-conda" class="toc-item toc-level-3">2.1 Conda</a>
+<a href="#env-renv" class="toc-item toc-level-3">2.2 renv</a>
+<a href="#env-rsiena" class="toc-item toc-level-3">2.3 RSiena</a>
+<a href="#env-docker" class="toc-item toc-level-3">2.4 Docker</a>
+<a href="#data-availability" class="toc-item toc-level-2">3. Data Availability</a>
+<a href="#release-contract" class="toc-item toc-level-2">4. Release Contract</a>
+<a href="#release-gates" class="toc-item toc-level-3">4.1 Current Gates</a>
+<a href="#interpretation-rule" class="toc-item toc-level-3">4.2 Interpretation Rule</a>
+<a href="#license-citation" class="toc-item toc-level-2">5. License &amp; Citation</a>
+<a href="#repro-fidelity" class="toc-item toc-level-2">6. Reproduction Fidelity</a>
+<a href="#check-inventory" class="toc-item toc-level-2">7. Check Inventory</a>
+<a href="#determinism" class="toc-item toc-level-2">8. Determinism</a>
+      </div>
+      <!-- Roadmap TOC -->
+      <div class="sidebar-toc hidden" data-sidebar="roadmap">
+<a href="#roadmap-sand" class="toc-item toc-level-1">Roadmap</a>
+<a href="#rm-completed" class="toc-item toc-level-2">1. Completed</a>
+<a href="#rm-next" class="toc-item toc-level-2">2. Next</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="content" id="content">
+    <div class="content-header">
+      <div class="content-tabs">
+        <div class="content-tabs-left">
+          <button class="content-tab-study active" data-tab="study">Study</button>
+        </div>
+        <div class="content-tabs-sep"></div>
+        <div class="content-tabs-right">
+          <button class="content-tab" data-tab="infra">Infra</button>
+          <button class="content-tab" data-tab="pipeline">Pipeline</button>
+          <button class="content-tab" data-tab="release">Release</button>
+          <button class="content-tab" data-tab="roadmap">Roadmap</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== STUDY TAB ==================== -->
+    <div class="tab-panel active" data-panel="study">
+
+<h1 id="study-sand" class="section-header" data-level="1">Study</h1>
+<blockquote>255 students &middot; 6 survey waves &middot; 87% retention &middot; Sep 2022 &ndash; Oct 2023<br>Social networks, alcohol use, and norm perceptions in a UK residence hall.<br><em>A narrative study book is available at <a href="https://shangshanggu.com/sand">shangshanggu.com/sand</a>. This tab provides the compact technical reference.</em></blockquote>
+<hr>
+
+<h2 id="my-contribution" class="section-header" data-level="2">My Contribution</h2>
+<p>SAND is the product of my PhD research at the University of Sheffield (2021&ndash;2025). I designed the study, built the data-collection infrastructure from bare university VMs, recruited and retained 255 participants across six longitudinal waves, conducted all analysis, and wrote the thesis. Every component documented here&mdash;the REDCap architecture, the identity-separation protocol, the recruitment operations, the reproducible analysis pipeline, and this open-science release&mdash;is my own work as a sole researcher, supervised but not co-developed.</p>
+<hr>
+
+<h2 id="overview" class="section-header" data-level="2">1. Overview</h2>
+<p>SAND followed 255 first-year students (from 375 invited) in one UK residence hall across six survey waves. Repeated alcohol-use measures and sociocentric important-peer nominations answered three questions:</p>
+<ol>
+  <li>How does drinking change after students move into halls?</li>
+  <li>How do perceived norms (what students think peers drink and approve of) relate to personal consumption?</li>
+  <li>Do students befriend similar drinkers (<strong>social selection</strong>), or do friends' drinking habits converge over time (<strong>social influence</strong>)?</li>
+</ol>
+<p>Chapter 4 prepares the data. Chapters 5&ndash;6 use network autocorrelation models for norm misperception. Chapter 7 uses a stochastic actor-oriented model to separate selection from influence.</p>
+<hr>
+
+<h2 id="study-design" class="section-header" data-level="2">2. Study Design</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Feature</th><th>SAND</th></tr></thead>
+<tbody>
+<tr><td>Setting</td><td>One university-managed residence hall in a UK city</td></tr>
+<tr><td>Invited population</td><td>375 first-year residents</td></tr>
+<tr><td>Enrolled sample</td><td>255 students</td></tr>
+<tr><td>Survey waves</td><td>6 waves, September 2022 &ndash; October 2023</td></tr>
+<tr><td>Network nominations</td><td>Up to 10 important-peer nominations per participant from Wave 2</td></tr>
+<tr><td>Behaviour outcome</td><td>AUDIT-C score (range 0&ndash;12)</td></tr>
+<tr><td>Consequence measures</td><td>BYAACQ alcohol-consequence items</td></tr>
+<tr><td>Norm constructs</td><td>Descriptive and injunctive norm perceptions at global and peer levels</td></tr>
+<tr><td>Main models</td><td>Network Autocorrelation Models (NAM) and Stochastic Actor-Oriented Models (SAOM)</td></tr>
+<tr><td>SAOM waves</td><td>Waves 2, 4, 5, 6 with baseline covariates from Wave 1</td></tr>
+<tr><td>Data collection</td><td>REDCap on a university-hosted Linux/Apache/MySQL stack</td></tr>
+<tr><td>Identity separation</td><td>Baseline and follow-up REDCap projects with role-based access separation</td></tr>
+</tbody></table></div>
+
+<h3 id="wave-map" class="section-header" data-level="3">2.1 Wave Map</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Wave</th><th>Timing</th><th>Downstream use</th></tr></thead>
+<tbody>
+<tr><td>Wave 1</td><td>Sep 2022 (baseline)</td><td>Baseline covariates, pre-university alcohol measures, Chapter 4</td></tr>
+<tr><td>Wave 2</td><td>Oct 2022</td><td>First network measurement; Ch 5/6 Time 1; Ch 7 SAOM start</td></tr>
+<tr><td>Wave 3</td><td>Nov 2022</td><td>Longitudinal preparation and QA</td></tr>
+<tr><td>Wave 4</td><td>Dec 2022</td><td>Ch 7 SAOM</td></tr>
+<tr><td>Wave 5</td><td>Mar 2023</td><td>Ch 5/6 Time 2; Ch 7 SAOM</td></tr>
+<tr><td>Wave 6</td><td>Oct 2023</td><td>Ch 5/6 Time 3; Ch 7 SAOM end</td></tr>
+</tbody></table></div>
+<p>Chapters 5 and 6 use three analysis timepoints (Time 1/2/3 = Waves 2/5/6). Chapter 7 uses four network observations (Waves 2/4/5/6) with Wave 1 baseline covariates.</p>
+
+<h3 id="network-boundary" class="section-header" data-level="3">2.2 Network Boundary</h3>
+<p>The network boundary is the residence hall cohort. Each participant could nominate up to 10 people who had been important to them in the past month, regardless of liking. Nominations are directed: A nominating B does not imply reciprocity. Legacy code sometimes uses &ldquo;friend&rdquo; as shorthand for nominated important peers.</p>
+<p>Network measurement began at Wave 2, one month after arrival. The first weeks of tie formation are unobserved.</p>
+
+<h3 id="study-timeline-fig" class="section-header" data-level="3">2.3 Timeline</h3>
+<div style="overflow-x:auto; margin:12px 0;">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 380" width="100%" style="max-width:1000px;" font-family="'Source Sans 3', 'Segoe UI', sans-serif">
+  <text x="600" y="30" text-anchor="middle" font-size="15" font-weight="600" fill="currentColor" letter-spacing="0.3">Study Timeline</text>
+  <text x="600" y="50" text-anchor="middle" font-size="11" fill="var(--text-muted)">375 targeted &middot; 255 enrolled (68%) &middot; 87% retention &middot; Single residence hall, a UK university town</text>
+  <rect x="80" y="65" width="620" height="250" fill="var(--table-stripe)" rx="4"/>
+  <rect x="700" y="65" width="420" height="250" fill="var(--bg)" rx="4"/>
+  <text x="390" y="82" text-anchor="middle" font-size="10" fill="var(--text-muted)" font-weight="500">Year 1</text>
+  <text x="910" y="82" text-anchor="middle" font-size="10" fill="var(--text-muted)" font-weight="500">Year 2</text>
+  <line x1="120" y1="180" x2="1100" y2="180" stroke="var(--text-muted)" stroke-width="2" stroke-linecap="round"/>
+  <polygon points="1100,175 1112,180 1100,185" fill="var(--text-muted)"/>
+  <circle cx="150" cy="180" r="8" fill="#4E79A7" stroke="var(--bg)" stroke-width="2"/>
+  <text x="150" y="160" text-anchor="middle" font-size="12" font-weight="600" fill="#4E79A7">W1</text>
+  <text x="150" y="147" text-anchor="middle" font-size="9" fill="var(--text-muted)">Baseline</text>
+  <text x="150" y="205" text-anchor="middle" font-size="9" fill="var(--text-muted)">Sep 2022</text>
+  <text x="150" y="218" text-anchor="middle" font-size="9" fill="var(--text-muted)">N=255</text>
+  <circle cx="310" cy="180" r="8" fill="#F28E2B" stroke="var(--bg)" stroke-width="2"/>
+  <text x="310" y="160" text-anchor="middle" font-size="12" font-weight="600" fill="#F28E2B">W2</text>
+  <text x="310" y="147" text-anchor="middle" font-size="9" fill="var(--text-muted)">NAM T1</text>
+  <text x="310" y="205" text-anchor="middle" font-size="9" fill="var(--text-muted)">Oct 2022</text>
+  <circle cx="460" cy="180" r="8" fill="#E15759" stroke="var(--bg)" stroke-width="2"/>
+  <text x="460" y="160" text-anchor="middle" font-size="12" font-weight="600" fill="#E15759">W3</text>
+  <text x="460" y="205" text-anchor="middle" font-size="9" fill="var(--text-muted)">Nov 2022</text>
+  <circle cx="610" cy="180" r="8" fill="#76B7B2" stroke="var(--bg)" stroke-width="2"/>
+  <text x="610" y="160" text-anchor="middle" font-size="12" font-weight="600" fill="#76B7B2">W4</text>
+  <text x="610" y="205" text-anchor="middle" font-size="9" fill="var(--text-muted)">Dec 2022</text>
+  <circle cx="800" cy="180" r="8" fill="#59A14F" stroke="var(--bg)" stroke-width="2"/>
+  <text x="800" y="160" text-anchor="middle" font-size="12" font-weight="600" fill="#59A14F">W5</text>
+  <text x="800" y="147" text-anchor="middle" font-size="9" fill="var(--text-muted)">NAM T2</text>
+  <text x="800" y="205" text-anchor="middle" font-size="9" fill="var(--text-muted)">Mar 2023</text>
+  <circle cx="1050" cy="180" r="8" fill="#B07AA1" stroke="var(--bg)" stroke-width="2"/>
+  <text x="1050" y="160" text-anchor="middle" font-size="12" font-weight="600" fill="#B07AA1">W6</text>
+  <text x="1050" y="147" text-anchor="middle" font-size="9" fill="var(--text-muted)">NAM T3</text>
+  <text x="1050" y="205" text-anchor="middle" font-size="9" fill="var(--text-muted)">Oct 2023</text>
+  <path d="M 150,130 Q 230,105 310,130" fill="none" stroke="#E15759" stroke-width="1.2" stroke-dasharray="3,2"/>
+  <text x="230" y="100" text-anchor="middle" font-size="9" fill="#E15759" font-weight="500">Freshers&rsquo; spike (4.9 &rarr; 7.4)</text>
+  <line x1="310" y1="240" x2="310" y2="252" stroke="var(--text-muted)" stroke-width="1"/>
+  <line x1="610" y1="240" x2="610" y2="252" stroke="var(--text-muted)" stroke-width="1"/>
+  <line x1="800" y1="240" x2="800" y2="252" stroke="var(--text-muted)" stroke-width="1"/>
+  <line x1="1050" y1="240" x2="1050" y2="252" stroke="var(--text-muted)" stroke-width="1"/>
+  <line x1="310" y1="252" x2="1050" y2="252" stroke="var(--text-muted)" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="680" y="270" text-anchor="middle" font-size="10" fill="var(--text-muted)">SAOM (Ch. 7) &mdash; Waves 2, 4, 5, 6</text>
+  <line x1="310" y1="282" x2="310" y2="294" stroke="var(--text-muted)" stroke-width="1"/>
+  <line x1="800" y1="282" x2="800" y2="294" stroke="var(--text-muted)" stroke-width="1"/>
+  <line x1="1050" y1="282" x2="1050" y2="294" stroke="var(--text-muted)" stroke-width="1"/>
+  <line x1="310" y1="294" x2="1050" y2="294" stroke="var(--text-muted)" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="680" y="312" text-anchor="middle" font-size="10" fill="var(--text-muted)">NAM (Ch. 5&ndash;6) &mdash; Times 1, 2, 3</text>
+  <text x="600" y="350" text-anchor="middle" font-size="9" fill="var(--text-muted)">Baseline covariates from W1 &middot; AUDIT-C 0&ndash;12 &middot; Max 10 nominations/wave &middot; RSiena n3 = 10,000</text>
+</svg>
+</div>
+
+<h3 id="participant-flow" class="section-header" data-level="3">2.4 Participant Flow</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Wave</th><th>Timing</th><th>NAM N</th><th>Jaccard</th><th>Mean AUDIT-C</th><th>SD</th></tr></thead>
+<tbody>
+<tr><td>W1 (baseline)</td><td>Sep 2022</td><td>255</td><td>&mdash;</td><td>4.9</td><td>2.8</td></tr>
+<tr><td>W2</td><td>Oct 2022</td><td>218</td><td>&mdash;</td><td>7.4</td><td>3.0</td></tr>
+<tr><td>W3</td><td>Nov 2022</td><td>&mdash;</td><td>&mdash;</td><td>6.7</td><td>3.0</td></tr>
+<tr><td>W4</td><td>Dec 2022</td><td>&mdash;</td><td>0.67</td><td>6.5</td><td>3.1</td></tr>
+<tr><td>W5</td><td>Mar 2023</td><td>213</td><td>0.81</td><td>6.4</td><td>3.1</td></tr>
+<tr><td>W6</td><td>Oct 2023</td><td>215</td><td>0.66</td><td>6.7</td><td>2.9</td></tr>
+</tbody></table></div>
+<p>NAM N is the analysis sample after listwise deletion for the descriptive norm models (Chapter 5). Jaccard indices measure wave-to-wave network stability; all exceed RSiena&rsquo;s 0.30 threshold. Overall retention across the study was 87%.</p>
+
+<h3 id="data-infrastructure" class="section-header" data-level="3">2.5 Data Collection Infrastructure</h3>
+<p>Data were collected via REDCap hosted on a university-managed Linux/Apache/MySQL/SSL stack. Two linked REDCap projects separated contact data from survey responses. The identity manager resolved names to pseudonymous IDs; the researcher exported only coded, de-identified data. The staged export (<code>list_by_wave.RData</code>) is the single input to the analysis pipeline.</p>
+<p>See the <strong>Infra</strong> tab for the full server stack, two-project model, identity separation workflow, recruitment operations, incentive automation, and REDCap API export configuration.</p>
+<hr>
+
+<h2 id="key-findings" class="section-header" data-level="2">3. Key Findings</h2>
+
+<h3 id="ch4-drinking-trends" class="section-header" data-level="3">3.1 Drinking Trends and Demographics (Chapter 4)</h3>
+<p>In this sample, mean AUDIT-C rose from 4.9 (pre-university baseline) to 7.4 one month after arrival. At the October peak, 80% reported monthly binge drinking and 60% weekly. Scores declined over the academic year but did not return to baseline.</p>
+
+<h3 id="ch5-descriptive-norms" class="section-header" data-level="3">3.2 Descriptive Norm Misperception (Chapter 5)</h3>
+<p>In all waves, participants overestimated typical-resident drinking by 1.5&ndash;1.7 AUDIT-C points. NAM estimates showed a shift in which referent predicted personal consumption:</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Time Period</th><th>Global Misperception &beta;</th><th>Peer Misperception &beta;</th><th>Interpretation</th></tr></thead>
+<tbody>
+<tr><td>Time 1 (Oct)</td><td>0.541 (p&lt;0.001)</td><td>0.045 (n.s.)</td><td>Community norms dominate</td></tr>
+<tr><td>Time 2 (Mar)</td><td>0.547 (p&lt;0.001)</td><td>0.124 (p&lt;0.05)</td><td>Peer influence emerges</td></tr>
+<tr><td>Time 3 (Oct)</td><td>0.246 (p&lt;0.01)</td><td>0.192 (p&lt;0.01)</td><td>Both matter; peer gaining</td></tr>
+</tbody></table></div>
+<p>At Time 1, global misperception was the stronger predictor. By Time 3, peer-level misperception reached comparable magnitude, consistent with a referent shift as friendship clusters stabilised.</p>
+
+<h3 id="ch6-injunctive-norms" class="section-header" data-level="3">3.3 Injunctive Norms (Chapter 6)</h3>
+<p>Participants overestimated peer approval of risky drinking across all three scenarios. However, neither global nor peer injunctive misperception predicted consumption in any of the nine NAM models (3 scenarios &times; 3 time periods).</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Scenario</th><th>Time</th><th>Global Misp. &beta;</th><th>Peer Misp. &beta;</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td rowspan="3">Not drinking</td><td>T1</td><td>&minus;0.001 (n.s.)</td><td>0.005 (n.s.)</td><td>Neither significant</td></tr>
+<tr><td>T2</td><td>&minus;0.015 (n.s.)</td><td>0.004 (n.s.)</td><td>Neither significant</td></tr>
+<tr><td>T3</td><td>0.006 (n.s.)</td><td>&minus;0.020 (n.s.)</td><td>Neither significant</td></tr>
+<tr><td rowspan="3">Binge drinking</td><td>T1</td><td>&minus;0.004 (n.s.)</td><td>&minus;0.019 (n.s.)</td><td>Neither significant</td></tr>
+<tr><td>T2</td><td>&minus;0.012 (n.s.)</td><td>0.006 (n.s.)</td><td>Neither significant</td></tr>
+<tr><td>T3</td><td>&minus;0.005 (n.s.)</td><td>0.007 (n.s.)</td><td>Neither significant</td></tr>
+<tr><td rowspan="3">Passing out</td><td>T1</td><td>0.003 (n.s.)</td><td>0.013 (n.s.)</td><td>Neither significant</td></tr>
+<tr><td>T2</td><td>0.025 (n.s.)</td><td>&minus;0.005 (n.s.)</td><td>Neither significant</td></tr>
+<tr><td>T3</td><td>&minus;0.020 (n.s.)</td><td>&minus;0.003 (n.s.)</td><td>Neither significant</td></tr>
+</tbody></table></div>
+<p>All 63 coefficient checks (7 terms &times; 3 scenarios &times; 3 time periods) reproduce thesis values to 3 decimal places. Previous drinking (AUDIT-C at t&minus;1) and ethnicity consistently predict consumption; injunctive misperception does not.</p>
+
+<h3 id="ch7-selection-influence" class="section-header" data-level="3">3.4 Social Selection &amp; Influence (Chapter 7)</h3>
+<p>The SAOM models network tie change and behaviour change jointly, separating two processes:</p>
+<p><strong>Social selection</strong> (similar drinkers become friends?): AUDIT-C similarity (&beta;=&minus;0.08, p=0.88), ego (&beta;=&minus;0.04, p=0.18), and alter (&beta;=0.03, p=0.35) were all non-significant. The model found no evidence that drinking similarity predicted tie formation.</p>
+<p><strong>Social influence</strong> (friends become similar drinkers?): The average similarity effect was significant (&beta;=1.88, p&lt;0.01), yielding an odds ratio of 1.17 (95% CI: 1.05&ndash;1.31). Under the model, students were 17% more likely to shift their drinking one unit toward their friends&rsquo; average than to hold steady.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Effect</th><th>&beta;</th><th>SE</th><th>p</th><th>Interpretation</th></tr></thead>
+<tbody>
+<tr><td>Average similarity (influence)</td><td>1.88</td><td>0.68</td><td>&lt;0.01</td><td>Drinking convergence among friends</td></tr>
+<tr><td>AUDIT-C similarity (selection)</td><td>&minus;0.08</td><td>0.53</td><td>0.88</td><td>n.s.; no selection on drinking</td></tr>
+<tr><td>Reciprocity</td><td>2.70</td><td>0.31</td><td>&lt;0.001</td><td>Mutual ties favoured</td></tr>
+<tr><td>Transitive triplets</td><td>0.78</td><td>0.12</td><td>&lt;0.001</td><td>Triadic closure</td></tr>
+<tr><td>Flatmate proximity</td><td>0.76</td><td>0.23</td><td>&lt;0.001</td><td>Flat co-residence predicts ties</td></tr>
+<tr><td>Blockmate proximity</td><td>0.80</td><td>0.22</td><td>&lt;0.001</td><td>Block co-residence predicts ties</td></tr>
+<tr><td>Density</td><td>&minus;2.91</td><td>0.52</td><td>&lt;0.001</td><td>Sparse network</td></tr>
+</tbody></table></div>
+<p>On thesis data: convergence max ratio &le; 0.10; Jaccard indices 0.67, 0.81, 0.66. Proxy-data convergence is not yet verified.</p>
+<hr>
+
+<h2 id="data-dictionary" class="section-header" data-level="2">4. Data Dictionary</h2>
+<p>Collapsed. Repeated friend-slot variables (slots 1&ndash;10) shown as patterns. <code>make DATA_MODE=proxy portfolio</code> generates the expanded version.</p>
+
+<h3 id="dict-identifiers" class="section-header" data-level="3">4.1 Identifiers</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Variable</th><th>Type</th><th>Description</th><th>Waves</th></tr></thead>
+<tbody>
+<tr><td><code>redcap_survey_identifier</code></td><td>integer</td><td>Pseudonymous participant key for within-study linkage</td><td>1&ndash;6</td></tr>
+<tr><td><code>redcap_event_name</code></td><td>character</td><td>REDCap event label (<code>wave1_arm_1</code> to <code>wave6_arm_1</code>)</td><td>1&ndash;6</td></tr>
+</tbody></table></div>
+
+<h3 id="dict-demographics" class="section-header" data-level="3">4.2 Demographics &amp; Residence</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Variable</th><th>Type</th><th>Encoding</th><th>Description</th><th>Waves</th></tr></thead>
+<tbody>
+<tr><td><code>age</code></td><td>numeric</td><td>Years</td><td>Participant age at survey</td><td>1&ndash;6</td></tr>
+<tr><td><code>sex</code></td><td>integer</td><td>0/1</td><td>Sex covariate (0=female, 1=male)</td><td>1&ndash;6</td></tr>
+<tr><td><code>ethnicity</code></td><td>integer</td><td>Collapsed categorical</td><td>Ethnicity category</td><td>1&ndash;6</td></tr>
+<tr><td><code>majority_status</code></td><td>integer</td><td>0/1</td><td>Composite majority-status covariate for Ch 7</td><td>1&ndash;6</td></tr>
+<tr><td><code>residence_cluster</code></td><td>integer</td><td>&mdash;</td><td>Proxy residence grouping; real data uses block/flat fields</td><td>1&ndash;6</td></tr>
+</tbody></table></div>
+
+<h3 id="dict-alcohol" class="section-header" data-level="3">4.3 Alcohol Use &amp; Consequences</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Variable</th><th>Type</th><th>Range</th><th>Description</th><th>Waves</th></tr></thead>
+<tbody>
+<tr><td><code>q1</code></td><td>numeric</td><td>0&ndash;4</td><td>AUDIT-C item 1: drinking frequency</td><td>1&ndash;6</td></tr>
+<tr><td><code>q2</code></td><td>numeric</td><td>0&ndash;4</td><td>AUDIT-C item 2: typical drinks per occasion</td><td>1&ndash;6</td></tr>
+<tr><td><code>q3</code></td><td>numeric</td><td>0&ndash;4</td><td>AUDIT-C item 3: heavy episodic drinking frequency</td><td>1&ndash;6</td></tr>
+<tr><td><code>audit_score</code></td><td>numeric</td><td>0&ndash;12</td><td>AUDIT-C composite: <code>q1 + q2 + q3</code></td><td>1&ndash;6</td></tr>
+<tr><td><code>byaacq_6</code></td><td>numeric</td><td>0&ndash;6</td><td>BYAACQ-derived passing-out field for Ch 6 blackout outcome</td><td>1&ndash;6</td></tr>
+</tbody></table></div>
+
+<h3 id="dict-nominations" class="section-header" data-level="3">4.4 Important-Peer Nominations</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Variable</th><th>Type</th><th>Description</th><th>Waves</th></tr></thead>
+<tbody>
+<tr><td><code>friend_number</code></td><td>numeric</td><td>Number of important-peer nominations made (0&ndash;10)</td><td>2&ndash;6</td></tr>
+<tr><td><code>which_friendid</code></td><td>integer</td><td>Nomination slot index (1&ndash;10)</td><td>2&ndash;6</td></tr>
+<tr><td><code>nomination</code></td><td>integer</td><td>Pseudonymous ID of nominated peer</td><td>2&ndash;6</td></tr>
+</tbody></table></div>
+
+<h3 id="dict-norms" class="section-header" data-level="3">4.5 Norm Perceptions</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Pattern</th><th>Type</th><th>Description</th><th>Waves</th></tr></thead>
+<tbody>
+<tr><td><code>inno[1-3]_self</code></td><td>numeric</td><td>Own approval of: (1) not drinking, (2) binge, (3) passing out</td><td>1&ndash;6</td></tr>
+<tr><td><code>deno[1,3,4]_friend_0</code></td><td>integer</td><td>Perceived drinking behaviour of a typical resident</td><td>2&ndash;6</td></tr>
+<tr><td><code>inno[1-3]_friend_0</code></td><td>integer</td><td>Perceived approval by a typical resident</td><td>2&ndash;6</td></tr>
+<tr><td><code>deno[1,3,4]_friend_[1-10]</code></td><td>integer</td><td>Perceived drinking behaviour of nominated peer (slots 1&ndash;10)</td><td>2&ndash;6</td></tr>
+<tr><td><code>inno[1-3]_friend_[1-10]</code></td><td>integer</td><td>Perceived approval by nominated peer (slots 1&ndash;10)</td><td>2&ndash;6</td></tr>
+</tbody></table></div>
+
+<h3 id="dict-derived" class="section-header" data-level="3">4.6 Derived Measures</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Family</th><th>Formula</th></tr></thead>
+<tbody>
+<tr><td><code>actual_*_peer</code></td><td>Mean of the corresponding measure across nominated important peers</td></tr>
+<tr><td><code>deno*_peer</code></td><td>Aggregated perceived important-peer descriptive norm</td></tr>
+<tr><td><code>inno*_peer</code></td><td>Aggregated perceived important-peer injunctive norm</td></tr>
+<tr><td><code>misperception_*_peer</code></td><td>Perceived peer value minus actual peer mean</td></tr>
+<tr><td><code>audit_score</code></td><td><code>q1 + q2 + q3</code></td></tr>
+</tbody></table></div>
+<hr>
+
+<h2 id="known-limitations" class="section-header" data-level="2">5. Known Limitations</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Limitation</th><th>Impact</th></tr></thead>
+<tbody>
+<tr><td>Behaviour GoF is poor (p&lt;0.001)</td><td>Bimodal AUDIT-C distribution violates SAOM&rsquo;s continuous-behaviour assumption</td></tr>
+<tr><td>Missing first-week data</td><td>Network measurement began one month after arrival; early formation period is unobserved</td></tr>
+<tr><td>Single-hall design</td><td>One residence hall in a UK university town; UK binge rates (80%) far exceed US cohorts (~28%)</td></tr>
+<tr><td>68% response rate</td><td>Missing network data could bias tie-formation estimates</td></tr>
+<tr><td>Self-reported alcohol data</td><td>Social desirability and recall error</td></tr>
+<tr><td>No study preregistration</td><td>Retrospective reproducibility release, not a preregistration</td></tr>
+</tbody></table></div>
+<hr>
+
+<h2 id="acknowledgements" class="section-header" data-level="2">6. Acknowledgements &amp; Contact</h2>
+<p>This research was funded by a <strong>Wellcome Trust</strong> Research and Training Support Grant (224&nbsp;850/Z/21/Z) through the <a href="https://www.pheds-dtc.ac.uk/">PHEDS Doctoral Training Centre</a> at the University of Sheffield. The funder had no role in study design, data collection, analysis, or the decision to publish.</p>
+<p><strong>Supervisors:</strong></p>
+<ul>
+<li>Professor Robin Purshouse, School of Electrical and Electronic Engineering, University of Sheffield</li>
+<li>Professor John Holmes, School of Medicine and Population Health, University of Sheffield</li>
+<li>Professor Paul Norman, Department of Psychology, University of Sheffield</li>
+</ul>
+<p><strong>Contact</strong><br>
+Shangshang Gu<br>
+<a href="mailto:shangshanggu@gmail.com">shangshanggu@gmail.com</a></p>
+
+    </div>
+
+    <!-- ==================== INFRA TAB ==================== -->
+    <div class="tab-panel" data-panel="infra">
+
+<h1 id="infra-sand" class="section-header" data-level="1">Infrastructure</h1>
+<blockquote>REDCap &middot; MySQL &middot; Apache/SSL &middot; Postfix &middot; cron &middot; API export<br>The data-collection stack behind the six-wave longitudinal study.</blockquote>
+<hr>
+
+<h2 id="infra-server" class="section-header" data-level="2">1. Server Stack</h2>
+<p>The lead researcher built the stack from bare university VMs. The university had no centrally managed REDCap instance. Two dedicated VMs formed a split web/database architecture on the university network:</p>
+
+<div style="text-align:center; margin: 24px 0;">
+<svg viewBox="0 0 840 440" xmlns="http://www.w3.org/2000/svg" style="max-width:800px; width:100%;" font-family="'Source Sans 3', 'Segoe UI', sans-serif">
+  <defs>
+    <marker id="arr-srv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="var(--text-muted, #5f6c7b)"/></marker>
+    <marker id="arr-srv2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="var(--accent, #243b53)"/></marker>
+  </defs>
+
+  <!-- Participants -->
+  <rect x="310" y="16" width="220" height="40" rx="20" fill="var(--code-bg, #eef1f4)" stroke="var(--border, #c8d1dc)"/>
+  <text x="420" y="41" text-anchor="middle" font-size="12" font-weight="500" fill="var(--text-muted, #5f6c7b)">Participants (HTTPS :443)</text>
+
+  <path d="M 420 56 L 420 90" stroke="var(--text-muted, #5f6c7b)" stroke-width="1.5" fill="none" marker-end="url(#arr-srv)"/>
+
+  <!-- Web server -->
+  <rect x="40" y="96" width="370" height="220" rx="10" fill="var(--bq-bg, #edf2f7)" stroke="var(--accent, #243b53)" stroke-width="1.5"/>
+  <text x="225" y="124" text-anchor="middle" font-size="14" font-weight="700" fill="var(--accent, #243b53)">Web Server</text>
+  <text x="225" y="142" text-anchor="middle" font-size="11" fill="var(--text-muted, #5f6c7b)">2 vCPU &middot; 4 GB</text>
+
+  <rect x="64" y="160" width="155" height="32" rx="5" fill="var(--code-bg, #eef1f4)" stroke="var(--border, #c8d1dc)"/>
+  <text x="141" y="181" text-anchor="middle" font-size="11" fill="var(--text, #1f2933)">Apache 2 + mod_ssl</text>
+
+  <rect x="231" y="160" width="155" height="32" rx="5" fill="var(--code-bg, #eef1f4)" stroke="var(--border, #c8d1dc)"/>
+  <text x="308" y="181" text-anchor="middle" font-size="11" fill="var(--text, #1f2933)">PHP 7.4 &rarr; 8.1</text>
+
+  <rect x="64" y="202" width="155" height="32" rx="5" fill="var(--code-bg, #eef1f4)" stroke="var(--border, #c8d1dc)"/>
+  <text x="141" y="223" text-anchor="middle" font-size="11" fill="var(--text, #1f2933)">REDCap v12&ndash;v13</text>
+
+  <rect x="231" y="202" width="155" height="32" rx="5" fill="var(--code-bg, #eef1f4)" stroke="var(--border, #c8d1dc)"/>
+  <text x="308" y="223" text-anchor="middle" font-size="11" fill="var(--text, #1f2933)">Postfix (smarthost)</text>
+
+  <rect x="64" y="244" width="155" height="32" rx="5" fill="var(--code-bg, #eef1f4)" stroke="var(--border, #c8d1dc)"/>
+  <text x="141" y="265" text-anchor="middle" font-size="11" fill="var(--text, #1f2933)">cron (every min)</text>
+
+  <rect x="231" y="244" width="155" height="32" rx="5" fill="var(--code-bg, #eef1f4)" stroke="var(--border, #c8d1dc)"/>
+  <text x="308" y="265" text-anchor="middle" font-size="11" fill="var(--text, #1f2933)">TLS 1.3 + OCSP</text>
+
+  <text x="225" y="300" text-anchor="middle" font-size="10" fill="var(--text-muted, #5f6c7b)">HttpOnly + Secure cookies &middot; GEANT OV RSA CA 4</text>
+
+  <!-- Database server -->
+  <rect x="460" y="96" width="340" height="220" rx="10" fill="var(--bq-bg, #edf2f7)" stroke="var(--accent, #243b53)" stroke-width="1.5"/>
+  <text x="630" y="124" text-anchor="middle" font-size="14" font-weight="700" fill="var(--accent, #243b53)">Database Server</text>
+  <text x="630" y="142" text-anchor="middle" font-size="11" fill="var(--text-muted, #5f6c7b)">2 vCPU &middot; 4 GB</text>
+
+  <rect x="484" y="160" width="292" height="32" rx="5" fill="var(--code-bg, #eef1f4)" stroke="var(--border, #c8d1dc)"/>
+  <text x="630" y="181" text-anchor="middle" font-size="11" fill="var(--text, #1f2933)">MySQL 8.0 on Ubuntu</text>
+
+  <rect x="484" y="202" width="292" height="32" rx="5" fill="var(--code-bg, #eef1f4)" stroke="var(--border, #c8d1dc)"/>
+  <text x="630" y="223" text-anchor="middle" font-size="11" fill="var(--text, #1f2933)">Dedicated study database &middot; scoped user</text>
+
+  <rect x="484" y="244" width="292" height="32" rx="5" fill="var(--code-bg, #eef1f4)" stroke="var(--border, #c8d1dc)"/>
+  <text x="630" y="265" text-anchor="middle" font-size="11" fill="var(--text, #1f2933)">220 tables &middot; 538 FKs &middot; 623 indexes</text>
+
+  <text x="630" y="300" text-anchor="middle" font-size="10" fill="var(--text-muted, #5f6c7b)">Port 3306 open only from web server &middot; bind-address scoped</text>
+
+  <!-- Connection arrow -->
+  <path d="M 410 210 L 482 210" stroke="var(--accent, #243b53)" stroke-width="2" fill="none" marker-end="url(#arr-srv2)"/>
+  <text x="446" y="202" text-anchor="middle" font-size="10" font-weight="600" fill="var(--accent, #243b53)">:3306</text>
+
+  <!-- Network boundary -->
+  <rect x="20" y="340" width="800" height="80" rx="10" fill="none" stroke="var(--fail, #c0392b)" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <text x="420" y="366" text-anchor="middle" font-size="12" font-weight="600" fill="var(--fail, #c0392b)">University Network Boundary</text>
+  <text x="420" y="386" text-anchor="middle" font-size="11" fill="var(--text-muted, #5f6c7b)">Web server: HTTPS only &middot; admin access from university network</text>
+  <text x="420" y="404" text-anchor="middle" font-size="11" fill="var(--text-muted, #5f6c7b)">Database server: no public ports &middot; accepts connections from web server only</text>
+</svg>
+</div>
+
+<div class="table-wrap"><table>
+<thead><tr><th>Layer</th><th>Component</th><th>Detail</th></tr></thead>
+<tbody>
+<tr><td>Web server VM</td><td>Ubuntu / Apache&nbsp;2 / PHP (7.4&ndash;8.1) / SSL</td><td>2 vCPUs, 4&nbsp;GB RAM, 32&nbsp;GB SSD. Port 443 open to participants. SSL certificates issued by IT Security with auto-renewal.</td></tr>
+<tr><td>Database server VM</td><td>Ubuntu / MySQL&nbsp;8.0</td><td>Same spec. Port 3306 open only from the web server. Dedicated <code>redcap</code> MySQL user with scoped privileges on the study database.</td></tr>
+<tr><td>Application</td><td>REDCap v12.5.5 &rarr; v13.10.0</td><td>Installed from the REDCap Community distribution. Six versions deployed across the study period (v12.5.5, v12.5.8, v12.5.9, v13.5.1, v13.9.3, v13.10.0).</td></tr>
+<tr><td>Mail relay</td><td>Postfix (internet with smarthost)</td><td>Delivers scheduled survey invitations, reminders, and incentive codes.</td></tr>
+<tr><td>Scheduler</td><td>REDCap cron job</td><td>Sends reminders on schedule, triggers survey invitations, expires inactive links.</td></tr>
+<tr><td>Authentication</td><td>Table-based, 30-min auto-logout</td><td>Autocomplete disabled on login. Clickjacking prevention enabled. User-created projects disabled for non-admin accounts.</td></tr>
+</tbody></table></div>
+
+<p><strong>Setup tasks.</strong> MySQL installation and secure configuration (<code>mysql_secure_installation</code>, dedicated user, remote bind, privilege scoping), Apache virtual-host and SSL certificate installation, PHP module setup (<code>php-mysql</code>, <code>php-curl</code>, <code>php-gd</code>, <code>php-zip</code>, <code>php-mbstring</code>, <code>php-xml</code>), REDCap database table creation via SQL, Postfix email relay, cron job, and a custom email-validation rule restricting registration to the university domain.</p>
+
+<p><strong>Security configuration.</strong> REDCap Control Centre: Send-It disabled, draft-mode auto-approval set to Never, non-admin users cannot create projects or modify events, survey response editing disabled, repeatable instruments locked.</p>
+
+<blockquote><strong>Retained evidence.</strong> A complete database backup and server configuration archive were preserved at the end of the study. Python scripts parse the backup offline, enabling reproducible evidence extraction without a running database instance.</blockquote>
+
+<h4>SSL and transport security</h4>
+<p>TLS&nbsp;1.3 only (all older protocols disabled). OCSP stapling enabled. <code>HttpOnly</code> and <code>Secure</code> flags enforced on all cookies. Directory indexing disabled. Certificates issued by university IT Security with auto-renewal.</p>
+
+<h4>Scheduled tasks</h4>
+<p>A minute-frequency cron job drives REDCap&rsquo;s automated survey invitations, reminders, and link expiry.</p>
+
+<h4>Database isolation</h4>
+<p>Separate web and database VMs connected over the university internal network. The application used a dedicated, scoped MySQL user with minimum-privilege access to a single study database. A de-identification salt was configured for REDCap&rsquo;s internal hashing.</p>
+
+<h4>Network isolation</h4>
+<p>The database VM had no public-facing ports. MySQL accepted connections only from the web server, enforced by both bind-address configuration and host-level firewall rules. The application database user held minimum-privilege access (no schema modification, no administrative rights). SSH access was restricted to the university network. HTTP traffic was forced to HTTPS via redirect.</p>
+
+<h4>REDCap Control Centre hardening</h4>
+<p>Key security settings: non-admin users cannot create projects, draft-mode changes require admin approval, file-sharing (Send-It) disabled, API enabled for controlled data export, survey links shortened via REDCap&rsquo;s built-in shortener.</p>
+<hr>
+
+<h2 id="infra-two-project" class="section-header" data-level="2">2. Two-Project Model</h2>
+<p>The study used two linked REDCap projects with role-based access separation:</p>
+
+<div style="text-align:center; margin: 24px 0;">
+<svg viewBox="0 0 800 520" xmlns="http://www.w3.org/2000/svg" style="max-width:760px; width:100%;" font-family="'Source Sans 3', 'Segoe UI', sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="var(--text-muted, #6b6b6b)"/></marker>
+    <marker id="arrow-accent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="var(--accent, #2c5f4a)"/></marker>
+  </defs>
+  <!-- PIS Portal box -->
+  <rect x="20" y="20" width="230" height="160" rx="8" fill="var(--bq-bg, #f6f9f7)" stroke="var(--accent, #2c5f4a)" stroke-width="2"/>
+  <text x="135" y="48" text-anchor="middle" font-size="13" font-weight="700" fill="var(--accent, #2c5f4a)">PIS Portal</text>
+  <text x="135" y="68" text-anchor="middle" font-size="11" fill="var(--text-muted, #6b6b6b)">Production &middot; 1 form &middot; 17 fields</text>
+  <line x1="40" y1="78" x2="230" y2="78" stroke="var(--border, #e8e6e1)" stroke-width="1"/>
+  <text x="40" y="96" font-size="11" fill="var(--text, #1a1a1a)">Participant Information Sheet</text>
+  <text x="40" y="112" font-size="11" fill="var(--text, #1a1a1a)">Consent gateway</text>
+  <text x="40" y="128" font-size="11" fill="var(--text, #1a1a1a)">Email domain validation</text>
+  <text x="40" y="148" font-size="10" fill="var(--text-muted, #6b6b6b)">13 surveys configured</text>
+  <text x="40" y="164" font-size="10" fill="var(--text-muted, #6b6b6b)">1,509 data rows</text>
+
+  <!-- Baseline box -->
+  <rect x="285" y="20" width="230" height="200" rx="8" fill="var(--bq-bg, #f6f9f7)" stroke="var(--accent, #2c5f4a)" stroke-width="2"/>
+  <text x="400" y="48" text-anchor="middle" font-size="13" font-weight="700" fill="var(--accent, #2c5f4a)">Baseline</text>
+  <text x="400" y="68" text-anchor="middle" font-size="11" fill="var(--text-muted, #6b6b6b)">28 instruments &middot; 231 fields</text>
+  <line x1="305" y1="78" x2="495" y2="78" stroke="var(--border, #e8e6e1)" stroke-width="1"/>
+  <text x="305" y="96" font-size="11" fill="var(--text, #1a1a1a)">Consent form (41 fields)</text>
+  <text x="305" y="112" font-size="11" fill="var(--text, #1a1a1a)">Alcohol use / AUDIT-C (38 fields)</text>
+  <text x="305" y="128" font-size="11" fill="var(--text, #1a1a1a)">ID key + email validation</text>
+  <text x="305" y="144" font-size="11" fill="var(--text, #1a1a1a)">RAF referral &times;4 groups</text>
+  <text x="305" y="160" font-size="11" fill="var(--text, #1a1a1a)">Amazon eGift automation</text>
+  <text x="305" y="180" font-size="10" fill="var(--text-muted, #6b6b6b)">30 surveys &middot; 400-row randomisation</text>
+  <text x="305" y="196" font-size="10" fill="var(--text-muted, #6b6b6b)">56 branching rules &middot; 19 PHI fields</text>
+  <text x="305" y="210" font-size="10" fill="var(--text-muted, #6b6b6b)">21,647 data rows</text>
+
+  <!-- Follow-up box -->
+  <rect x="550" y="20" width="230" height="200" rx="8" fill="var(--bq-bg, #f6f9f7)" stroke="var(--accent, #2c5f4a)" stroke-width="2"/>
+  <text x="665" y="48" text-anchor="middle" font-size="13" font-weight="700" fill="var(--accent, #2c5f4a)">Follow-up</text>
+  <text x="665" y="68" text-anchor="middle" font-size="11" fill="var(--text-muted, #6b6b6b)">8 instruments &middot; 239 fields &middot; 5 waves</text>
+  <line x1="570" y1="78" x2="760" y2="78" stroke="var(--border, #e8e6e1)" stroke-width="1"/>
+  <text x="570" y="96" font-size="11" fill="var(--text, #1a1a1a)">Alcohol use / AUDIT-C (45 fields)</text>
+  <text x="570" y="112" font-size="11" fill="var(--text, #1a1a1a)">Friend nomination (64 fields, 21 calc)</text>
+  <text x="570" y="128" font-size="11" fill="var(--text, #1a1a1a)">Friend1 perceptions (96 fields)</text>
+  <text x="570" y="144" font-size="11" fill="var(--text, #1a1a1a)">Friend0 (typical peer, 11 fields)</text>
+  <text x="570" y="160" font-size="11" fill="var(--text, #1a1a1a)">Amazon eGift + prize draw</text>
+  <text x="570" y="180" font-size="10" fill="var(--text-muted, #6b6b6b)">34 surveys &middot; 151 branching rules</text>
+  <text x="570" y="196" font-size="10" fill="var(--text-muted, #6b6b6b)">123 required fields &middot; 62 validated</text>
+  <text x="570" y="210" font-size="10" fill="var(--text-muted, #6b6b6b)">101,017 data rows</text>
+
+  <!-- Arrows -->
+  <path d="M 250 100 L 283 100" stroke="var(--text-muted, #6b6b6b)" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <path d="M 515 100 L 548 100" stroke="var(--text-muted, #6b6b6b)" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- Identity separation line -->
+  <rect x="20" y="250" width="760" height="100" rx="8" fill="none" stroke="var(--fail, #c0392b)" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <text x="400" y="274" text-anchor="middle" font-size="12" font-weight="700" fill="var(--fail, #c0392b)">Identity Separation Boundary</text>
+
+  <!-- Role boxes inside boundary -->
+  <rect x="50" y="286" width="200" height="52" rx="6" fill="var(--code-bg, #f0eeeb)" stroke="var(--border, #e8e6e1)"/>
+  <text x="150" y="306" text-anchor="middle" font-size="11" font-weight="600" fill="var(--text, #1a1a1a)">Identity Manager</text>
+  <text x="150" y="322" text-anchor="middle" font-size="10" fill="var(--text-muted, #6b6b6b)">design + key access</text>
+
+  <rect x="300" y="286" width="200" height="52" rx="6" fill="var(--code-bg, #f0eeeb)" stroke="var(--border, #e8e6e1)"/>
+  <text x="400" y="306" text-anchor="middle" font-size="11" font-weight="600" fill="var(--text, #1a1a1a)">Project Manager</text>
+  <text x="400" y="322" text-anchor="middle" font-size="10" fill="var(--text-muted, #6b6b6b)">operations only</text>
+
+  <rect x="550" y="286" width="200" height="52" rx="6" fill="var(--code-bg, #f0eeeb)" stroke="var(--border, #e8e6e1)"/>
+  <text x="650" y="306" text-anchor="middle" font-size="11" font-weight="600" fill="var(--text, #1a1a1a)">Amazon Code Manager</text>
+  <text x="650" y="322" text-anchor="middle" font-size="10" fill="var(--text-muted, #6b6b6b)">codes only</text>
+
+  <!-- Data flow -->
+  <text x="400" y="386" text-anchor="middle" font-size="12" font-weight="700" fill="var(--accent, #2c5f4a)">Data Flow</text>
+  <rect x="80" y="400" width="160" height="36" rx="6" fill="var(--accent, #2c5f4a)"/>
+  <text x="160" y="423" text-anchor="middle" font-size="11" fill="#fff">Consent + names</text>
+  <path d="M 240 418 L 310 418" stroke="var(--accent, #2c5f4a)" stroke-width="1.5" fill="none" marker-end="url(#arrow-accent)"/>
+
+  <rect x="312" y="400" width="176" height="36" rx="6" fill="var(--accent, #2c5f4a)"/>
+  <text x="400" y="423" text-anchor="middle" font-size="11" fill="#fff">@HIDDEN-SURVEY &#8594; coded IDs</text>
+  <path d="M 488 418 L 558 418" stroke="var(--accent, #2c5f4a)" stroke-width="1.5" fill="none" marker-end="url(#arrow-accent)"/>
+
+  <rect x="560" y="400" width="160" height="36" rx="6" fill="var(--accent, #2c5f4a)"/>
+  <text x="640" y="423" text-anchor="middle" font-size="11" fill="#fff">De-identified export</text>
+
+  <!-- Export to pipeline -->
+  <path d="M 640 436 L 640 470 L 700 470" stroke="var(--text-muted, #6b6b6b)" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="710" y="474" font-size="11" fill="var(--text-muted, #6b6b6b)">list_by_wave.RData &#8594; Pipeline tab</text>
+
+  <!-- No overlap annotation -->
+  <text x="400" y="510" text-anchor="middle" font-size="10" font-style="italic" fill="var(--text-muted, #6b6b6b)">No team member simultaneously held export access and the identity key</text>
+</svg>
+</div>
+
+<div class="table-wrap"><table>
+<thead><tr><th>Component</th><th>Purpose</th><th>Access</th></tr></thead>
+<tbody>
+<tr><td><strong>Baseline project</strong></td><td>Consent, demographics, pre-university alcohol measures, contact details, email validation</td><td>Identity manager + researcher</td></tr>
+<tr><td><strong>Follow-up projects</strong></td><td>Waves 2&ndash;6 surveys: AUDIT-C, peer nominations (coded by ID), descriptive and injunctive norm perceptions, alcohol consequences</td><td>Researcher (export only, de-identified)</td></tr>
+<tr><td><strong>Identity manager key</strong></td><td>Maps record IDs, pseudonymous six-digit codes, email addresses, and nomination roster positions</td><td>Identity manager only</td></tr>
+</tbody></table></div>
+<p>After baseline collection, the researcher exported all responses and erased the baseline project data from REDCap. The follow-up project was rebuilt from exported instrument ZIP files, preserving survey design without carrying forward participant records.</p>
+
+<p>The PIS portal served as the consent gateway (1 form, 17 fields). The baseline project collected data across 28 instruments covering consent, alcohol measures, email validation, incentive distribution, referral management, and identification-key operations. The follow-up project collected five waves of data (waves 2&ndash;6) across 8 instruments including friend-nomination forms with 10 per-friend survey pages.</p>
+<hr>
+
+<h2 id="infra-identity" class="section-header" data-level="2">3. Identity Separation</h2>
+<p>The core design problem: participants must see names to nominate peers, but the analyst must not access those names.</p>
+<p>The identity manager generated six-digit random identifiers in Excel (<code>RANDBETWEEN</code>) and loaded the resulting roster into the follow-up project, linking names to pseudonymous IDs.</p>
+<p>When participants nominated up to 10 important peers by name (via dropdown), REDCap&rsquo;s <code>@HIDDEN-SURVEY</code> and <code>@HIDDEN-FORM</code> action tags separated what participants saw from what the system recorded:</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Action tag</th><th>Effect</th></tr></thead>
+<tbody>
+<tr><td><code>@HIDDEN-FORM</code></td><td>Name-selection fields visible to participants during the survey, hidden from the researcher in data views and reports</td></tr>
+<tr><td><code>@HIDDEN-SURVEY</code></td><td>Calculated ID fields hidden from participants, recorded in the database for export</td></tr>
+</tbody></table></div>
+<p>A calculated field converted each name selection to its coded ID. The researcher could export de-identified data only: no free text, no dates, no identifier fields, no access to reports or the design interface after initial setup.</p>
+<p>No team member simultaneously held export access and the identity key.</p>
+
+<p>Identity-key fields (suffixed <code>_ik</code>) are systematically hidden from the survey view and marked read-only, confirming the separation is enforced at the field level, not merely by convention.</p>
+
+<h4>Calculated fields for pseudonymised linkage</h4>
+<p>The follow-up project contains 21 calculated fields in the <code>friend_nomination</code> instrument. Ten fields convert name-dropdown selections to numeric IDs. A further 10 detect duplicate nominations using conditional logic, with an aggregating error-check flag. A <code>friend_number</code> field counts valid nominations per respondent.</p>
+<hr>
+
+<h2 id="infra-recruitment" class="section-header" data-level="2">4. Recruitment Operations</h2>
+
+<div style="text-align:center; margin: 24px 0;">
+<svg viewBox="0 0 780 160" xmlns="http://www.w3.org/2000/svg" style="max-width:740px; width:100%;" font-family="'Source Sans 3', 'Segoe UI', sans-serif">
+  <defs><marker id="arr4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="var(--text-muted, #6b6b6b)"/></marker></defs>
+
+  <!-- Timeline axis -->
+  <line x1="40" y1="60" x2="760" y2="60" stroke="var(--border, #e8e6e1)" stroke-width="2"/>
+
+  <!-- Baseline -->
+  <rect x="40" y="38" width="100" height="44" rx="6" fill="var(--accent, #2c5f4a)"/>
+  <text x="90" y="58" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">Baseline</text>
+  <text x="90" y="72" text-anchor="middle" font-size="9" fill="rgba(255,255,255,0.8)">Classic</text>
+  <text x="90" y="100" text-anchor="middle" font-size="9" fill="var(--text-muted, #6b6b6b)">Sep&ndash;Oct 2022</text>
+  <text x="90" y="112" text-anchor="middle" font-size="9" fill="var(--text-muted, #6b6b6b)">255 enrolled</text>
+
+  <!-- Waves 2-6 -->
+  <rect x="180" y="38" width="90" height="44" rx="6" fill="var(--accent, #2c5f4a)"/>
+  <text x="225" y="58" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">Wave 2</text>
+  <text x="225" y="72" text-anchor="middle" font-size="9" fill="rgba(255,255,255,0.8)">Longitudinal</text>
+  <text x="225" y="100" text-anchor="middle" font-size="9" fill="var(--text-muted, #6b6b6b)">Oct 2022</text>
+
+  <rect x="300" y="38" width="90" height="44" rx="6" fill="var(--accent, #2c5f4a)"/>
+  <text x="345" y="58" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">Wave 3</text>
+  <text x="345" y="100" text-anchor="middle" font-size="9" fill="var(--text-muted, #6b6b6b)">Nov 2022</text>
+
+  <rect x="420" y="38" width="90" height="44" rx="6" fill="var(--accent, #2c5f4a)"/>
+  <text x="465" y="58" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">Wave 4</text>
+  <text x="465" y="100" text-anchor="middle" font-size="9" fill="var(--text-muted, #6b6b6b)">Dec 2022</text>
+
+  <rect x="540" y="38" width="90" height="44" rx="6" fill="var(--accent, #2c5f4a)"/>
+  <text x="585" y="58" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">Wave 5</text>
+  <text x="585" y="100" text-anchor="middle" font-size="9" fill="var(--text-muted, #6b6b6b)">Mar 2023</text>
+
+  <rect x="660" y="38" width="90" height="44" rx="6" fill="var(--accent, #2c5f4a)"/>
+  <text x="705" y="58" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">Wave 6</text>
+  <text x="705" y="100" text-anchor="middle" font-size="9" fill="var(--text-muted, #6b6b6b)">Oct 2023</text>
+
+  <!-- Retention -->
+  <text x="400" y="140" text-anchor="middle" font-size="11" fill="var(--text, #1a1a1a)">Overall retention: <tspan font-weight="700">87%</tspan> &middot; 101,017 follow-up data rows</text>
+  <text x="400" y="156" text-anchor="middle" font-size="10" fill="var(--text-muted, #6b6b6b)">Unique survey links &middot; Up to 3 reminders per wave &middot; &pound;10 eGift per completion</text>
+</svg>
+</div>
+
+<p>Recruitment ran in two phases with daily response tracking.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Phase</th><th>Period</th><th>Method</th><th>Outcome</th></tr></thead>
+<tbody>
+<tr><td><strong>A: Public invitation</strong></td><td>20 Sep &ndash; 7 Oct 2022</td><td>Three Residence Life emails to 375 residents. 400 A5 + 100 A4 posters. One in-person session. Public REDCap link with university email domain validation.</td><td>~160 completed records by the initial deadline.</td></tr>
+<tr><td><strong>B: Refer-a-friend</strong></td><td>8&ndash;14 Oct 2022</td><td>Respondent-driven sampling. Each existing participant received a unique referral code. Referrers earned &pound;10 per new participant; referred participants received an extra &pound;5 bonus.</td><td>Additional enrolments bringing the total to 255.</td></tr>
+</tbody></table></div>
+<p>Follow-up waves (2&ndash;6) used unique non-forwardable survey links emailed via REDCap&rsquo;s participant list. Up to three reminder emails per wave.</p>
+<p>An anonymous enquiry portal stayed open throughout data collection. Participants could raise concerns without identifying themselves.</p>
+
+<p>The follow-up project contains five longitudinal events (one per wave), each linking the same core instruments: alcohol use, friend nomination, per-friend perception pages, and incentive delivery. Combined with the baseline project (single event), the study covers six longitudinal time-points.</p>
+<hr>
+
+<h2 id="infra-incentives" class="section-header" data-level="2">5. Incentive Automation</h2>
+<p>&pound;10 Amazon eGift Card per completed survey. From Wave&nbsp;2 onward, codes were delivered automatically at survey completion via the REDCap randomisation module:</p>
+<ul>
+<li>Amazon eGift Card codes pre-loaded into the REDCap randomisation table</li>
+<li>On submission, REDCap assigned the next available code and emailed it to the participant</li>
+<li>No manual matching of names to completion status required</li>
+</ul>
+<p>Additional incentives: &pound;10 bonus for completing all six waves, &pound;500 prize draw at study end, &pound;10 per successful referral for the referrer, &pound;5 bonus for each referred participant.</p>
+
+<hr>
+
+<h2 id="infra-schema" class="section-header" data-level="2">6. Database Schema</h2>
+<p>The archived REDCap database preserves the full relational schema:</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Metric</th><th>Count</th></tr></thead>
+<tbody>
+<tr><td>Tables</td><td>220</td></tr>
+<tr><td>Foreign-key constraints</td><td>538</td></tr>
+<tr><td>Non-unique indexes</td><td>519</td></tr>
+<tr><td>Unique indexes</td><td>104</td></tr>
+<tr><td>Configuration entries</td><td>342</td></tr>
+</tbody></table></div>
+
+<h4>External modules installed</h4>
+<div class="table-wrap"><table>
+<thead><tr><th>Module</th><th>Version</th><th>Purpose</th></tr></thead>
+<tbody>
+<tr><td><code>giftcard_reward</code></td><td>v2.0.1</td><td>Automated Amazon eGift Card distribution at survey completion</td></tr>
+<tr><td><code>auto_populate_fields</code></td><td>v2.6.0</td><td>Pre-fill fields from prior events or calculated sources</td></tr>
+<tr><td><code>record_autonumber</code></td><td>v1.0.5</td><td>Sequential record numbering for enrolment tracking</td></tr>
+<tr><td><code>unique_actiontag</code></td><td>v2.0.2</td><td>Enforce uniqueness constraints on field values (e.g., email addresses)</td></tr>
+<tr><td><code>shazam</code></td><td>v1.3.10</td><td>Custom HTML/CSS/JS injection for instrument display</td></tr>
+</tbody></table></div>
+<hr>
+
+<h2 id="infra-field-eng" class="section-header" data-level="2">7. Field-Level Engineering</h2>
+<p>The follow-up project demonstrates the complexity of sociometric data collection at the field level:</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Metric</th><th>Baseline</th><th>Follow-up</th></tr></thead>
+<tbody>
+<tr><td>Total fields</td><td>231</td><td>239</td></tr>
+<tr><td>Branching-logic rules</td><td>56</td><td>151</td></tr>
+<tr><td>Required fields</td><td>61</td><td>123</td></tr>
+<tr><td>Fields with validation</td><td>5</td><td>62</td></tr>
+<tr><td>PHI-marked fields</td><td>19</td><td>12</td></tr>
+<tr><td>Calculated fields</td><td>4</td><td>24</td></tr>
+</tbody></table></div>
+
+<h4>Validation types (follow-up project)</h4>
+<div class="table-wrap"><table>
+<thead><tr><th>Type</th><th>Count</th><th>Use</th></tr></thead>
+<tbody>
+<tr><td><code>number</code></td><td>36</td><td>Numeric range enforcement on scale items</td></tr>
+<tr><td><code>int</code></td><td>15</td><td>Integer-only fields (counts, IDs)</td></tr>
+<tr><td><code>autocomplete</code></td><td>10</td><td>Peer-nomination dropdown search</td></tr>
+<tr><td><code>float</code></td><td>1</td><td>Decimal values</td></tr>
+</tbody></table></div>
+<p>The baseline project adds 5 validated fields: 2&nbsp;<code>alpha_only</code> (name fields), 1&nbsp;<code>email</code>, 1&nbsp;<code>float</code>, 1&nbsp;<code>int</code>.</p>
+
+<h4>Branching logic: sociometric nomination cascade</h4>
+<p>The follow-up project&rsquo;s 151 branching rules implement a cascading survey design where each nominated friend generates a personalised block of perception questions:</p>
+
+<div style="text-align:center; margin: 24px 0;">
+<svg viewBox="0 0 780 400" xmlns="http://www.w3.org/2000/svg" style="max-width:740px; width:100%;" font-family="'Source Sans 3', 'Segoe UI', sans-serif">
+  <defs>
+    <marker id="arr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="var(--accent, #2c5f4a)"/></marker>
+    <marker id="arr3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="var(--text-muted, #6b6b6b)"/></marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="390" y="24" text-anchor="middle" font-size="13" font-weight="700" fill="var(--text, #1a1a1a)">Friend Nomination Cascade (follow-up project, per wave)</text>
+
+  <!-- Step 1: Nomination -->
+  <rect x="20" y="44" width="200" height="70" rx="8" fill="var(--accent, #2c5f4a)"/>
+  <text x="120" y="68" text-anchor="middle" font-size="12" font-weight="600" fill="#fff">friend_nomination</text>
+  <text x="120" y="84" text-anchor="middle" font-size="10" fill="rgba(255,255,255,0.8)">64 fields &middot; 21 calc &middot; 11 dropdowns</text>
+  <text x="120" y="100" text-anchor="middle" font-size="10" fill="rgba(255,255,255,0.8)">Select up to 10 friends by name</text>
+
+  <!-- Arrow to error check -->
+  <path d="M 220 79 L 268 79" stroke="var(--accent, #2c5f4a)" stroke-width="1.5" fill="none" marker-end="url(#arr2)"/>
+
+  <!-- Step 2: Duplicate check -->
+  <rect x="270" y="44" width="200" height="70" rx="8" fill="var(--code-bg, #f0eeeb)" stroke="var(--border, #e8e6e1)" stroke-width="1.5"/>
+  <text x="370" y="68" text-anchor="middle" font-size="12" font-weight="600" fill="var(--text, #1a1a1a)">Duplicate detection</text>
+  <text x="370" y="84" text-anchor="middle" font-size="10" fill="var(--text-muted, #6b6b6b)">error2&ndash;error10 (calc)</text>
+  <text x="370" y="100" text-anchor="middle" font-size="10" fill="var(--text-muted, #6b6b6b)">error_check = &Sigma;(errorN)</text>
+
+  <!-- Arrow to ID conversion -->
+  <path d="M 470 79 L 518 79" stroke="var(--accent, #2c5f4a)" stroke-width="1.5" fill="none" marker-end="url(#arr2)"/>
+
+  <!-- Step 3: ID conversion -->
+  <rect x="520" y="44" width="240" height="70" rx="8" fill="var(--code-bg, #f0eeeb)" stroke="var(--border, #e8e6e1)" stroke-width="1.5"/>
+  <text x="640" y="68" text-anchor="middle" font-size="12" font-weight="600" fill="var(--text, #1a1a1a)">Name &#8594; Code</text>
+  <text x="640" y="84" text-anchor="middle" font-size="10" fill="var(--text-muted, #6b6b6b)">friendid1&ndash;friendid10 = sum([friendN])</text>
+  <text x="640" y="100" text-anchor="middle" font-size="10" fill="var(--text-muted, #6b6b6b)">@HIDDEN-SURVEY on coded fields</text>
+
+  <!-- Layer 1 label -->
+  <text x="20" y="148" font-size="11" font-weight="700" fill="var(--text, #1a1a1a)">For each valid friend (error=0):</text>
+
+  <!-- Layer 1: Descriptive norm -->
+  <rect x="40" y="162" width="220" height="52" rx="6" fill="var(--bq-bg, #f6f9f7)" stroke="var(--accent, #2c5f4a)" stroke-width="1.5"/>
+  <text x="150" y="184" text-anchor="middle" font-size="11" font-weight="600" fill="var(--accent, #2c5f4a)">Layer 1: Gate question</text>
+  <text x="150" y="200" text-anchor="middle" font-size="10" fill="var(--text-muted, #6b6b6b)">deno1_friend_N: [friendN]&lt;&gt;&quot;&quot; and [errorN]=0</text>
+
+  <path d="M 260 188 L 298 188" stroke="var(--accent, #2c5f4a)" stroke-width="1.5" fill="none" marker-end="url(#arr2)"/>
+
+  <!-- Layer 2: Follow-up -->
+  <rect x="300" y="162" width="220" height="52" rx="6" fill="var(--bq-bg, #f6f9f7)" stroke="var(--accent, #2c5f4a)" stroke-width="1.5"/>
+  <text x="410" y="184" text-anchor="middle" font-size="11" font-weight="600" fill="var(--accent, #2c5f4a)">Layer 2: Follow-up</text>
+  <text x="410" y="200" text-anchor="middle" font-size="10" fill="var(--text-muted, #6b6b6b)">deno2_friend_N: ... and [deno1]&gt;1</text>
+
+  <path d="M 520 188 L 558 188" stroke="var(--accent, #2c5f4a)" stroke-width="1.5" fill="none" marker-end="url(#arr2)"/>
+
+  <!-- Layer 3: Cross-wave -->
+  <rect x="560" y="162" width="200" height="52" rx="6" fill="var(--bq-bg, #f6f9f7)" stroke="var(--accent, #2c5f4a)" stroke-width="1.5"/>
+  <text x="660" y="184" text-anchor="middle" font-size="11" font-weight="600" fill="var(--accent, #2c5f4a)">Layer 3: Cross-wave</text>
+  <text x="660" y="200" text-anchor="middle" font-size="10" fill="var(--text-muted, #6b6b6b)">friend_confirm: [prev-event][friendN]&gt;1</text>
+
+  <!-- Multiply annotation -->
+  <text x="390" y="240" text-anchor="middle" font-size="11" fill="var(--text-muted, #6b6b6b)">&times;10 friends &times; 4 norm dimensions = 151 branching rules</text>
+
+  <!-- Norm dimensions -->
+  <text x="20" y="270" font-size="11" font-weight="700" fill="var(--text, #1a1a1a)">Four norm perception dimensions per friend:</text>
+
+  <rect x="40" y="284" width="160" height="36" rx="6" fill="var(--code-bg, #f0eeeb)" stroke="var(--border, #e8e6e1)"/>
+  <text x="120" y="306" text-anchor="middle" font-size="10" fill="var(--text, #1a1a1a)">deno (desc. frequency)</text>
+
+  <rect x="220" y="284" width="160" height="36" rx="6" fill="var(--code-bg, #f0eeeb)" stroke="var(--border, #e8e6e1)"/>
+  <text x="300" y="306" text-anchor="middle" font-size="10" fill="var(--text, #1a1a1a)">deno (desc. quantity)</text>
+
+  <rect x="400" y="284" width="160" height="36" rx="6" fill="var(--code-bg, #f0eeeb)" stroke="var(--border, #e8e6e1)"/>
+  <text x="480" y="306" text-anchor="middle" font-size="10" fill="var(--text, #1a1a1a)">inno (inj. approval)</text>
+
+  <rect x="580" y="284" width="160" height="36" rx="6" fill="var(--code-bg, #f0eeeb)" stroke="var(--border, #e8e6e1)"/>
+  <text x="660" y="306" text-anchor="middle" font-size="10" fill="var(--text, #1a1a1a)">inno (inj. quantity)</text>
+
+  <!-- Participant journey -->
+  <text x="20" y="352" font-size="11" font-weight="700" fill="var(--text, #1a1a1a)">Participant journey per wave:</text>
+  <rect x="40" y="366" width="100" height="28" rx="4" fill="var(--accent, #2c5f4a)"/><text x="90" y="384" text-anchor="middle" font-size="10" fill="#fff">AUDIT-C</text>
+  <path d="M 140 380 L 158 380" stroke="var(--text-muted, #6b6b6b)" stroke-width="1" fill="none" marker-end="url(#arr3)"/>
+  <rect x="160" y="366" width="120" height="28" rx="4" fill="var(--accent, #2c5f4a)"/><text x="220" y="384" text-anchor="middle" font-size="10" fill="#fff">Nominate friends</text>
+  <path d="M 280 380 L 298 380" stroke="var(--text-muted, #6b6b6b)" stroke-width="1" fill="none" marker-end="url(#arr3)"/>
+  <rect x="300" y="366" width="140" height="28" rx="4" fill="var(--accent, #2c5f4a)"/><text x="370" y="384" text-anchor="middle" font-size="10" fill="#fff">Rate friend 0 (typical)</text>
+  <path d="M 440 380 L 458 380" stroke="var(--text-muted, #6b6b6b)" stroke-width="1" fill="none" marker-end="url(#arr3)"/>
+  <rect x="460" y="366" width="140" height="28" rx="4" fill="var(--accent, #2c5f4a)"/><text x="530" y="384" text-anchor="middle" font-size="10" fill="#fff">Rate friends 1&ndash;10</text>
+  <path d="M 600 380 L 618 380" stroke="var(--text-muted, #6b6b6b)" stroke-width="1" fill="none" marker-end="url(#arr3)"/>
+  <rect x="620" y="366" width="120" height="28" rx="4" fill="var(--accent, #2c5f4a)"/><text x="680" y="384" text-anchor="middle" font-size="10" fill="#fff">eGift Card code</text>
+</svg>
+</div>
+
+<p>The logic follows a three-layer pattern:</p>
+<pre><code># Layer 1: Show descriptive-norm question only if friend N was nominated
+# and is not a duplicate (error check passed)
+deno1_friend_3: [friend3]&lt;&gt;"" and [error3]=0
+
+# Layer 2: Show frequency question only if friend was nominated
+# AND respondent rated them as drinking "sometimes" or more
+deno2_friend_3: [friend3]&lt;&gt;"" and [error3]=0 and [deno1_friend_3]&gt;1
+
+# Layer 3: Cross-wave confirmation — show friend only if they
+# appeared in the previous wave's nomination list
+friend3_confirm: [previous-event-name][friend3:value]&gt;1</code></pre>
+<p>This pattern repeats for friends 1&ndash;10 across four norm dimensions (descriptive frequency, descriptive quantity, injunctive approval, injunctive quantity), yielding the 151 branching rules. Fields with <code>[previous-event-name]</code> references demonstrate REDCap&rsquo;s longitudinal piping: values carry forward from wave to wave without re-entry.</p>
+
+<h4>Duplicate-nomination detection</h4>
+<pre><code># Calculated field: flag if friend5 duplicates any earlier nomination
+error5 = if(([friend5]&lt;&gt;"" and ([friend5]=[friend4] or
+  [friend5]=[friend3] or [friend5]=[friend2] or [friend5]=[friend1])),1,0)
+
+# Aggregate: total number of flagged duplicates
+error_check = [error2]+[error3]+[error4]+[error5]+[error6]+
+  [error7]+[error8]+[error9]+[error10]</code></pre>
+<p>If <code>error_check &gt; 0</code>, the respondent is prompted to correct their nomination. This is automated data-quality enforcement at the instrument level.</p>
+<hr>
+
+<h2 id="infra-export" class="section-header" data-level="2">8. Export Boundary</h2>
+<p>The researcher exported follow-up data via REDCap&rsquo;s API. De-identification settings stripped free-text fields, date/time fields, and identifier fields before delivery.</p>
+<p>The staged export (<code>list_by_wave.RData</code>) is the single input to the reproduction pipeline. Everything upstream belongs to the data-collection infrastructure; everything downstream belongs to the analysis pipeline documented in the Pipeline tab.</p>
+<hr>
+
+<h2 id="infra-decisions" class="section-header" data-level="2">9. Design Decisions</h2>
+<p>Each choice below resolves a tension specific to sociometric data collection.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Decision</th><th>Rationale</th><th>Implementation</th></tr></thead>
+<tbody>
+<tr><td>Separate identifiers from responses</td><td>Participants must see names to nominate; analyst must not access names.</td><td><code>@HIDDEN-SURVEY</code> / <code>@HIDDEN-FORM</code> action tags + calculated fields. Export set to de-identified only.</td></tr>
+<tr><td>Unique non-forwardable links</td><td>Public links would allow duplicate or non-resident submissions.</td><td>REDCap participant list with individual survey links tied to validated email addresses.</td></tr>
+<tr><td>Identity manager role</td><td>Someone must verify residence and assign IDs but must not see responses.</td><td>Identity manager: design access + identity key. Researcher: export-only, de-identified. No overlap.</td></tr>
+<tr><td>Erase baseline data after export</td><td>Minimise window where names and responses coexist on the server.</td><td>Export to encrypted local file, delete from REDCap. Follow-up built from instrument ZIPs.</td></tr>
+<tr><td>Automated incentive distribution</td><td>Manual voucher assignment is slow and creates a privacy risk.</td><td>REDCap randomisation module with a 400-row allocation table per project. No manual step.</td></tr>
+<tr><td>Staged export boundary</td><td>Analysis pipeline must not depend on live REDCap access or raw contact data.</td><td><code>list_by_wave.RData</code> is the single handoff file.</td></tr>
+</tbody></table></div>
+<hr>
+
+<h2 id="infra-access" class="section-header" data-level="2">10. Role-Based Access Control</h2>
+<p>User rights were configured so that no team member simultaneously held export access and identity-key access. Named roles enforced the separation:</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Project</th><th>Role</th><th>Capability</th></tr></thead>
+<tbody>
+<tr><td rowspan="4">Baseline</td><td>Admin</td><td>Design + rights management</td></tr>
+<tr><td>Project Manager</td><td>Operational management, no design access</td></tr>
+<tr><td>Validation Officer</td><td>Data validation only</td></tr>
+<tr><td>Identification Code Manager</td><td>Identity-key operations only</td></tr>
+<tr><td rowspan="4">Follow-up</td><td>Admin</td><td>Design + rights management</td></tr>
+<tr><td>Project Manager</td><td>Operational management, no design access</td></tr>
+<tr><td>Identification Code Manager</td><td>Identity-key operations only</td></tr>
+<tr><td>Amazon Code Manager</td><td>Gift-card code distribution only</td></tr>
+</tbody></table></div>
+<p>Five distinct role definitions were created across the two projects: Project Manager, Validation Officer, Super User, Identification Code Manager, and Amazon Code Manager. The identity manager had no export access; the researcher had no access to the identity-key instruments.</p>
+<hr>
+
+<h2 id="infra-audit" class="section-header" data-level="2">11. Audit Trail</h2>
+<p>REDCap logs every action to numbered <code>redcap_log_event</code> tables. The study&rsquo;s audit trail covers survey submissions, record operations, user logins, role changes, and configuration updates across the full data-collection period (August 2022&ndash;September 2024). This trail is preserved in the archived backup and is available for institutional review.</p>
+<hr>
+
+<h2 id="infra-backup" class="section-header" data-level="2">12. Backup &amp; Evidence Verification</h2>
+
+<p>A complete database backup and application archive were extracted from the production servers at the end of the study. The backup preserves the relational schema, project metadata, instrument definitions, and operational configuration needed to verify claims made in this documentation.</p>
+
+<h4>Automated evidence extraction</h4>
+<p>Python scripts parse the database backup offline as a text stream, extracting project structure, instrument definitions, action-tag usage, calculated fields, role definitions, event configuration, and survey settings. No running database instance is required. A single pass completes in under 2&nbsp;seconds. Numeric claims in this tab were verified against these scripts.</p>
+
+<pre><code>python3 extract_projects.py          # project inventory
+python3 extract_evidence.py           # instrument and role extraction
+python3 generate_data_dictionaries.py # portable data dictionaries</code></pre>
+<hr>
+
+<h2 id="infra-reproduce" class="section-header" data-level="2">13. Reproduction Guide</h2>
+<p>A researcher with no prior REDCap experience can recreate the study infrastructure from the portable files in <code>presentation/portable/</code>. These files contain only project structure (instruments, fields, logic, action tags) and zero participant data.</p>
+
+<h4>Portable artefacts</h4>
+<div class="table-wrap"><table>
+<thead><tr><th>File</th><th>Size</th><th>Contents</th></tr></thead>
+<tbody>
+<tr><td><code>pis_portal_data_dictionary.csv</code></td><td>21&nbsp;KB</td><td>17 fields, 1 instrument (PIS + consent)</td></tr>
+<tr><td><code>baseline_data_dictionary.csv</code></td><td>90&nbsp;KB</td><td>231 fields, 28 instruments</td></tr>
+<tr><td><code>followup_data_dictionary.csv</code></td><td>218&nbsp;KB</td><td>239 fields, 8 instruments, 151 branching rules, 24 calculated fields</td></tr>
+<tr><td><code>followup_events.csv</code></td><td>1&nbsp;KB</td><td>5 longitudinal events (wave2&ndash;wave6) with form assignments</td></tr>
+</tbody></table></div>
+<p>Generated by <code>python3 presentation/generate_data_dictionaries.py</code>, which parses the database backup without requiring MySQL.</p>
+
+<h4>Prerequisites</h4>
+<ul>
+<li><strong>REDCap licence</strong> &mdash; register at <a href="https://projectredcap.org">projectredcap.org</a> and download the source. REDCap is free for non-commercial use but requires institutional agreement.</li>
+<li><strong>Docker</strong> &mdash; any machine with Docker Desktop or Docker Engine. No other software required.</li>
+</ul>
+
+<h4>Step 1: Start a local REDCap instance</h4>
+<p>A Docker Compose config is provided in <code>presentation/redcap-docker/</code>:</p>
+<pre><code>cd presentation/redcap-docker/redcap-docker/
+
+# Place REDCap source so that data/redcap/index.php exists
+cp -r /path/to/redcap-source/* data/redcap/
+
+docker compose up -d
+# Wait ~30s for MySQL, then open http://localhost:8080</code></pre>
+<p>The container runs Apache + PHP + MySQL in an isolated network. No data leaves the machine. No email is sent.</p>
+
+<h4>Step 2: Create the baseline project</h4>
+<ol>
+<li>Log in (the DZD container creates a <code>site_admin</code> on first boot)</li>
+<li>New Project &rarr; name it &ldquo;TFS Baseline&rdquo; &rarr; Classic project</li>
+<li>Project Setup &rarr; Data Dictionary &rarr; Upload <code>baseline_data_dictionary.csv</code></li>
+<li>REDCap recreates all 28 instruments, 231 fields, 56 branching rules, 61 required-field constraints, 34 <code>@DEFAULT</code> tags, 14 <code>@HIDDEN-SURVEY</code> tags, and 37 <code>@READONLY</code> tags from the CSV alone</li>
+</ol>
+
+<h4>Step 3: Create the follow-up project</h4>
+<ol>
+<li>New Project &rarr; name it &ldquo;TFS Follow-up&rdquo; &rarr; <strong>Longitudinal</strong> project</li>
+<li>Project Setup &rarr; Define My Events &rarr; create five events matching <code>followup_events.csv</code>:
+<pre><code>wave2  day_offset=1
+wave3  day_offset=2
+wave4  day_offset=3
+wave5  day_offset=4
+wave6  day_offset=5</code></pre></li>
+<li>Data Dictionary &rarr; Upload <code>followup_data_dictionary.csv</code></li>
+<li>Designate Instruments for My Events &rarr; assign forms per the <code>forms</code> column in <code>followup_events.csv</code></li>
+</ol>
+<p>This recreates the full sociometric instrument with 239 fields, 151 branching rules, cascading friend-nomination logic, duplicate-detection calculated fields, and all action tags.</p>
+
+<h4>Step 4: Verify</h4>
+<div class="table-wrap"><table>
+<thead><tr><th>Check</th><th>Expected</th><th>How to verify</th></tr></thead>
+<tbody>
+<tr><td>Baseline instrument count</td><td>28</td><td>Online Designer &rarr; count instruments listed</td></tr>
+<tr><td>Baseline field count</td><td>231</td><td>Data Dictionary &rarr; row count</td></tr>
+<tr><td><code>@HIDDEN-SURVEY</code> in baseline</td><td>14 fields</td><td>Data Dictionary &rarr; filter Field Annotation column</td></tr>
+<tr><td>Follow-up instrument count</td><td>8</td><td>Online Designer</td></tr>
+<tr><td>Follow-up field count</td><td>239</td><td>Data Dictionary &rarr; row count</td></tr>
+<tr><td>Longitudinal events</td><td>5 (wave2&ndash;wave6)</td><td>Define My Events page</td></tr>
+<tr><td>Branching rules</td><td>151</td><td>Data Dictionary &rarr; count non-empty Branching Logic cells</td></tr>
+<tr><td>Calculated fields</td><td>24</td><td>Data Dictionary &rarr; filter Field Type = &ldquo;calc&rdquo;</td></tr>
+</tbody></table></div>
+
+<h4>Step 5: Explore the survey design</h4>
+<p>Navigate the Online Designer to see the instruments as they appeared to participants and researchers:</p>
+<ul>
+<li><strong>friend_nomination</strong> (64 fields) &mdash; dropdown selection of up to 10 peers, with <code>friendid1</code>&ndash;<code>friendid10</code> calculated fields converting names to pseudonymous IDs</li>
+<li><strong>friend1</strong> (96 fields) &mdash; per-friend perception questions with three-layer branching cascade (show question &rarr; show follow-up &rarr; cross-wave confirmation)</li>
+<li><strong>alcohol_use</strong> (45 fields) &mdash; AUDIT-C screening with <code>[q1]&gt;1</code> skip logic gating the B-YAACQ consequences section</li>
+<li><strong>consent_form</strong> (41 fields, baseline) &mdash; 17 radio-button consent items, text fields for names and signatures, <code>@TODAY</code> timestamp</li>
+</ul>
+
+<h4>What the portable files do not contain</h4>
+<ul>
+<li>Participant data (records, responses, timestamps)</li>
+<li>User accounts, roles, or access rights (set up manually per Section 10)</li>
+<li>Randomisation allocations (Amazon eGift Card codes; load separately)</li>
+<li>Survey configuration (titles, email templates, auto-continue settings)</li>
+<li>External modules (install <code>giftcard_reward</code>, <code>auto_populate_fields</code>, <code>unique_actiontag</code>, <code>shazam</code>, <code>record_autonumber</code> from the REDCap module repository)</li>
+</ul>
+<p>These limitations are deliberate: participant data is confidential, and operational settings depend on the deployment context.</p>
+<hr>
+
+<h2 id="infra-limitations" class="section-header" data-level="2">14. Infrastructure Limitations</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Limitation</th><th>Impact</th></tr></thead>
+<tbody>
+<tr><td>Roster-based nomination</td><td>Participants nominated from a searchable dropdown (REDCap autocomplete). Suitable at this cohort size; larger populations might benefit from additional search or filtering to manage the roster.</td></tr>
+<tr><td>Excel-based identity-key generation</td><td>Identity manager generated six-digit codes in Excel (<code>RANDBETWEEN</code>) and loaded the roster into REDCap. This was accessible for non-technical identity managers. API-based linkage would reduce manual steps at larger scale.</td></tr>
+<tr><td>No automated failover</td><td>Standard university VM snapshots only. Not required for this single-cohort study and would have been solvable within the architecture if needed.</td></tr>
+<tr><td>REDCap version migration</td><td>Upgrades (12.5.5 &rarr; 13.5.1 &rarr; 13.9.3) required manual testing. No automated regression suite for survey behaviour.</td></tr>
+</tbody></table></div>
+
+    </div>
+
+    <!-- ==================== PIPELINE TAB ==================== -->
+    <div class="tab-panel" data-panel="pipeline">
+
+<h1 id="pipeline-sand" class="section-header" data-level="1">Pipeline</h1>
+<blockquote>Chapters 4&ndash;7. Make-orchestrated, config-driven.<br>Paths, toggles, and seeds live in <code>reproduced/config/thesis.yml</code>.</blockquote>
+<hr>
+
+<h2 id="architecture" class="section-header" data-level="2">1. Architecture</h2>
+<div style="overflow-x:auto; margin:12px 0;">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" width="100%" style="max-width:800px;" font-family="'Source Sans 3', 'Segoe UI', sans-serif">
+  <defs>
+    <marker id="arr-pipe" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="var(--text-muted, #5f6c7b)"/></marker>
+  </defs>
+
+  <!-- Input -->
+  <rect x="260" y="16" width="280" height="48" rx="6" fill="none" stroke="var(--text-muted, #5f6c7b)" stroke-width="1.5"/>
+  <text x="400" y="37" text-anchor="middle" font-size="12" font-weight="600" fill="var(--text-muted, #5f6c7b)">list_by_wave.RData</text>
+  <text x="400" y="53" text-anchor="middle" font-size="10" fill="var(--text-muted, #5f6c7b)">Raw REDCap export &middot; 6 waves &middot; 255 students</text>
+
+  <line x1="400" y1="64" x2="400" y2="96" stroke="var(--text-muted, #5f6c7b)" stroke-width="1.5" marker-end="url(#arr-pipe)"/>
+
+  <!-- Chapter 4 -->
+  <rect x="140" y="100" width="520" height="56" rx="6" fill="#4E79A7" fill-opacity="0.08" stroke="#4E79A7" stroke-width="1" stroke-opacity="0.3"/>
+  <text x="400" y="124" text-anchor="middle" font-size="13" font-weight="600" fill="#4E79A7">Chapter 4: Data Preparation</text>
+  <text x="400" y="144" text-anchor="middle" font-size="11" fill="var(--text-muted, #5f6c7b)">QA checks &rarr; LOCF imputation &rarr; Network arrays + Norm variables</text>
+
+  <!-- Output files -->
+  <line x1="300" y1="156" x2="300" y2="192" stroke="var(--text-muted, #5f6c7b)" stroke-width="1" marker-end="url(#arr-pipe)"/>
+  <line x1="500" y1="156" x2="500" y2="192" stroke="var(--text-muted, #5f6c7b)" stroke-width="1" marker-end="url(#arr-pipe)"/>
+
+  <rect x="170" y="196" width="260" height="36" rx="5" fill="none" stroke="var(--border, #c8d1dc)" stroke-width="1"/>
+  <text x="300" y="219" text-anchor="middle" font-size="11" fill="var(--text-muted, #5f6c7b)">network_arrays.rds</text>
+
+  <rect x="470" y="196" width="260" height="36" rx="5" fill="none" stroke="var(--border, #c8d1dc)" stroke-width="1"/>
+  <text x="600" y="219" text-anchor="middle" font-size="11" fill="var(--text-muted, #5f6c7b)">norms_longitudinal.rds</text>
+
+  <!-- Arrows to chapters -->
+  <line x1="240" y1="232" x2="160" y2="280" stroke="var(--text-muted, #5f6c7b)" stroke-width="1" marker-end="url(#arr-pipe)"/>
+  <line x1="540" y1="232" x2="400" y2="280" stroke="var(--text-muted, #5f6c7b)" stroke-width="1" marker-end="url(#arr-pipe)"/>
+  <line x1="660" y1="232" x2="660" y2="280" stroke="var(--text-muted, #5f6c7b)" stroke-width="1" marker-end="url(#arr-pipe)"/>
+
+  <!-- Chapter 7 -->
+  <rect x="40" y="284" width="230" height="56" rx="6" fill="#E15759" fill-opacity="0.06" stroke="#E15759" stroke-width="1" stroke-opacity="0.3"/>
+  <text x="155" y="308" text-anchor="middle" font-size="12" font-weight="600" fill="#E15759">Chapter 7: SAOM</text>
+  <text x="155" y="326" text-anchor="middle" font-size="10" fill="var(--text-muted, #5f6c7b)">RSiena &middot; Selection vs Influence</text>
+
+  <!-- Chapter 5 -->
+  <rect x="286" y="284" width="230" height="56" rx="6" fill="#F28E2B" fill-opacity="0.06" stroke="#F28E2B" stroke-width="1" stroke-opacity="0.3"/>
+  <text x="401" y="308" text-anchor="middle" font-size="12" font-weight="600" fill="#F28E2B">Chapter 5: Descriptive NAM</text>
+  <text x="401" y="326" text-anchor="middle" font-size="10" fill="var(--text-muted, #5f6c7b)">Network autocorrelation &times; 3</text>
+
+  <!-- Chapter 6 -->
+  <rect x="532" y="284" width="230" height="56" rx="6" fill="#59A14F" fill-opacity="0.06" stroke="#59A14F" stroke-width="1" stroke-opacity="0.3"/>
+  <text x="647" y="308" text-anchor="middle" font-size="12" font-weight="600" fill="#59A14F">Chapter 6: Injunctive NAM</text>
+  <text x="647" y="326" text-anchor="middle" font-size="10" fill="var(--text-muted, #5f6c7b)">Network autocorrelation &times; 3</text>
+
+  <!-- Arrows to validation -->
+  <line x1="155" y1="340" x2="155" y2="380" stroke="var(--text-muted, #5f6c7b)" stroke-width="1" marker-end="url(#arr-pipe)"/>
+  <line x1="401" y1="340" x2="401" y2="380" stroke="var(--text-muted, #5f6c7b)" stroke-width="1" marker-end="url(#arr-pipe)"/>
+  <line x1="647" y1="340" x2="647" y2="380" stroke="var(--text-muted, #5f6c7b)" stroke-width="1" marker-end="url(#arr-pipe)"/>
+
+  <!-- Validation bar -->
+  <rect x="40" y="384" width="722" height="40" rx="6" fill="none" stroke="var(--border, #c8d1dc)" stroke-width="1"/>
+  <text x="401" y="409" text-anchor="middle" font-size="11" fill="var(--text-muted, #5f6c7b)">Validation &middot; Reproducibility Manifests &middot; SHA-256 Checksums &middot; Portfolio</text>
+
+  <!-- Tech stack note -->
+  <text x="401" y="452" text-anchor="middle" font-size="10" fill="var(--text-muted, #5f6c7b)">R 4.3.2 + Python 3.11 &middot; GNU Make &middot; Conda + renv &middot; RSiena 1.4.7 &middot; testthat + pytest</text>
+  <text x="401" y="468" text-anchor="middle" font-size="10" fill="var(--text-muted, #5f6c7b)">Config: reproduced/config/thesis.yml &middot; Proxy or real data modes</text>
+</svg>
+</div>
+<div class="table-wrap"><table>
+<thead><tr><th>Layer</th><th>Technology</th></tr></thead>
+<tbody>
+<tr><td>Language</td><td>R 4.3.2 (analysis), Python 3.11 (tooling, verification)</td></tr>
+<tr><td>Orchestration</td><td>GNU Make with config-driven targets</td></tr>
+<tr><td>Configuration</td><td>Single YAML file: <code>reproduced/config/thesis.yml</code></td></tr>
+<tr><td>Environment</td><td>Conda (system packages) + renv (R library lock)</td></tr>
+<tr><td>R dependency lock</td><td><code>renv.lock</code> with 90 packages including RSiena 1.4.7</td></tr>
+<tr><td>SAOM estimation</td><td>RSiena 1.4.7 (exact pinned from CRAN Archive)</td></tr>
+<tr><td>Container</td><td>Dockerfile (optional, for CI and clean-room runs)</td></tr>
+<tr><td>Privacy scanning</td><td>R-based portfolio privacy guard + Python release-builder secret scanner</td></tr>
+<tr><td>Testing</td><td>testthat (R), pytest (Python)</td></tr>
+</tbody></table></div>
+<hr>
+
+<h2 id="directory-structure" class="section-header" data-level="2">2. Directory Structure</h2>
+<pre><code>SAND/
+├── Makefile                         Top-level proxy to reproduced/Makefile
+├── Dockerfile                       Optional container build
+├── LICENSE                          MIT (code) + CC BY 4.0 (docs)
+├── CITATION.cff                     Citation metadata
+├── README.md                        Entry point with findings and quick start
+├── DATA_AVAILABILITY.md             What is public, protected, and synthetic
+├── SECURITY.md                      Credential and vulnerability reporting
+├── CONTRIBUTING.md                  Contribution workflow
+├── CHANGELOG.md                     Release history
+│
+├── docs/
+│   ├── reference.html               This file
+│   └── readme-assets/               SVG figures for README
+│
+└── reproduced/                      The reproduction workspace
+    ├── Makefile                      Build contract (all targets)
+    ├── .Rprofile                     renv activation and library precedence
+    ├── renv.lock                     90-package R dependency lock
+    ├── environment.yml               Conda environment specification
+    ├── REPRODUCIBLE_PIPELINE.md      Canonical build contract
+    ├── README.md                     Pipeline entry point
+    │
+    ├── config/
+    │   ├── thesis.yml                Single source of truth
+    │   └── scenarios/
+    │       └── saom_models.yml       SAOM model specifications
+    │
+    ├── data/
+    │   ├── raw/                      Protected real data (staged locally, never committed)
+    │   │   └── README.md
+    │   ├── proxy/                    Synthetic structure-compatible data
+    │   │   └── list_by_wave_schema.csv
+    │   └── vendor/
+    │       └── rsiena/               Pinned RSiena 1.4.7 source tarball
+    │
+    ├── analyses/
+    │   ├── chapter4_data_collection/scripts/
+    │   ├── chapter5_descriptive_norms/scripts/
+    │   ├── chapter6_injunctive_norms/scripts/
+    │   ├── chapter7_saom/scripts/
+    │   └── chapter8_interventions/scripts/
+    │
+    ├── scripts/
+    │   ├── 00_setup/                 Environment, proxy generation, verification, release
+    │   ├── portfolio/                Data dictionary, privacy guard, dashboard
+    │   ├── visualisation/            Network explorers, microstep animation
+    │   └── utils/                    YAML loader, helpers
+    │
+    ├── tests/
+    │   ├── test_verify_outputs.py    Verifier unit tests
+    │   ├── test_build_public_release.py  Release-builder tests
+    │   └── portfolio/testthat/       R portfolio test suite
+    │
+    ├── docs/
+    │   ├── README.md                 Documentation hub
+    │   ├── references/               Stable background: crosswalk, config guide, etc.
+    │   ├── portfolio/                Public-facing study book, case study, findings
+    │   ├── roadmaps/                 Canonical execution plan
+    │   ├── status/                   Release audit and verification records
+    │   └── decisions/                Architectural decision records
+    │
+    ├── outputs/                      Generated (gitignored)
+    │   ├── chapter4/ ... chapter7/
+    │   └── portfolio/
+    │
+    └── R/                            Shared R utilities
+</code></pre>
+<hr>
+
+<h2 id="configuration" class="section-header" data-level="2">3. Configuration</h2>
+<p>Scripts read paths and toggles from <code>reproduced/config/thesis.yml</code>. Hardcoded paths in analysis code are bugs.</p>
+
+<h3 id="config-keys" class="section-header" data-level="3">3.1 Key Config Paths</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Key</th><th>Purpose</th></tr></thead>
+<tbody>
+<tr><td><code>data.mode</code></td><td><code>real</code> (default) or <code>proxy</code></td></tr>
+<tr><td><code>data.proxy_dir</code></td><td>Proxy data directory</td></tr>
+<tr><td><code>project.paths.raw_data_dir</code></td><td>Protected real data staging area</td></tr>
+<tr><td><code>chapters.*.enabled</code></td><td>Per-chapter toggle (Ch 8 is <code>false</code> by default)</td></tr>
+<tr><td><code>chapters.chapter5_descriptive_norms.nam.seed</code></td><td>NAM reproducibility seed</td></tr>
+<tr><td><code>rsiena.package_version</code></td><td>Pinned RSiena version (<code>1.4.7</code>)</td></tr>
+<tr><td><code>rsiena.estimation.seed</code></td><td>SAOM RNG seed (<code>2022</code>)</td></tr>
+<tr><td><code>rsiena.estimation.n3</code></td><td>Phase 3 iterations (<code>10000</code>)</td></tr>
+<tr><td><code>rsiena.use_cached_results</code></td><td><code>false</code> forces re-estimation</td></tr>
+</tbody></table></div>
+<hr>
+
+<h2 id="data-modes" class="section-header" data-level="2">4. Data Modes</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Mode</th><th>Source</th><th>Purpose</th><th>Public?</th></tr></thead>
+<tbody>
+<tr><td><strong>Real</strong></td><td><code>reproduced/data/raw/</code></td><td>Reproduce thesis analyses from protected REDCap exports</td><td>No</td></tr>
+<tr><td><strong>Proxy</strong></td><td><code>reproduced/data/proxy/</code></td><td>Exercise the pipeline with synthetic, structure-compatible data</td><td>Yes</td></tr>
+</tbody></table></div>
+<p>Priority: <code>SAND_DATA_MODE</code> env var overrides <code>data.mode</code> in <code>thesis.yml</code>.</p>
+<p>Proxy data share the schema but contain no participant information. They are synthetic, not anonymised.</p>
+
+<h3 id="proxy-generator" class="section-header" data-level="3">4.1 Proxy Data Generator</h3>
+<p>The script <code>scripts/00_setup/create_realistic_proxy_data.R</code> produces a deterministic synthetic dataset. Fixed seed: <code>20250921</code>.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Parameter</th><th>Value</th></tr></thead>
+<tbody>
+<tr><td>Students</td><td>255</td></tr>
+<tr><td>Waves</td><td>6 (matching study design)</td></tr>
+<tr><td>Network density</td><td>Calibrated to observed nomination volumes</td></tr>
+<tr><td>AUDIT-C distribution</td><td>Wave-specific means and SDs from thesis Table 4.x</td></tr>
+<tr><td>Residence structure</td><td>12 blocks, 72 flats, ~3.5 students per flat</td></tr>
+<tr><td>Flatmate dyads</td><td>666</td></tr>
+<tr><td>Blockmate dyads</td><td>5,166</td></tr>
+<tr><td>Nomination slots</td><td>Up to 10 per participant per wave</td></tr>
+</tbody></table></div>
+<p>The generator produces <code>list_by_wave.RData</code>, <code>participants.csv</code>, <code>outcomes.csv</code>, a schema file, and a JSON generation report. Network ties, alcohol scores, and norm perceptions follow study-level design parameters; they do not transform, perturb, or anonymise real participant data.</p>
+<hr>
+
+<h2 id="quick-start" class="section-header" data-level="2">5. Quick Start</h2>
+
+<h3 id="qs-proxy" class="section-header" data-level="3">5.1 Proxy Mode (no real data required)</h3>
+<pre><code>make env                 # bootstrap Conda + renv + RSiena 1.4.7
+make verify-proxy-quick  # regenerate proxy data, run Chapters 4-6
+
+# Full path including Chapter 7 (~2 hours):
+make verify-proxy</code></pre>
+
+<h3 id="qs-real" class="section-header" data-level="3">5.2 Real Data Mode</h3>
+<pre><code>make env
+
+# Stage required files:
+#   reproduced/data/raw/list_by_wave.RData  (required)
+#   reproduced/data/raw/participants.csv    (optional)
+#   reproduced/data/raw/outcomes.csv        (optional)
+
+make verify-real  # Chapters 4-7 plus empirical benchmarks</code></pre>
+<hr>
+
+<h2 id="chapter-walkthrough" class="section-header" data-level="2">6. Chapter Walkthrough</h2>
+
+<h3 id="cw-ch4" class="section-header" data-level="3">6.1 Chapter 4: Data Preparation &amp; QA</h3>
+<p><strong>Method:</strong> Data extraction from REDCap exports, participation coverage, quality-assurance checks, imputation, network array construction.</p>
+<h4>Scripts (executed sequentially by <code>make chapter4</code>)</h4>
+<ul class="script-list">
+  <li><code>01_data_preparation_norms.R</code> &mdash; Load <code>list_by_wave.RData</code>. Reshape wave-level survey responses into a longitudinal panel. Compute peer-level actual and perceived norms, derive misperception measures, apply LOCF imputation where configured.</li>
+  <li><code>02_qa_checks_norms.R</code> &mdash; Participation counts per wave, nomination volume diagnostics, out-of-range value detection, Jaccard stability indices.</li>
+  <li><code>03_export_norms_longitudinal.R</code> &mdash; Write the analysis-ready longitudinal dataset (<code>norms_longitudinal.rds</code>) and chapter manifest.</li>
+  <li><code>04_export_chapter5_bridge.R</code> &mdash; Build directed network adjacency arrays aligned to SAOM waves. Export <code>network_arrays.rds</code> for Chapters 5&ndash;7.</li>
+</ul>
+<h4>Outputs</h4>
+<div class="output-grid">
+  <span class="og-path">chapter4/data/norms_longitudinal.rds</span><span class="og-desc">Analysis-ready longitudinal panel (all waves)</span>
+  <span class="og-path">chapter4/data/network_arrays.rds</span><span class="og-desc">Directed adjacency matrices aligned to SAOM waves</span>
+  <span class="og-path">chapter4/manifests/prepared_data_manifest.json</span><span class="og-desc">Input/output hashes and run metadata</span>
+  <span class="og-path">chapter4/logs/run.json</span><span class="og-desc">Execution log with timestamps</span>
+</div>
+<p class="flow-arrow">&darr;</p>
+
+<h3 id="cw-ch5" class="section-header" data-level="3">6.2 Chapter 5: Descriptive Norms (NAM)</h3>
+<p><strong>Method:</strong> Network Autocorrelation Models (<code>sna::lnam()</code>) across 3 time periods, quantifying how global and peer-level descriptive norm misperception relates to personal consumption.</p>
+<h4>Scripts</h4>
+<ul class="script-list">
+  <li><code>01_prepare_chapter5_data.R</code> &mdash; Subset longitudinal data to Time 1/2/3 (Waves 2/5/6). Build NAM-compatible weight matrices from the network arrays.</li>
+  <li><code>02_estimate_nam_models.R</code> &mdash; Fit NAM for each time period with the configured seed. Extract coefficients, standard errors, p-values.</li>
+  <li><code>03_generate_nam_figures.R</code> &mdash; Coefficient comparison plots across time periods.</li>
+  <li><code>04_validate_nam_results.R</code> &mdash; Compare estimated coefficients against thesis benchmarks. Proxy mode: warnings. Real-data mode: requires match within tolerance.</li>
+  <li><code>05_compare_nam_results.R</code> &mdash; Side-by-side table: current vs. thesis vs. legacy October 2024 fits.</li>
+</ul>
+<h4>Outputs</h4>
+<div class="output-grid">
+  <span class="og-path">chapter5/tables/nam_summary.csv</span><span class="og-desc">NAM coefficients for all 3 time periods</span>
+  <span class="og-path">chapter5/tables/nam_diagnostics.csv</span><span class="og-desc">Model fit diagnostics</span>
+  <span class="og-path">chapter5/tables/nam_comparison.csv</span><span class="og-desc">Current vs. thesis benchmark comparison</span>
+  <span class="og-path">chapter5/figures/nam_coefficients.png</span><span class="og-desc">Coefficient comparison plot</span>
+  <span class="og-path">chapter5/logs/nam_checksums.json</span><span class="og-desc">Output file hashes</span>
+</div>
+<p class="flow-arrow">&darr;</p>
+
+<h3 id="cw-ch6" class="section-header" data-level="3">6.3 Chapter 6: Injunctive Norms (NAM)</h3>
+<p><strong>Method:</strong> NAM across 3 approval scenarios (abstaining, binge drinking, passing out), testing whether injunctive norm misperception predicts consumption.</p>
+<h4>Scripts</h4>
+<ul class="script-list">
+  <li><code>01_prepare_approval_longitudinal.R</code> &mdash; Build wave-level approval datasets for each scenario from the Chapter 4 manifest. Compute injunctive misperception measures.</li>
+  <li><code>02_analyze_injunctive_norms.R</code> &mdash; Descriptive statistics and trend summaries for injunctive norm perceptions.</li>
+  <li><code>03_plot_injunctive_trends.R</code> &mdash; Approval trajectory plots over time, stratified by scenario.</li>
+  <li><code>04_estimate_injunctive_nam_models.R</code> &mdash; Fit NAM for each approval scenario. Extract coefficients and diagnostics.</li>
+  <li><code>05_validate_injunctive_results.R</code> &mdash; Benchmark validation. Proxy mode: warnings for expected differences.</li>
+</ul>
+<h4>Outputs</h4>
+<div class="output-grid">
+  <span class="og-path">chapter6/data/approval_longitudinal.rds</span><span class="og-desc">Scenario-level longitudinal datasets</span>
+  <span class="og-path">chapter6/tables/</span><span class="og-desc">Injunctive NAM summaries and comparisons</span>
+  <span class="og-path">chapter6/figures/</span><span class="og-desc">Approval trend plots</span>
+</div>
+<p class="flow-arrow">&darr;</p>
+
+<h3 id="cw-ch7" class="section-header" data-level="3">6.4 Chapter 7: Social Selection &amp; Influence (SAOM)</h3>
+<p><strong>Method:</strong> Stochastic Actor-Oriented Model (RSiena 1.4.7) jointly modelling network tie change and behaviour change across Waves 2, 4, 5, 6. Separates social selection from social influence.</p>
+<h4>Scripts</h4>
+<ul class="script-list">
+  <li><code>00_build_network_arrays_base.R</code> &mdash; Build SAOM-compatible network arrays and behaviour vectors from Chapter 4 outputs. Align to thesis waves (2/4/5/6), build block and flat dyadic covariates from residence fields, extract baseline majority-status and sex covariates from Wave 1.</li>
+  <li><code>01_prepare_saom_inputs.R</code> &mdash; Assemble the RSiena data object (<code>sienaDataCreate</code>): dependent network, dependent behaviour, constant/varying covariates, dyadic proximity covariates.</li>
+  <li><code>02_run_saom_model.R</code> &mdash; Run <code>siena07()</code> with configured seed, n3, phase settings, Dolby correction. Write fitted object and text output. ~2h runtime.</li>
+  <li><code>03_generate_saom_tables_figures.R</code> &mdash; Extract coefficient tables, goodness-of-fit diagnostics, summary figures from the fitted model.</li>
+  <li><code>04_validate_saom_results.R</code> &mdash; Check convergence ratio (target &le;0.10), Jaccard indices, benchmark coefficients. Flag degenerate covariate effects.</li>
+</ul>
+<h4>Estimation parameters</h4>
+<div class="table-wrap"><table>
+<thead><tr><th>Parameter</th><th>Value</th><th>Purpose</th></tr></thead>
+<tbody>
+<tr><td>RNG seed</td><td><code>2022</code></td><td>Reproducibility across runs</td></tr>
+<tr><td>Phase 3 iterations (n3)</td><td><code>10000</code></td><td>Convergence diagnostics precision</td></tr>
+<tr><td>Subphases (nsub)</td><td><code>4</code></td><td>Phase 2 refinement steps</td></tr>
+<tr><td>Initial gain (firstg)</td><td><code>0.1</code></td><td>Step size in Phase 1</td></tr>
+<tr><td>Gain reduction (reduceg)</td><td><code>0.5</code></td><td>Step decay per subphase</td></tr>
+<tr><td>Dolby correction</td><td><code>true</code></td><td>Reduces variance in Phase 3</td></tr>
+<tr><td>Max iterations</td><td><code>8</code></td><td>Re-estimation attempts before stopping</td></tr>
+</tbody></table></div>
+<h4>Outputs</h4>
+<div class="output-grid">
+  <span class="og-path">chapter7/cache/base_fit.RData</span><span class="og-desc">Fitted RSiena model object</span>
+  <span class="og-path">chapter7/tables/</span><span class="og-desc">Coefficient tables and diagnostics</span>
+  <span class="og-path">chapter7/figures/</span><span class="og-desc">GoF and convergence plots</span>
+  <span class="og-path">chapter7/logs/saom_diagnostics.json</span><span class="og-desc">Machine-readable convergence report</span>
+  <span class="og-path">saom_base.txt</span><span class="og-desc">Full RSiena text output (at repo root)</span>
+</div>
+<p><strong>Runtime:</strong> ~2 hours on Apple M4 (10 cores). The fast CI gate covers Chapters 4&ndash;6 only; Chapter 7 is a separate manual or scheduled job.</p>
+
+<h3 id="cw-ch8" class="section-header" data-level="3">6.5 Chapter 8: Interventions (Experimental)</h3>
+<p><strong>Method:</strong> Counterfactual SAOM scenario simulations. Disabled by default (<code>chapters.chapter8_interventions.enabled: false</code>).</p>
+<ul class="script-list">
+  <li><code>01_load_manifest_and_baseline.R</code> &mdash; Loads the Chapter 7 fitted model as the baseline for intervention scenarios.</li>
+  <li><code>03_summarize_interventions.R</code> &mdash; Aggregates simulation results across scenario batches.</li>
+</ul>
+<p><strong>Status:</strong> Scaffolding exists. Not part of the verified release. 462 scenarios &times; 3 chained periods.</p>
+<hr>
+
+<h2 id="thesis-crosswalk" class="section-header" data-level="2">7. Thesis-to-Code Crosswalk</h2>
+<p>Mapping from thesis chapter claims to the scripts and output files that produce them.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Thesis claim / output</th><th>Script</th><th>Output file</th><th>Validation</th></tr></thead>
+<tbody>
+<tr><td>Ch 4: Participation, retention, Jaccard indices</td><td><code>chapter4/.../02_qa_checks_norms.R</code></td><td><code>chapter4/logs/chapter4_qa_assertions.json</code></td><td>QA assertions checked automatically</td></tr>
+<tr><td>Ch 4: Longitudinal norms panel</td><td><code>chapter4/.../03_export_norms_longitudinal.R</code></td><td><code>chapter4/data/norms_longitudinal.rds</code></td><td>Manifest with SHA-256 hashes</td></tr>
+<tr><td>Ch 4: Network adjacency arrays</td><td><code>chapter4/.../04_export_chapter5_bridge.R</code></td><td><code>chapter4/data/network_arrays.rds</code></td><td>Manifest hash; consumed by Ch 5&ndash;7</td></tr>
+<tr><td>Ch 5: NAM coefficient tables (3 time periods)</td><td><code>chapter5/.../02_estimate_nam_models.R</code></td><td><code>chapter5/tables/nam_summary.csv</code></td><td>3dp match to thesis (real mode)</td></tr>
+<tr><td>Ch 5: Coefficient comparison plots</td><td><code>chapter5/.../03_generate_nam_figures.R</code></td><td><code>chapter5/figures/nam_coefficients.png</code></td><td>&mdash;</td></tr>
+<tr><td>Ch 5: Thesis benchmark validation</td><td><code>chapter5/.../04_validate_nam_results.R</code></td><td><code>chapter5/logs/nam_validation.json</code></td><td>JSON targets in <code>quan_results.md</code></td></tr>
+<tr><td>Ch 6: Injunctive NAM tables (3 scenarios &times; 3 time periods)</td><td><code>chapter6/.../04_estimate_injunctive_nam_models.R</code></td><td><code>chapter6/tables/injunctive_nam_coefficients.csv</code></td><td>63 coefficient checks, 3dp match</td></tr>
+<tr><td>Ch 7: SAOM selection/influence estimates</td><td><code>chapter7/.../02_run_saom_model.R</code></td><td><code>chapter7/cache/base_fit.RData</code>, <code>saom_base.txt</code></td><td>Convergence ratio &le; 0.10; Jaccard &ge; 0.30</td></tr>
+<tr><td>Ch 7: GoF and convergence diagnostics</td><td><code>chapter7/.../03_generate_saom_tables_figures.R</code></td><td><code>chapter7/figures/</code>, <code>chapter7/logs/saom_diagnostics.json</code></td><td>Machine-readable convergence report</td></tr>
+</tbody></table></div>
+<p>Abbreviated paths: <code>chapter4/.../</code> means <code>analyses/chapter4_data_collection/scripts/</code>. All outputs land in <code>reproduced/outputs/</code>.</p>
+<hr>
+
+<h2 id="verification" class="section-header" data-level="2">8. Verification</h2>
+<p>Proxy runs test execution and artefact structure; empirical differences are warnings, not failures. Real-data runs enforce chapter benchmarks.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Target</th><th>What it does</th></tr></thead>
+<tbody>
+<tr><td><code>make verify-proxy-quick</code></td><td>Regenerate proxy data, run Chapters 4&ndash;6, verify 15 structural checks</td></tr>
+<tr><td><code>make verify-proxy</code></td><td>Full proxy path including Chapter 7 SAOM estimation (~2h)</td></tr>
+<tr><td><code>make verify-real</code></td><td>Protected data: Chapters 4&ndash;7 with empirical benchmarks and convergence checks</td></tr>
+<tr><td><code>make verify</code></td><td>Dispatches to the appropriate target for the current data mode</td></tr>
+</tbody></table></div>
+<hr>
+
+<h2 id="setup-scripts" class="section-header" data-level="2">9. Setup &amp; Tooling Scripts</h2>
+<p>Under <code>reproduced/scripts/</code>, outside the chapter analysis directories.</p>
+<h4>00_setup/ &mdash; Environment and release</h4>
+<ul class="script-list">
+  <li><code>install_r_packages.R</code> &mdash; Restore the renv library from <code>renv.lock</code> into the project-local directory.</li>
+  <li><code>install_rsiena.R</code> &mdash; Download, compile, install exact RSiena 1.4.7 from the CRAN Archive tarball. Validate the installed version.</li>
+  <li><code>create_realistic_proxy_data.R</code> &mdash; Deterministic synthetic data generator. 255 students &times; 6 waves with network ties, alcohol scores, norm perceptions, residence structure. Seed: <code>20250921</code>.</li>
+  <li><code>validate_config.py</code> &mdash; Check <code>thesis.yml</code> for required keys, valid types, path existence.</li>
+  <li><code>verify_outputs.py</code> &mdash; Mode-aware output verifier. Proxy: structural checks, empirical-difference warnings. Real: benchmark enforcement.</li>
+  <li><code>build_public_release.py</code> &mdash; Build a history-free release candidate. Scan for secrets, local paths, protected data paths, oversized files.</li>
+  <li><code>generate_data_hashes.py</code> &mdash; Compute SHA-256 hashes for staged data files.</li>
+  <li><code>docker_smoke_test.R</code> &mdash; Minimal R test for Docker container verification.</li>
+</ul>
+<h4>portfolio/ &mdash; Public documentation generators</h4>
+<ul class="script-list">
+  <li><code>generate_data_dictionary.R</code> &mdash; Generate a Markdown data dictionary from the proxy schema.</li>
+  <li><code>generate_repro_manifest.R</code> &mdash; Produce a reproducibility manifest: tracked scripts, configs, checksums.</li>
+  <li><code>generate_validation_dashboard.R</code> &mdash; HTML dashboard: proxy vs. empirical results per chapter.</li>
+  <li><code>check_privacy.R</code> &mdash; Scan generated Markdown/HTML for participant identifiers, real network data, missing synthetic labels.</li>
+</ul>
+<h4>visualisation/ &mdash; Network outputs</h4>
+<ul class="script-list">
+  <li><code>05_interactive_networks.R</code> &mdash; Standalone HTML network explorers (one per SAOM wave) via visNetwork. Provenance labels and synthetic/real-data markers embedded in the output.</li>
+  <li><code>04_animate_microsteps.R</code> &mdash; Optional SAOM microstep animation. Requires <code>networkDynamic</code>/<code>ndtv</code>.</li>
+  <li><code>plot_network_panel.R</code> / <code>plot_network_stability.R</code> &mdash; Static network and Jaccard stability plots.</li>
+</ul>
+<hr>
+
+<h2 id="make-targets" class="section-header" data-level="2">10. Make Targets</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Target</th><th>Purpose</th></tr></thead>
+<tbody>
+<tr><td><code>make env</code></td><td>Bootstrap Conda environment + renv library + RSiena 1.4.7</td></tr>
+<tr><td><code>make validate-config</code></td><td>Check <code>thesis.yml</code> for required keys and valid values</td></tr>
+<tr><td><code>make proxy-data</code></td><td>Generate synthetic proxy inputs</td></tr>
+<tr><td><code>make chapter4</code> &hellip; <code>make chapter7</code></td><td>Run individual chapters</td></tr>
+<tr><td><code>make all</code></td><td>Run Chapters 4&ndash;7 sequentially</td></tr>
+<tr><td><code>make check</code></td><td>Configuration validation, R syntax check, Python tests, portfolio suite</td></tr>
+<tr><td><code>make portfolio</code></td><td>Generate data dictionary, manifest, dashboard, network pages</td></tr>
+<tr><td><code>make portfolio-test</code></td><td>Run the R portfolio test suite</td></tr>
+<tr><td><code>make privacy-check</code></td><td>Scan Markdown/HTML outputs for privacy violations</td></tr>
+<tr><td><code>make rsiena</code></td><td>Install exact RSiena 1.4.7 into project library</td></tr>
+<tr><td><code>make visualise</code></td><td>Generate interactive network explorers</td></tr>
+<tr><td><code>make docker-build</code></td><td>Build the Docker image</td></tr>
+<tr><td><code>make clean</code></td><td>Remove generated outputs</td></tr>
+</tbody></table></div>
+<hr>
+
+<h2 id="failure-modes" class="section-header" data-level="2">11. Common Failure Modes</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Symptom</th><th>Cause</th><th>Fix</th></tr></thead>
+<tbody>
+<tr><td><code>make chapter4</code> fails with missing inputs</td><td>Real data not staged</td><td>Stage exports into <code>reproduced/data/raw/</code>, or use <code>make proxy-data</code> + <code>DATA_MODE=proxy</code></td></tr>
+<tr><td>SAOM convergence issues or long runtimes</td><td>Inherent to RSiena estimation</td><td>See <code>docs/references/chapter7_saom_restart.md</code></td></tr>
+<tr><td>RSiena version mismatch</td><td>Global R library has a newer version</td><td>Run <code>make rsiena</code> to install exact 1.4.7 into project library</td></tr>
+<tr><td>Conda environment fails to solve</td><td>Channel or package availability change</td><td>Check <code>environment.yml</code> against current conda-forge</td></tr>
+<tr><td>renv restore fails</td><td>CRAN mirror or package version unavailable</td><td>Run <code>make env-renv</code> and check status with <code>renv::status()</code></td></tr>
+</tbody></table></div>
+
+    </div>
+
+    <!-- ==================== RELEASE TAB ==================== -->
+    <div class="tab-panel" data-panel="release">
+
+<h1 id="release-sand" class="section-header" data-level="1">Release</h1>
+<blockquote>Release status and contract. Scope, provenance, data restrictions, environment, validation, and limitations must all be inspectable.</blockquote>
+<hr>
+
+<h2 id="release-status" class="section-header" data-level="2">1. Verification Status</h2>
+<p>Verified on 14 July 2026 &middot; macOS 15.6 (arm64) &middot; Apple M4 &middot; R 4.3.2 &middot; RSiena 1.4.7</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Check</th><th>Result</th><th>Detail</th></tr></thead>
+<tbody>
+<tr><td>Secret/credential scan</td><td><span class="tag tag-pass">Pass</span></td><td>No protected paths, known secret forms, local absolute paths, or unsafe symlinks</td></tr>
+<tr><td>Conda environment solve</td><td><span class="tag tag-pass">Pass</span></td><td><code>environment.yml</code> resolves from declared channels on macOS arm64</td></tr>
+<tr><td>Locked R library restore</td><td><span class="tag tag-pass">Pass</span></td><td><code>renv.lock</code> restored into clean project library</td></tr>
+<tr><td>Python test suite</td><td><span class="tag tag-pass">Pass</span></td><td>11 tests: release-builder, verifier behaviour</td></tr>
+<tr><td>R portfolio/integration suite</td><td><span class="tag tag-pass">Pass</span></td><td>Dictionary, limits, explorer, integration, privacy, manifest, dashboard</td></tr>
+<tr><td>Fast proxy pipeline (Ch 4&ndash;6)</td><td><span class="tag tag-pass">Pass</span></td><td>15 structural checks, 0 failures, 2 expected proxy-vs-empirical warnings</td></tr>
+<tr><td>Portfolio generation &amp; privacy</td><td><span class="tag tag-pass">Pass</span></td><td>Dictionary, manifest, dashboard, 5 labelled network pages; privacy scans pass</td></tr>
+<tr><td>Full Chapter 7 (corrected proxy)</td><td><span class="tag tag-open">Open</span></td><td>First proxy run completed but did not converge (ratio=1.10); corrected proxy data produced but rerun not completed</td></tr>
+<tr><td>Docker image</td><td><span class="tag tag-open">Open</span></td><td>Dockerfile exists; daemon was unavailable during verification</td></tr>
+<tr><td>Hosted CI</td><td><span class="tag tag-open">Open</span></td><td>Workflows prepared but not run in a published repository</td></tr>
+</tbody></table></div>
+<hr>
+
+<h2 id="environment" class="section-header" data-level="2">2. Environment</h2>
+
+<h3 id="env-conda" class="section-header" data-level="3">2.1 Conda</h3>
+<p>Defined in <code>reproduced/environment.yml</code>. Key pins:</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Package</th><th>Version</th></tr></thead>
+<tbody>
+<tr><td>R</td><td>4.3.2</td></tr>
+<tr><td>Python</td><td>3.11</td></tr>
+<tr><td>igraph</td><td>1.5.1</td></tr>
+<tr><td>tidyverse</td><td>2.0.0</td></tr>
+<tr><td>visNetwork</td><td>2.1.4</td></tr>
+<tr><td>renv</td><td>1.0.7</td></tr>
+<tr><td>pandoc</td><td>3.1.12</td></tr>
+</tbody></table></div>
+
+<h3 id="env-renv" class="section-header" data-level="3">2.2 renv</h3>
+<p><code>reproduced/renv.lock</code> locks 90 R packages with concrete version pins and hashes. The lock was regenerated from the maintained Chapters 4&ndash;7 source tree.</p>
+
+<h3 id="env-rsiena" class="section-header" data-level="3">2.3 RSiena</h3>
+<p>Pinned to exact version <strong>1.4.7</strong> from the CRAN Archive. The installer downloads the source tarball to <code>data/vendor/rsiena/</code>, compiles it, and installs to the project-local <code>.Rlib/</code> directory. A regression check confirms the activated version matches. The global R library may contain a newer RSiena; the project <code>.Rprofile</code> ensures the local 1.4.7 takes precedence.</p>
+
+<h3 id="env-docker" class="section-header" data-level="3">2.4 Docker</h3>
+<p><code>Dockerfile</code> builds a self-contained image. Not yet verified in the current release cycle.</p>
+<hr>
+
+<h2 id="data-availability" class="section-header" data-level="2">3. Data Availability</h2>
+<p><strong>Public:</strong> Analysis code, configuration, environment definitions, documentation, schema inventory, synthetic proxy-data generator.</p>
+<p><strong>Protected:</strong> Participant data. Longitudinal alcohol-use, demographic, residential, and network information. Pseudonymisation does not remove disclosure risk from a bounded social graph with repeated measurements. Not distributed.</p>
+<p><strong>Synthetic proxy:</strong> Generated by <code>make proxy-data</code>. Uses study-level design parameters to exercise the pipeline. Does not transform, perturb, or anonymise participant rows. Not suitable for substantive inference.</p>
+<p><strong>Aggregate results:</strong> README figures and tables were cross-checked against thesis Chapters 4&ndash;7 on 13 July 2026 (source cross-check, not a fresh protected-data run).</p>
+<p><strong>Access:</strong> No public access procedure. Future requests must follow institutional governance.</p>
+<hr>
+
+<h2 id="release-contract" class="section-header" data-level="2">4. Release Contract</h2>
+<p><strong>Included:</strong> Chapters 4&ndash;7 pipeline, real/proxy data modes, synthetic data generator, schema documentation, environment locks, thesis-to-code crosswalk, tests, validation reports, citation/contribution/security/data-availability documents, confirmed licence, release manifest.</p>
+<p><strong>Excluded:</strong> participant data, credentials, private Git history, project-management files, agent instructions, personal notes, unvalidated Chapter 8 claims.</p>
+
+<h3 id="release-gates" class="section-header" data-level="3">4.1 Current Gates</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Gate</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>Remove local secret configuration from tracked tree</td><td><span class="tag tag-pass">Done</span></td></tr>
+<tr><td>Replace ambiguous <code>make verify</code> with explicit proxy/real checks</td><td><span class="tag tag-pass">Done</span></td></tr>
+<tr><td>CI generates proxy inputs explicitly</td><td><span class="tag tag-pass">Done</span></td></tr>
+<tr><td>Replace placeholder dependency lock; add renv activation</td><td><span class="tag tag-pass">Done</span></td></tr>
+<tr><td>Reconcile README, config, chapter status for Ch 4&ndash;7</td><td><span class="tag tag-pass">Done</span></td></tr>
+<tr><td>Embed provenance in generated network HTML; privacy guard rejects unlabelled pages</td><td><span class="tag tag-pass">Done</span></td></tr>
+<tr><td>Audit candidate for secrets, protected paths, private notes, local paths</td><td><span class="tag tag-pass">Done</span></td></tr>
+<tr><td>Build history-free release candidate</td><td><span class="tag tag-pass">Done</span></td></tr>
+<tr><td>Run Chapters 4&ndash;6 from clean checkout</td><td><span class="tag tag-pass">Done</span></td></tr>
+<tr><td>Complete Chapter 7 from corrected proxy data</td><td><span class="tag tag-open">Open</span></td></tr>
+<tr><td>Confirm code and documentation licence</td><td><span class="tag tag-pass">Done</span></td></tr>
+<tr><td>Test links, citation metadata, installation commands</td><td><span class="tag tag-open">Open</span></td></tr>
+<tr><td>CI/Docker verification</td><td><span class="tag tag-open">Open</span></td></tr>
+<tr><td>Tag and archive</td><td><span class="tag tag-open">Open</span></td></tr>
+</tbody></table></div>
+
+<h3 id="interpretation-rule" class="section-header" data-level="3">4.2 Interpretation Rule</h3>
+<blockquote>A proxy run proves the software executes on synthetic inputs. It does not prove proxy estimates match thesis results. A real-data run proves agreement with recorded empirical benchmarks, subject to stated tolerances. Release documentation keeps these claims separate.</blockquote>
+<hr>
+
+<h2 id="license-citation" class="section-header" data-level="2">5. License &amp; Citation</h2>
+<p><strong>Code:</strong> MIT License &copy; 2025 Shangshang Gu</p>
+<p><strong>Documentation &amp; diagrams:</strong> CC BY 4.0</p>
+<p><strong>Data:</strong> Not distributed. Synthetic proxy data are covered by the MIT License.</p>
+<p>See <code>LICENSE</code> for full text and <code>CITATION.cff</code> for machine-readable citation metadata.</p>
+<hr>
+
+<h2 id="repro-fidelity" class="section-header" data-level="2">6. Reproduction Fidelity</h2>
+<p>On the thesis data, Chapters 5 and 6 reproduce every coefficient to 3 decimal places. Three code fixes were required to achieve exact match:</p>
+<div class="table-wrap"><table>
+<thead><tr><th>#</th><th>Fix</th><th>Detail</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Zero-friend peer coding</td><td>Participants with <code>friend_number == 0</code> receive <code>peer_misperception = 0</code>. Participants whose friends all have missing data keep <code>NaN</code> (dropped as incomplete).</td></tr>
+<tr><td>2</td><td>Imputation mean source</td><td>The mean for single-NA imputation is computed from the flagged subset only, matching the legacy <code>filter(further_imputation==1)</code> pipeline.</td></tr>
+<tr><td>3</td><td>Adjacency normalisation</td><td>Uses <code>diag(1/colSums) %*% adj</code> (legacy normalisation), not standard row-normalisation.</td></tr>
+</tbody></table></div>
+<p>These fixes produce thesis-matching sample sizes (218/213/215 for Time 1/2/3) and exact agreement at 3dp.</p>
+
+<h3 id="validation-targets" class="section-header" data-level="3">6.1 Recorded Validation Targets</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Chapter</th><th>Scope</th><th>Checks</th><th>Status (real data)</th></tr></thead>
+<tbody>
+<tr><td>Ch 5 (Descriptive NAM)</td><td>Global and peer misperception &beta; at T1, T2, T3</td><td>6 coefficients</td><td>All match to 3dp</td></tr>
+<tr><td>Ch 6 (Injunctive NAM)</td><td>7 terms &times; 3 scenarios &times; 3 time periods</td><td>63 coefficients</td><td>All match to 3dp</td></tr>
+<tr><td>Ch 7 (SAOM)</td><td>Convergence ratio, Jaccard indices, key effects</td><td>Convergence &le; 0.10; Jaccards 0.67, 0.81, 0.66</td><td>Converged on thesis data</td></tr>
+</tbody></table></div>
+<p>Machine-readable targets are stored in <code>reproduced/docs/references/quan_results.md</code> and consumed by each chapter&rsquo;s validation script. Proxy runs cannot reproduce these values because synthetic inputs have different distributions; the verifier issues warnings rather than failures.</p>
+<hr>
+
+<h2 id="check-inventory" class="section-header" data-level="2">7. Verification Check Inventory</h2>
+<p>The verifier (<code>scripts/00_setup/verify_outputs.py</code>) runs 15 checks for a Chapters 4&ndash;6 proxy path, more when Chapter 7 is included.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Check ID</th><th>What it tests</th><th>Fail behaviour</th></tr></thead>
+<tbody>
+<tr><td><code>data.proxy_bundle</code></td><td><code>list_by_wave.RData</code> exists in proxy dir</td><td>Fail</td></tr>
+<tr><td><code>data.proxy_marker</code></td><td>Proxy marker file present</td><td>Fail</td></tr>
+<tr><td><code>chapter4.prepared_data</code></td><td><code>prepared_data_sets.RData</code> exists (&gt; 0 bytes)</td><td>Fail</td></tr>
+<tr><td><code>chapter4.manifest</code></td><td>Data manifest is valid JSON</td><td>Fail</td></tr>
+<tr><td><code>chapter4.qa</code></td><td>QA assertions file exists and is valid JSON</td><td>Fail</td></tr>
+<tr><td><code>chapter4.data_mode</code></td><td>QA records the expected data mode (proxy/real)</td><td>Fail</td></tr>
+<tr><td><code>chapter4.qa_status</code></td><td>All Chapter 4 QA assertions passed</td><td>Fail</td></tr>
+<tr><td><code>chapter5.summary</code></td><td>NAM summary CSV exists</td><td>Fail</td></tr>
+<tr><td><code>chapter5.summary_schema</code></td><td>CSV has required columns and &gt; 0 rows</td><td>Fail</td></tr>
+<tr><td><code>chapter5.benchmarks</code></td><td>Validation JSON exists</td><td>Fail</td></tr>
+<tr><td><code>chapter5.benchmark_status</code></td><td>Coefficient check results (proxy: warn if different; real: fail)</td><td>Warn (proxy) / Fail (real)</td></tr>
+<tr><td><code>chapter6.coefficients</code></td><td>Injunctive NAM coefficients CSV exists</td><td>Fail</td></tr>
+<tr><td><code>chapter6.benchmarks</code></td><td>Validation JSON exists</td><td>Fail</td></tr>
+<tr><td><code>chapter6.data_mode</code></td><td>Validation records the expected data mode</td><td>Fail</td></tr>
+<tr><td><code>chapter6.benchmark_status</code></td><td>Coefficient check results</td><td>Warn (proxy) / Fail (real)</td></tr>
+</tbody></table></div>
+<p>Chapter 7 adds checks for network arrays, input manifest, run log, dyadic covariates (non-degenerate), fitted model file, and convergence ratio. Real-data runs also verify coefficient benchmarks.</p>
+<hr>
+
+<h2 id="determinism" class="section-header" data-level="2">8. Determinism &amp; Platform Drift</h2>
+<p>Chapters 4&ndash;6 are deterministic for fixed inputs and configuration. Chapter 7 (SAOM) may show cross-platform numeric drift from BLAS/LAPACK and compiler differences, even with fixed seeds.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Parameter</th><th>Value</th></tr></thead>
+<tbody>
+<tr><td>NAM seed</td><td><code>20250921</code></td></tr>
+<tr><td>SAOM RNG seed</td><td><code>2022</code></td></tr>
+<tr><td>SAOM Phase 3 iterations</td><td><code>10000</code></td></tr>
+<tr><td>RSiena version</td><td><code>1.4.7</code> (exact CRAN Archive pin)</td></tr>
+</tbody></table></div>
+
+    </div>
+
+    <!-- ==================== ROADMAP TAB ==================== -->
+    <div class="tab-panel" data-panel="roadmap">
+
+<h1 id="roadmap-sand" class="section-header" data-level="1">Roadmap</h1>
+<blockquote>What has been completed and what comes next. Updated July 2026.</blockquote>
+<hr>
+
+<h2 id="rm-completed" class="section-header" data-level="2">1. Completed</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Item</th><th>Status</th><th>Detail</th></tr></thead>
+<tbody>
+<tr><td>REDCap/MySQL server stack</td><td><span class="tag tag-pass">Done</span></td><td>Built two-server architecture from bare university VMs: Apache/SSL web server + dedicated MySQL database VM with scoped access and network isolation.</td></tr>
+<tr><td>Two-project identity separation</td><td><span class="tag tag-pass">Done</span></td><td>Implemented baseline + follow-up REDCap projects with role-based access separation, <code>@HIDDEN-SURVEY</code>/<code>@HIDDEN-FORM</code> action tags, and calculated fields for pseudonymised linkage.</td></tr>
+<tr><td>Six-wave data collection</td><td><span class="tag tag-pass">Done</span></td><td>Recruited 255 of 375 invited residents, achieved 87% retention across six waves (Sep 2022&ndash;Oct 2023), with automated incentive distribution and up to three reminders per wave.</td></tr>
+<tr><td>R/Make analysis pipeline</td><td><span class="tag tag-pass">Done</span></td><td>Config-driven pipeline covering Chapters 4&ndash;7: data preparation, network autocorrelation models, injunctive norm models, and stochastic actor-oriented models.</td></tr>
+<tr><td>Proxy data generator</td><td><span class="tag tag-pass">Done</span></td><td>Deterministic synthetic data generator producing 255 students &times; 6 waves with network ties, AUDIT-C scores, norm perceptions, and residence structure.</td></tr>
+<tr><td>Environment locks</td><td><span class="tag tag-pass">Done</span></td><td>Conda environment + <code>renv.lock</code> (90 packages) + RSiena 1.4.7 pinned from CRAN Archive. Clean solve and restore verified.</td></tr>
+<tr><td>Chapters 4&ndash;6 proxy verification</td><td><span class="tag tag-pass">Done</span></td><td>15 structural checks, 0 failures, 2 expected proxy-vs-empirical warnings. Reproducible from a clean checkout.</td></tr>
+<tr><td>Portfolio and privacy generation</td><td><span class="tag tag-pass">Done</span></td><td>Data dictionary, reproducibility manifest, validation dashboard, 5 labelled network pages with embedded <code>SYNTHETIC PROXY DATA</code> provenance. Privacy scans pass.</td></tr>
+<tr><td>Secret and credential scan</td><td><span class="tag tag-pass">Done</span></td><td>Release candidate scanned for protected paths, known secret patterns, local absolute paths, and unsafe symlinks. No findings.</td></tr>
+<tr><td>History-free release candidate</td><td><span class="tag tag-pass">Done</span></td><td>Built clean export without private Git history. Private commits do not carry into the public repository.</td></tr>
+<tr><td>Thesis coefficient reproduction</td><td><span class="tag tag-pass">Done</span></td><td>Chapters 5&ndash;6 reproduce every coefficient to 3 decimal places on real data (69 checks). Three code fixes required for exact match documented in Release tab.</td></tr>
+<tr><td>Infrastructure evidence extraction</td><td><span class="tag tag-pass">Done</span></td><td>Database backup and server configuration archived. Python scripts parse the backup directly without requiring a running database.</td></tr>
+<tr><td>Portable data dictionaries</td><td><span class="tag tag-pass">Done</span></td><td>Generated REDCap-importable CSVs from the database backup: PIS portal (17 fields), baseline (231 fields, 28 instruments), follow-up (239 fields, 8 instruments, 151 branching rules).</td></tr>
+<tr><td>Licence and citation</td><td><span class="tag tag-pass">Done</span></td><td>MIT (code) + CC BY 4.0 (documentation). <code>CITATION.cff</code> with machine-readable metadata.</td></tr>
+</tbody></table></div>
+<hr>
+
+<h2 id="rm-next" class="section-header" data-level="2">2. Next</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Item</th><th>Status</th><th>Detail</th></tr></thead>
+<tbody>
+<tr><td>Chapter 7 (SAOM) code</td><td><span class="tag tag-warn">In progress</span></td><td>Analysis complete. Organising and updating pipeline code for public release.</td></tr>
+<tr><td>Chapter 8 (Interventions) code</td><td><span class="tag tag-warn">In progress</span></td><td>Analysis complete. 462 counterfactual scenarios &times; 3 chained periods. Organising pipeline code.</td></tr>
+<tr><td>Thesis compilation</td><td><span class="tag tag-warn">In progress</span></td><td>Chapters written. Integrating <code>make thesis</code> target into the reproducible pipeline.</td></tr>
+<tr><td>Data access procedure</td><td><span class="tag tag-warn">In progress</span></td><td>Formal data-sharing agreements and institutional governance under development.</td></tr>
+<tr><td>DOI and archived release</td><td><span class="tag tag-warn">In progress</span></td><td>Version tag and archived release bundle in preparation.</td></tr>
+<tr><td>Cross-platform reproducibility</td><td><span class="tag tag-open">Open</span></td><td>All verification performed on macOS arm64. Linux and x86_64 behaviour is untested.</td></tr>
+</tbody></table></div>
+
+    </div>
+
+  </main>
+
+<script>
+(function () {
+  // Theme toggle
+  const toggle = document.getElementById('theme-toggle');
+  const stored = localStorage.getItem('sand-ref-theme');
+  function applyTheme(mode) {
+    document.documentElement.setAttribute('data-theme', mode);
+    toggle.textContent = mode === 'dark' ? '\u2600' : '\u263D';
+    localStorage.setItem('sand-ref-theme', mode);
+  }
+  if (stored) { applyTheme(stored); }
+  else if (window.matchMedia('(prefers-color-scheme: dark)').matches) { applyTheme('dark'); }
+  toggle.addEventListener('click', function () {
+    var current = document.documentElement.getAttribute('data-theme');
+    applyTheme(current === 'dark' ? 'light' : 'dark');
+  });
+
+  const allTabBtns = document.querySelectorAll('.content-tab, .content-tab-study');
+  const panels = document.querySelectorAll('.tab-panel');
+  const sidebars = document.querySelectorAll('.sidebar-toc');
+  const searchInput = document.getElementById('search-input');
+  const content = document.getElementById('content');
+
+  function switchTab(name) {
+    allTabBtns.forEach(t => t.classList.toggle('active', t.dataset.tab === name));
+    panels.forEach(p => p.classList.toggle('active', p.dataset.panel === name));
+    sidebars.forEach(s => {
+      s.classList.toggle('hidden', s.dataset.sidebar !== name);
+    });
+    content.scrollTop = 0;
+    searchInput.value = '';
+    filterToc('');
+  }
+
+  allTabBtns.forEach(t => t.addEventListener('click', () => switchTab(t.dataset.tab)));
+
+  // TOC click scrolling
+  document.querySelectorAll('.toc-item').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const id = link.getAttribute('href').slice(1);
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // Active TOC tracking
+  const headers = document.querySelectorAll('.section-header');
+  const tocItems = document.querySelectorAll('.toc-item');
+  const tocMap = new Map();
+  tocItems.forEach(item => {
+    const id = item.getAttribute('href')?.slice(1);
+    if (id) tocMap.set(id, item);
+  });
+
+  let ticking = false;
+  content.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        let current = '';
+        const activePanel = document.querySelector('.tab-panel.active');
+        if (activePanel) {
+          const panelHeaders = activePanel.querySelectorAll('.section-header');
+          panelHeaders.forEach(h => {
+            const rect = h.getBoundingClientRect();
+            const mainRect = content.getBoundingClientRect();
+            if (rect.top - mainRect.top <= 80) current = h.id;
+          });
+        }
+        tocItems.forEach(item => item.classList.remove('active'));
+        if (current && tocMap.has(current)) {
+          tocMap.get(current).classList.add('active');
+        }
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+
+  // Search
+  function filterToc(query) {
+    const q = query.toLowerCase().trim();
+    const activeSidebar = document.querySelector('.sidebar-toc:not(.hidden)');
+    if (!activeSidebar) return;
+    const items = activeSidebar.querySelectorAll('.toc-item');
+    items.forEach(item => {
+      if (!q) { item.style.display = ''; return; }
+      const text = item.textContent.toLowerCase();
+      item.style.display = text.includes(q) ? '' : 'none';
+    });
+  }
+
+  searchInput.addEventListener('input', () => filterToc(searchInput.value));
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 440" width="1200" height="440" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif">
+
+  <!-- Title -->
+  <text x="600" y="28" text-anchor="middle" font-size="15" font-weight="600" fill="#333" letter-spacing="0.3">Reproduction Pipeline</text>
+  <text x="600" y="46" text-anchor="middle" font-size="11" fill="#888">From a protected analysis bundle or synthetic proxy to chapter outputs</text>
+
+  <!-- ===== INPUT ===== -->
+  <rect x="440" y="70" width="320" height="44" rx="4" fill="none" stroke="#999" stroke-width="1.5"/>
+  <text x="600" y="88" text-anchor="middle" font-size="11" fill="#555" font-weight="600">list_by_wave.RData</text>
+  <text x="600" y="103" text-anchor="middle" font-size="9" fill="#aaa">Protected downstream bundle or synthetic proxy · 6 waves · 255 students</text>
+
+  <!-- Arrow down -->
+  <line x1="600" y1="114" x2="600" y2="140" stroke="#999" stroke-width="1.5"/>
+  <polygon points="594,138 600,148 606,138" fill="#999"/>
+
+  <!-- ===== CHAPTER 4 ===== -->
+  <rect x="280" y="150" width="640" height="52" rx="4" fill="#4E79A7" fill-opacity="0.08" stroke="#4E79A7" stroke-width="1" stroke-opacity="0.3"/>
+  <text x="600" y="172" text-anchor="middle" font-size="12" font-weight="600" fill="#4E79A7">Chapter 4: Data Preparation</text>
+  <text x="600" y="190" text-anchor="middle" font-size="10" fill="#888">QA checks → LOCF imputation → Network arrays + Norm variables</text>
+
+  <!-- Two output arrows from Ch4 -->
+  <!-- Left arrow to network_arrays.rds -->
+  <line x1="430" y1="202" x2="430" y2="240" stroke="#999" stroke-width="1"/>
+  <polygon points="424,238 430,248 436,238" fill="#999"/>
+  <!-- Right arrow to norms_longitudinal.rds -->
+  <line x1="770" y1="202" x2="770" y2="240" stroke="#999" stroke-width="1"/>
+  <polygon points="764,238 770,248 776,238" fill="#999"/>
+
+  <!-- Intermediate outputs -->
+  <rect x="320" y="250" width="220" height="32" rx="3" fill="none" stroke="#ccc" stroke-width="1"/>
+  <text x="430" y="271" text-anchor="middle" font-size="10" fill="#666">network_arrays.rds</text>
+
+  <rect x="660" y="250" width="220" height="32" rx="3" fill="none" stroke="#ccc" stroke-width="1"/>
+  <text x="770" y="271" text-anchor="middle" font-size="10" fill="#666">norms_longitudinal.rds</text>
+
+  <!-- Arrows from intermediates to chapters -->
+  <!-- network_arrays → Ch7 -->
+  <line x1="430" y1="282" x2="230" y2="320" stroke="#999" stroke-width="1"/>
+  <polygon points="225,316 224,326 234,320" fill="#999"/>
+
+  <!-- norms → Ch5 -->
+  <line x1="720" y1="282" x2="600" y2="320" stroke="#999" stroke-width="1"/>
+  <polygon points="594,318 596,328 604,320" fill="#999"/>
+
+  <!-- norms → Ch6 -->
+  <line x1="820" y1="282" x2="920" y2="320" stroke="#999" stroke-width="1"/>
+  <polygon points="916,316 926,320 918,326" fill="#999"/>
+
+  <!-- ===== CHAPTER 7 ===== -->
+  <rect x="100" y="322" width="260" height="48" rx="4" fill="#E15759" fill-opacity="0.06" stroke="#E15759" stroke-width="1" stroke-opacity="0.25"/>
+  <text x="230" y="342" text-anchor="middle" font-size="11" font-weight="600" fill="#E15759">Chapter 7: SAOM</text>
+  <text x="230" y="358" text-anchor="middle" font-size="9" fill="#888">RSiena · Selection vs Influence</text>
+
+  <!-- ===== CHAPTER 5 ===== -->
+  <rect x="470" y="322" width="260" height="48" rx="4" fill="#F28E2B" fill-opacity="0.06" stroke="#F28E2B" stroke-width="1" stroke-opacity="0.25"/>
+  <text x="600" y="342" text-anchor="middle" font-size="11" font-weight="600" fill="#F28E2B">Chapter 5: Descriptive NAM</text>
+  <text x="600" y="358" text-anchor="middle" font-size="9" fill="#888">Network autocorrelation x 3</text>
+
+  <!-- ===== CHAPTER 6 ===== -->
+  <rect x="840" y="322" width="260" height="48" rx="4" fill="#59A14F" fill-opacity="0.06" stroke="#59A14F" stroke-width="1" stroke-opacity="0.25"/>
+  <text x="970" y="342" text-anchor="middle" font-size="11" font-weight="600" fill="#59A14F">Chapter 6: Injunctive NAM</text>
+  <text x="970" y="358" text-anchor="middle" font-size="9" fill="#888">Network autocorrelation x 3</text>
+
+  <!-- Arrows down to validation -->
+  <line x1="230" y1="370" x2="230" y2="395" stroke="#999" stroke-width="1"/>
+  <polygon points="224,393 230,403 236,393" fill="#999"/>
+  <line x1="600" y1="370" x2="600" y2="395" stroke="#999" stroke-width="1"/>
+  <polygon points="594,393 600,403 606,393" fill="#999"/>
+  <line x1="970" y1="370" x2="970" y2="395" stroke="#999" stroke-width="1"/>
+  <polygon points="964,393 970,403 976,393" fill="#999"/>
+
+  <!-- ===== VALIDATION ===== -->
+  <rect x="100" y="405" width="1000" height="30" rx="4" fill="none" stroke="#ccc" stroke-width="1"/>
+  <text x="600" y="425" text-anchor="middle" font-size="10" fill="#999">Validation · Reproducibility Manifests · SHA-256 Checksums · Portfolio Artifacts</text>
+</svg>

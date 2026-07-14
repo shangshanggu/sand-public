@@ -1,0 +1,526 @@
+{
+  "release_state": "unversioned-candidate",
+  "file_count": 130,
+  "files": [
+    {
+      "path": ".Rprofile",
+      "sha256": "b2f9cbe7ae8d3f269cbecdd151be8636caa86c308b58e048345e5378f780d024"
+    },
+    {
+      "path": ".gitattributes",
+      "sha256": "a345b5fa8268bdc7ffa3fef67689ac3c75ce3e8b803ce8a7c4f6ac567ca670de"
+    },
+    {
+      "path": ".github/workflows/r-check.yml",
+      "sha256": "f3d03a4141b2b9200086f887562b99115d150ac350d87caf6d67e9622e4355ad"
+    },
+    {
+      "path": ".github/workflows/r-full-check.yml",
+      "sha256": "1ed66891a40bcdfe024f416a53ca35366cd2d71c3ad3b329898290392d49f3c0"
+    },
+    {
+      "path": ".gitignore",
+      "sha256": "d3cc33b747ceed2a420ba2377ab3b41ff4679b2b496497e780e1a44c08e2fd72"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "sha256": "c0344598c070b839c25769984bf2357e782de7aedb89582d2c84953a527bcb07"
+    },
+    {
+      "path": "CITATION.cff",
+      "sha256": "72916cc67246a3980d63e904365e89a94d79f1395bc017fd890b0b3a529792ad"
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "sha256": "581b38ff5747bdf3ffe100eb5846cd2a33b4e73838a02bfd7d7797101a4b0095"
+    },
+    {
+      "path": "DATA_AVAILABILITY.md",
+      "sha256": "22e4e862e8391c23cfc722b678a9d5dd89eebbc119d9a4100efec56f9917f6c1"
+    },
+    {
+      "path": "Dockerfile",
+      "sha256": "82501024981968431dbb10b2b6685f5a265edda9957477715214c9e3e00914ac"
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "6ad9107eae71dfd7119adeb1c92818f282c0ae3ccca8d0ca07cb5554fe91d3d9"
+    },
+    {
+      "path": "Makefile",
+      "sha256": "4c2d92547931a1b3894223c664f864d213d04d3ab0469332022064d037541852"
+    },
+    {
+      "path": "README.md",
+      "sha256": "f7ff539c2928a9f2388d3e3b8a60374814ca3bc2953ca2aed721617a6db90846"
+    },
+    {
+      "path": "SECURITY.md",
+      "sha256": "dad23345557ac179f4e5e4e0a478f0d0ac3eb79b4415835a0bd6e8982c2838f1"
+    },
+    {
+      "path": "docs/readme-assets/audit_trends.svg",
+      "sha256": "8a5d2e2ae183d53a4d01f665c23f4e233a7dce93274d74db15b213b30f3faf29"
+    },
+    {
+      "path": "docs/readme-assets/demographics.svg",
+      "sha256": "ee9eb3b95ef530d348ebac8af8831d322b979c38f90d2a8b2af0e293ec0c7aa8"
+    },
+    {
+      "path": "docs/readme-assets/misperception_shifts.svg",
+      "sha256": "722f9d4954ff2b9586fb8eb65f73ce8f1f428e2404ff8d07e841c28098a490a6"
+    },
+    {
+      "path": "docs/readme-assets/pipeline.svg",
+      "sha256": "56224d9e9204cec5d9e47ee9d98eb5550e9c91aed9e31ac5ea9ef69c54169f8e"
+    },
+    {
+      "path": "docs/readme-assets/study_timeline.svg",
+      "sha256": "77106a0dde3ea92da017913c83e93be0f8fe4ff73407d44d4266ffbf5efa712a"
+    },
+    {
+      "path": "docs/reference.html",
+      "sha256": "48b47e28f8a0c227be45965464f3210f41f38b1886e5b11fe97abc8eda0855fb"
+    },
+    {
+      "path": "reproduced/.Rprofile",
+      "sha256": "e7f4d73f29e577feeff5beb065cb99208f71abd06c43666f172358c9dd2c6ad8"
+    },
+    {
+      "path": "reproduced/.renvignore",
+      "sha256": "7761113ee2d5badfffa42792fe43b5e996c0c675805f7b5a80861762b3773be2"
+    },
+    {
+      "path": "reproduced/Makefile",
+      "sha256": "2358670a5d7907edd65ac69e13baf0a51a31f083279506a566eeabd9350f7aab"
+    },
+    {
+      "path": "reproduced/R/common.R",
+      "sha256": "19f467a7adc32258a236bc935619019103664b29c87a78512e3ae0d8feb923e2"
+    },
+    {
+      "path": "reproduced/README.md",
+      "sha256": "f2d1380ad940d0c117ccb685b11a3aa027af384b3ccd4a432d192ac3ad3adf12"
+    },
+    {
+      "path": "reproduced/REPRODUCIBLE_PIPELINE.md",
+      "sha256": "7ac28076901af2fc02ca6fb26b1ff81fc284fb8f9fd37045a5edc763eb84d5fd"
+    },
+    {
+      "path": "reproduced/analyses/chapter4_data_collection/README.md",
+      "sha256": "62bb3ad6f1e6b1c25c45bad94ac7ece61b7ed09dae5aaafb6d683faf5058351d"
+    },
+    {
+      "path": "reproduced/analyses/chapter4_data_collection/scripts/01_data_preparation_norms.R",
+      "sha256": "fb2c72c470a7959eb7791d02c5b972ffb91fbf114a4fb956cbb69a771e1c1a5c"
+    },
+    {
+      "path": "reproduced/analyses/chapter4_data_collection/scripts/02_qa_checks_norms.R",
+      "sha256": "41f5e6d6afb6940feca6a36af08159d9643c9506172cc0988e5c46083891db94"
+    },
+    {
+      "path": "reproduced/analyses/chapter4_data_collection/scripts/03_export_norms_longitudinal.R",
+      "sha256": "9c029bd626004b2fecdb21a951add3c68f2316a56a47e6ca6c97581be361c1a8"
+    },
+    {
+      "path": "reproduced/analyses/chapter4_data_collection/scripts/04_export_chapter5_bridge.R",
+      "sha256": "1abc002a3e6961f28149abad24634af2548945b2a1dbbeaff252bb6836748b95"
+    },
+    {
+      "path": "reproduced/analyses/chapter5_descriptive_norms/README.md",
+      "sha256": "3038af9f60d077d531d7fa9cd92522fee14bec9b097c8dc0349584d8958b35c5"
+    },
+    {
+      "path": "reproduced/analyses/chapter5_descriptive_norms/scripts/01_prepare_chapter5_data.R",
+      "sha256": "3f527b565ae75c0224d70a84c3bd43a6f0d1ce4bb62bd399a40b0ae4980f853a"
+    },
+    {
+      "path": "reproduced/analyses/chapter5_descriptive_norms/scripts/02_estimate_nam_models.R",
+      "sha256": "d4f959170f66ac83e39f8f4d7b6b6f8857dae2fcb3e636346162197fe6b52cba"
+    },
+    {
+      "path": "reproduced/analyses/chapter5_descriptive_norms/scripts/03_generate_nam_figures.R",
+      "sha256": "2aabc52de7b6ea9f9b5c4778b1ae88f23836dead1903f2d0715581dbeb0192f2"
+    },
+    {
+      "path": "reproduced/analyses/chapter5_descriptive_norms/scripts/04_validate_nam_results.R",
+      "sha256": "5bf02e330d73f436c7ba8b600773fd79c360444e094474d823318417c1256059"
+    },
+    {
+      "path": "reproduced/analyses/chapter5_descriptive_norms/scripts/05_compare_nam_results.R",
+      "sha256": "a74d2acaa8dee937e9b8590572b6b9d756285099dbbf35b9c941bf77e7d7154f"
+    },
+    {
+      "path": "reproduced/analyses/chapter6_injunctive_norms/README.md",
+      "sha256": "5909f508da90dc65d59ffbcd6c7a4708d071400583d4c69544bbd5fea3154baa"
+    },
+    {
+      "path": "reproduced/analyses/chapter6_injunctive_norms/outputs/.gitkeep",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "reproduced/analyses/chapter6_injunctive_norms/scripts/01_prepare_approval_longitudinal.R",
+      "sha256": "bf01d54f77d198180ca5163e6f287f48ac829f20fb882870eb65d18076cf5cf6"
+    },
+    {
+      "path": "reproduced/analyses/chapter6_injunctive_norms/scripts/02_analyze_injunctive_norms.R",
+      "sha256": "7bde9e378d1644a26d39e65779c23786608253536f527e00643358dc47d301d7"
+    },
+    {
+      "path": "reproduced/analyses/chapter6_injunctive_norms/scripts/03_plot_injunctive_trends.R",
+      "sha256": "a01825a6ff14fcbe0f967c2a02678e385f55408cd916c81b689e850f233e6ccb"
+    },
+    {
+      "path": "reproduced/analyses/chapter6_injunctive_norms/scripts/04_estimate_injunctive_nam_models.R",
+      "sha256": "b1c3d96d27b981be388900966387dd9272ce5188064552a5576fc5d970f2efec"
+    },
+    {
+      "path": "reproduced/analyses/chapter6_injunctive_norms/scripts/05_validate_injunctive_results.R",
+      "sha256": "738fced2d9bb5d4906a2f1fe20d85387315baab3d0388b7617b4438f5d2e2881"
+    },
+    {
+      "path": "reproduced/analyses/chapter7_saom/README.md",
+      "sha256": "8c1c60f520955dc76550072fbab3dc58854e556664658ddaa3ff83e16c05f0c6"
+    },
+    {
+      "path": "reproduced/analyses/chapter7_saom/outputs/cache/.gitkeep",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "reproduced/analyses/chapter7_saom/scripts/00_build_network_arrays_base.R",
+      "sha256": "fedb4c6e247f0d8c286fa9a65a4502615d3241fb1b8d6f89792f1292b92081a7"
+    },
+    {
+      "path": "reproduced/analyses/chapter7_saom/scripts/01_prepare_saom_inputs.R",
+      "sha256": "9b2355aa73fbc0d6026c63335153479daf932dad234721cfb4f9aea791fcd0a9"
+    },
+    {
+      "path": "reproduced/analyses/chapter7_saom/scripts/02_run_saom_model.R",
+      "sha256": "8aa1207ea11c15bf26af1fdf3427d8595a261ca270a99b29342d792888d85858"
+    },
+    {
+      "path": "reproduced/analyses/chapter7_saom/scripts/03_generate_saom_tables_figures.R",
+      "sha256": "5be7a8e85d4ec4cb1e3ac1cbc09cfdef84f3a30a696d6851110758c6b63e7b42"
+    },
+    {
+      "path": "reproduced/analyses/chapter7_saom/scripts/04_validate_saom_results.R",
+      "sha256": "6551883d1de45d96314423be195f0f16fc96af895b5d50c78341165b115c5f90"
+    },
+    {
+      "path": "reproduced/analyses/chapter8_interventions/README.md",
+      "sha256": "97e0f6f6ca0faa53486311f2da896ba98a586b4bb0735521de6b23ec25279c54"
+    },
+    {
+      "path": "reproduced/analyses/chapter8_interventions/outputs/.gitkeep",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "reproduced/analyses/chapter8_interventions/scripts/00_build_scenario_manifest.R",
+      "sha256": "b2ca749d4e0e8a4acc4c6404cb41e728e7529bca7321d66619299510a3047af2"
+    },
+    {
+      "path": "reproduced/analyses/chapter8_interventions/scripts/01_prepare_baseline_and_strategy.R",
+      "sha256": "b02355945d33668fc928a2e4b8e13f3a567c87934bdf0b4ab5de767ca24a5f29"
+    },
+    {
+      "path": "reproduced/analyses/chapter8_interventions/scripts/02_run_interventions.R",
+      "sha256": "04d7b7c90156f42b0d958040044e14a1629a2921c1ad972bdbbb128acbbb7e98"
+    },
+    {
+      "path": "reproduced/analyses/chapter8_interventions/scripts/03_chain_beyond_periods.R",
+      "sha256": "1077bf10dade64ecb80a6f2e072c23f821a33688b519d15e906293d629433dc6"
+    },
+    {
+      "path": "reproduced/analyses/chapter8_interventions/scripts/04_combine_and_summarize.R",
+      "sha256": "bb57d0056d903bc7766fa1ada33aa2bb75b82aba4cc6fe294b4846fc2ed082ac"
+    },
+    {
+      "path": "reproduced/analyses/chapter8_interventions/scripts/05_plot_intervention_effects.R",
+      "sha256": "20ed1e5d314d010918c36495166e4cef3c5c6f9dbf0b531fe4341c5ca9f2be30"
+    },
+    {
+      "path": "reproduced/config/scenarios/.gitkeep",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "reproduced/config/scenarios/intervention_strategy_basecase.csv",
+      "sha256": "970b19fc36babdbd92a429b38279395138184d970168b202f204c2e5553812b8"
+    },
+    {
+      "path": "reproduced/config/scenarios/interventions.yml",
+      "sha256": "47d1dfa51cd7b5c4976607c38504e348cdb2ce3e3cb3a395b4fcf05efb348868"
+    },
+    {
+      "path": "reproduced/config/scenarios/saom_models.yml",
+      "sha256": "b0ae0b4e767bb4d711903b2bf914eaff12238f7811fb7a7c661d29ac5d8c1c48"
+    },
+    {
+      "path": "reproduced/config/thesis.yml",
+      "sha256": "097b4619069f5c5a4c16a910ef67beee32e39e497d516cd8491c677b25eed6a7"
+    },
+    {
+      "path": "reproduced/data/proxy/README.md",
+      "sha256": "79ab905e28ecacdfbd0220ae1a50487347318281c2c80f0781e432c292c8c62c"
+    },
+    {
+      "path": "reproduced/data/proxy/list_by_wave_schema.csv",
+      "sha256": "1da668d9221944cdc1fadc927f43280b5a4d86d0592ad71b41f8fb2f3735479e"
+    },
+    {
+      "path": "reproduced/data/raw/README.md",
+      "sha256": "ec89f2fc0e9f76e5a00cd617a34f59e51150931ae073b5cff32f13f4e6612302"
+    },
+    {
+      "path": "reproduced/docs/README.md",
+      "sha256": "800f25eb788ce253334fdb9a3aefbdf82a3f6830370f9e6fcd7574ea4eb59980"
+    },
+    {
+      "path": "reproduced/docs/decisions/README.md",
+      "sha256": "a601193532449b4766bdc5831f64e90f1fa9dd81e68724451674e68969e52a8a"
+    },
+    {
+      "path": "reproduced/docs/decisions/binary_storage_guidance.md",
+      "sha256": "5356473bf18ec654c5f3f87b0616a4624736b7dd08a08f9b0d3c6a859d5e83bf"
+    },
+    {
+      "path": "reproduced/docs/decisions/decision_record_template.md",
+      "sha256": "6947fbed0ffde303f431c67b56caf35ccd3fbe8ffab0fed609e9d4ed5df4e0fc"
+    },
+    {
+      "path": "reproduced/docs/portfolio/assets/findings_coefficients.svg",
+      "sha256": "c977cb03f56a547a37e110729e98bbb8c431b7f0bab3449c7ac7e7a81f7fda55"
+    },
+    {
+      "path": "reproduced/docs/portfolio/case_study.md",
+      "sha256": "89b9555701e5528d465ba342ec98462bbb0479e2b2173f04a3912e6b1b5be299"
+    },
+    {
+      "path": "reproduced/docs/portfolio/findings_summary.md",
+      "sha256": "673c451fd145fef4ff20cf5336ecaeb4946a4eeaae104569a2d865510fb59c60"
+    },
+    {
+      "path": "reproduced/docs/portfolio/sand_study_book.md",
+      "sha256": "e8a0daf1df9a3c9c4084a62fd5c11df1a13ec459eeb5e6c7aeb50755b1cbe77f"
+    },
+    {
+      "path": "reproduced/docs/references/README.md",
+      "sha256": "e22997554064db18ab8a765f41d5c0654abb3defd54fd4f3928d7ffefedc84f0"
+    },
+    {
+      "path": "reproduced/docs/references/chapter5_nam_summary_schema.md",
+      "sha256": "ba4e3f54a26ac9db1f43c522636ca309721d0d55dad7f1e74be583db00a1c575"
+    },
+    {
+      "path": "reproduced/docs/references/configuration_guide.md",
+      "sha256": "451d9199c7857d3c774585183ead832092c3e4524c39eb80ac0e8643425d68fa"
+    },
+    {
+      "path": "reproduced/docs/references/environment_reproducibility_guide.md",
+      "sha256": "cc00720a2ade74f97116ad9ceea034719933fe30ac6e321c1d5f852f749938f3"
+    },
+    {
+      "path": "reproduced/docs/references/onboarding_pointer_map.md",
+      "sha256": "66734cc83f3407528724cf87b7637b782084dbbaadaf5bb9baf95ca0bf38e1b2"
+    },
+    {
+      "path": "reproduced/docs/references/open_science_release_contract.md",
+      "sha256": "3f37b081c47439c1bfa1bc67bf8a2128bbcb02fb95912e01ebae80873b4f2e62"
+    },
+    {
+      "path": "reproduced/docs/references/quan_results.md",
+      "sha256": "fa7d703b44b45f9b76b68af151fe1a817b24f851d86d32bb181e4517302678ac"
+    },
+    {
+      "path": "reproduced/docs/references/thesis_scope_and_crosswalk.md",
+      "sha256": "c46230d1cf4f7d765b81152fc54e1fa17c038c8d0e5afe14d3542077d2ce0f3e"
+    },
+    {
+      "path": "reproduced/docs/status/2026-07-14_public_release_verification.md",
+      "sha256": "48fc522133b3baa6b11bba48916249db97c8f47c3d6e8641e185e4c6ae0e3516"
+    },
+    {
+      "path": "reproduced/environment.yml",
+      "sha256": "926265cca531f79e516ba0d563df341c475b0ca5769361bc4e20a122b48bf3b4"
+    },
+    {
+      "path": "reproduced/renv/.gitignore",
+      "sha256": "2c31e978189a98022566bd6084936f5608222b2bb9230b8d189b5a1c97a2c2da"
+    },
+    {
+      "path": "reproduced/renv/activate.R",
+      "sha256": "4892dac8acf8ecd017d6b11e3b5bbe62615ae9288a9b1ec90da73d6c54fe4d73"
+    },
+    {
+      "path": "reproduced/renv.lock",
+      "sha256": "3bbe30470aae59507046a4bf96edb3c6d2b8aad4f0c50c02be7e7682ff630910"
+    },
+    {
+      "path": "reproduced/run_all.R",
+      "sha256": "0ad5543d4cdfc9ec3f2d2eed42f8cf5788011ba3ecbbc8d67f74c3742a295551"
+    },
+    {
+      "path": "reproduced/run_ch4_to_ch7_clean.sh",
+      "sha256": "eda4ca6205584f33eb37c277a1a8b2c900aea419a68000f943b73e55f104b935"
+    },
+    {
+      "path": "reproduced/scripts/00_setup/build_public_release.py",
+      "sha256": "ac0f97826977df2c9ef0c1d66e10ff2ba47993b2226584d49c00b5b7bd45a2a4"
+    },
+    {
+      "path": "reproduced/scripts/00_setup/create_realistic_proxy_data.R",
+      "sha256": "e5c32ac321c64e1dce9bdae124c5bc7a65682c376d39f268e2cd474432e84cc2"
+    },
+    {
+      "path": "reproduced/scripts/00_setup/docker_smoke_test.R",
+      "sha256": "5accb4fae8131bc41172dec5117339be5c09f457d2f820ee59dad2d0ae79168f"
+    },
+    {
+      "path": "reproduced/scripts/00_setup/export_raw_csvs_from_list_by_wave.R",
+      "sha256": "645f87fd4e7ffa69115130abe017cee3d04f337ceb4f9d2bede5c1e7dd0ce8a5"
+    },
+    {
+      "path": "reproduced/scripts/00_setup/generate_data_hashes.py",
+      "sha256": "5bded9416ef62dd712e00dd9ce881985e2698682e2dbc4c3cc3b21a4c7107c9a"
+    },
+    {
+      "path": "reproduced/scripts/00_setup/install_r_packages.R",
+      "sha256": "ccc9a3388926eb443a5290c8169e9117df51af61e35ab0c39391b212c611ee65"
+    },
+    {
+      "path": "reproduced/scripts/00_setup/install_rsiena.R",
+      "sha256": "69174544cde8d883e14460ae595254285164034ff64ad50b3345ca23e3fa3b6a"
+    },
+    {
+      "path": "reproduced/scripts/00_setup/validate_config.py",
+      "sha256": "c37ca4e9445f894a2bee939909ca1fa2169e84277ac21c328832108a72941b7a"
+    },
+    {
+      "path": "reproduced/scripts/00_setup/verify_outputs.py",
+      "sha256": "20715d08249fb95cb2ad5a452b9b32e05a3f230114f2635e2b412bca3c5b40a9"
+    },
+    {
+      "path": "reproduced/scripts/check_renv_packages.py",
+      "sha256": "8d5064bbea06eb5f198ec37e7db8c32b4dc2aef26160057b08ce0b9d67798685"
+    },
+    {
+      "path": "reproduced/scripts/portfolio/.gitkeep",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "reproduced/scripts/portfolio/check_privacy.R",
+      "sha256": "9a797ca7dffac9a1c66ea9b56d2eb9f59dfc8e9d9d71b737f2bbc2f36feea3b9"
+    },
+    {
+      "path": "reproduced/scripts/portfolio/generate_data_dictionary.R",
+      "sha256": "32e3b890de299d393be21938fca843baf7eb13084b4110394053fe8453be6d5c"
+    },
+    {
+      "path": "reproduced/scripts/portfolio/generate_repro_manifest.R",
+      "sha256": "a28355ae92322fe8c9e39444693c88f2fd5a4eb4cc12dbaab483f6281bb13c5b"
+    },
+    {
+      "path": "reproduced/scripts/portfolio/generate_validation_dashboard.R",
+      "sha256": "bc09ede16fdb033cee55291997288beb7d2b5274b24e68ca8b514e55b3a6b61c"
+    },
+    {
+      "path": "reproduced/scripts/thesis/render_thesis.R",
+      "sha256": "080bf655b5defc6d660382c37f1dda04da9446be147b2a56e7d59e6039c94551"
+    },
+    {
+      "path": "reproduced/scripts/utils/check_r_syntax.R",
+      "sha256": "daad7c8b954af3562aae90c3e105e8a3e969a60d94c393aa4ac275c032dee154"
+    },
+    {
+      "path": "reproduced/scripts/utils/compare_results_to_thesis_tex.py",
+      "sha256": "04ad60db1c823cbe0d0e77ae92cba5dc312982c9971cf3963c2f52c764dc3e12"
+    },
+    {
+      "path": "reproduced/scripts/utils/config_loader.R",
+      "sha256": "94a5657bd4f011c072a335e10edc5ff3d7217903ef1f64a40b65eb719b42caea"
+    },
+    {
+      "path": "reproduced/scripts/utils/pack_thesis_outputs.R",
+      "sha256": "2d5f0f714217167432917019c6bb1e8932b39eca812b7f8221b9133843426c8a"
+    },
+    {
+      "path": "reproduced/scripts/utils/yaml_loader.py",
+      "sha256": "de2c58583be77219b89859405384d3d047bafa1e483a45a7ab61bd614c0f6802"
+    },
+    {
+      "path": "reproduced/scripts/visualisation/03_extract_chains.R",
+      "sha256": "09f62c98d33cd74183ad2277e9d01ad35f50accfbf8a18707d6d4c9d2b7f58b2"
+    },
+    {
+      "path": "reproduced/scripts/visualisation/04_animate_microsteps.R",
+      "sha256": "631af0d321391d4f1d9ca4ba095de03dddb53c858ddc576e5010f351265501f8"
+    },
+    {
+      "path": "reproduced/scripts/visualisation/05_interactive_networks.R",
+      "sha256": "30a8f9e3d4325f02bf6b916d9e6ce36f8a8b19572117ca5963ee7ebfc4d544c3"
+    },
+    {
+      "path": "reproduced/scripts/visualisation/plot_network_panel.R",
+      "sha256": "a9fb953f06a819a69a436a7b8f46c66c6970a22bdbc41fb79a47c4bedf11bd6a"
+    },
+    {
+      "path": "reproduced/scripts/visualisation/plot_network_stability.R",
+      "sha256": "5232565b6ed22cdb31b6404a394dfdb1955c5185d90ef0d8de575a2a60283e79"
+    },
+    {
+      "path": "reproduced/scripts/visualisation/viz_utils.R",
+      "sha256": "35a2a73a483ded3c4fb8a56c279ac3348ec1537252b98e1a5e23d7259aa713d3"
+    },
+    {
+      "path": "reproduced/tests/portfolio/testthat/.gitkeep",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "reproduced/tests/portfolio/testthat/helper.R",
+      "sha256": "762962fbf5bd8de86f69abc1e686263b7de81e00b263fcb1bcd2f5728127e9f2"
+    },
+    {
+      "path": "reproduced/tests/portfolio/testthat/test_data_dictionary.R",
+      "sha256": "f03a7ebfa60d4baff07093d36e6bb06bb7906cd10faacd848ad58c86883aa3e2"
+    },
+    {
+      "path": "reproduced/tests/portfolio/testthat/test_document_limits.R",
+      "sha256": "d123bd8b2afa98ef3e5fc3ff71d63635a5ca87901bbf744291900eedcc9dd9d5"
+    },
+    {
+      "path": "reproduced/tests/portfolio/testthat/test_network_explorer.R",
+      "sha256": "0626a2c48d165107bb8f7ea1d776b60405d0b2cfb91a866d329c63121358666b"
+    },
+    {
+      "path": "reproduced/tests/portfolio/testthat/test_portfolio_integration.R",
+      "sha256": "8cb9bb890c79e2691f0e62fd75e7590b975c04bc257b225a345c7afb4625422b"
+    },
+    {
+      "path": "reproduced/tests/portfolio/testthat/test_privacy_guard.R",
+      "sha256": "72981e98e516663048faa84f5e6dafb6366c18284673aac4c503bcfa478fe2ee"
+    },
+    {
+      "path": "reproduced/tests/portfolio/testthat/test_proxy_residence_structure.R",
+      "sha256": "c996f823e5751be6376d6e2aff1be0899a6bc222835b9489ede627ae127d4473"
+    },
+    {
+      "path": "reproduced/tests/portfolio/testthat/test_repro_manifest.R",
+      "sha256": "c4efbfaaf72761954ac31fc72a3dd11f5ab2fcc1c6051661e44411f04f87060b"
+    },
+    {
+      "path": "reproduced/tests/portfolio/testthat/test_validation_dashboard.R",
+      "sha256": "251b548e2b102d6aade87c65a575727116995073f98dc9b6d8f315a899ea1c08"
+    },
+    {
+      "path": "reproduced/tests/portfolio/testthat.R",
+      "sha256": "7e05266e0e2992e465d0f8d3e46e42862d3784db3480b1ad420dcbc8e07bc141"
+    },
+    {
+      "path": "reproduced/tests/test_build_public_release.py",
+      "sha256": "5694d29843ec77fa1000810fb3e1edc1a3e0b7ee3951cb09e6c9d12d1a4daf7a"
+    },
+    {
+      "path": "reproduced/tests/test_verify_outputs.py",
+      "sha256": "a36e7f79996d5546b7fb1d2fdd18c0c2fb35cc32dc08296499f345db738554a3"
+    }
+  ]
+}

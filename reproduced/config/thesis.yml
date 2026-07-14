@@ -1,0 +1,302 @@
+# Canonical configuration for the maintained SAND reproduction workflow.
+project:
+  name: thesis-reproduction
+  version: 0.1.0
+  timezone: UTC
+  paths:
+    repository_root: reproduced
+    config_dir: reproduced/config
+    raw_data_dir: reproduced/data/raw
+    processed_data_dir: reproduced/data/processed
+    intermediate_data_dir: reproduced/data/intermediate
+    external_data_dir: reproduced/data/external
+    logs_dir: reproduced/logs
+    figures_dir: reproduced/outputs/figures
+    tables_dir: reproduced/outputs/tables
+    thesis_assets_dir: reproduced/outputs/thesis
+    thesis_figures_dir: reproduced/outputs/thesis/figures
+    thesis_tables_dir: reproduced/outputs/thesis/tables
+    thesis_manifests_dir: reproduced/outputs/thesis/manifests
+    thesis_tex_dir: reproduced/outputs/thesis/tex
+    thesis_pdf_dir: reproduced/outputs/thesis/pdf
+    thesis_md_dir: reproduced/outputs/thesis/md
+  environment:
+    conda_env: r_stable
+    renv_lock: reproduced/renv.lock
+    environment_manifest: reproduced/environment.yml
+    docker_image: thesis-repro
+
+data:
+  mode: real
+  proxy_dir: reproduced/data/proxy
+  raw_files:
+    participants: reproduced/data/raw/participants.csv
+    outcomes: reproduced/data/raw/outcomes.csv
+  metadata_manifest: reproduced/logs/data_manifest.json
+  checksum_log: reproduced/logs/data_hashes.json
+  allow_missing_raw: false
+
+chapters:
+  chapter4_data_collection:
+    enabled: true
+    description: "Protected wave bundle derived from controlled REDCap CSV exports, participation coverage, and QA checks."
+    scripts_dir: reproduced/analyses/chapter4_data_collection/scripts
+    outputs_dir: reproduced/outputs/chapter4
+    required_inputs:
+      - reproduced/data/raw/list_by_wave.RData
+    qa_expectations:
+      min_participants_per_wave: 240
+      coverage_tolerance: 0.05
+    spec_parameters:
+      imputation_method:
+        - "No"
+        - "LOCF"
+      include_perception:
+        - "No"
+        - "Yes"
+      model_type:
+        - "NAM"
+        - "Linear"
+      time_periods:
+        - "Time 1"
+        - "Time 2"
+        - "Time 3"
+      reference_group:
+        - "No group"
+        - "Global only"
+        - "Peer only"
+        - "Both"
+      typical_definition:
+        - "mean"
+        - "median"
+        - "mode"
+      separate_or_together:
+        - "Separate"
+        - "Together"
+        - "Together but audit"
+      measures:
+        Separate:
+          misperceptions:
+            - "audit_c"
+            - "deno1"
+            - "deno3"
+            - "deno4"
+            - "inno1"
+            - "inno2"
+            - "inno3"
+          outcomes:
+            - "audit_score"
+            - "q1"
+            - "q2"
+            - "q3"
+            - "if_drinker"
+            - "if_bingedrinker"
+            - "if_passout"
+        Together:
+          misperceptions:
+            - "inno1 and deno1"
+            - "inno2 and deno3"
+          outcomes:
+            - "if_drinker"
+            - "if_bingedrinker"
+        "Together but audit":
+          misperceptions:
+            - "inno1 and audit_c"
+            - "inno2 and audit_c"
+            - "inno3 and audit_c"
+          outcomes:
+            - "audit_score"
+            - "audit_score"
+            - "audit_score"
+  chapter5_descriptive_norms:
+    enabled: true
+    description: "Normative Autocorrelation Models and descriptive norms summaries."
+    scripts_dir: reproduced/analyses/chapter5_descriptive_norms/scripts
+    outputs_dir: reproduced/outputs/chapter5
+    required_inputs:
+      - reproduced/outputs/chapter4/data/norms_longitudinal.rds
+    reference_results: reproduced/docs/references/quan_results.md
+    legacy_results_csv: reproduced/data/chapter5_nam_summary/final_all_summary_df.csv
+    # Local archive of October 2024 NAM fits (used when re-estimating lnam() is unavailable).
+    legacy_results_rdata: SAND_norms_1009/updated_analysis_environment.RData
+    nam:
+      set_seed: true
+      seed: 20250921
+  chapter6_injunctive_norms:
+    enabled: true
+    description: "Approval trajectories and innovation shift contrasts."
+    scripts_dir: reproduced/analyses/chapter6_injunctive_norms/scripts
+    outputs_dir: reproduced/outputs/chapter6
+    required_inputs:
+      - reproduced/outputs/chapter4/manifests/prepared_data_manifest.json
+    longitudinal_data: reproduced/outputs/chapter6/data/approval_longitudinal.rds
+    scenarios:
+      approval_abstaining:
+        key: approval_abstaining
+        label: "Approval of abstaining"
+        imputation_method: "LOCF"
+        typical_definition: "mean"
+        waves:
+          - baseline
+          - time1
+          - time2
+          - time3
+        approval_column: inno1_self
+        outcome_column: if_drinker
+        misperception_peer_column: misperception_inno1_peer
+        misperception_global_column: misperception_inno1_global
+        outcome_transform: identity
+      approval_binge_drinking:
+        key: approval_binge_drinking
+        label: "Approval of binge drinking"
+        imputation_method: "LOCF"
+        typical_definition: "mean"
+        waves:
+          - baseline
+          - time1
+          - time2
+          - time3
+        approval_column: inno2_self
+        outcome_column: if_bingedrinker
+        misperception_peer_column: misperception_inno2_peer
+        misperception_global_column: misperception_inno2_global
+        outcome_transform: identity
+      approval_passing_out:
+        key: approval_passing_out
+        label: "Approval of passing out"
+        imputation_method: "LOCF"
+        typical_definition: "mean"
+        waves:
+          - baseline
+          - time1
+          - time2
+          - time3
+        approval_column: inno3_self
+        outcome_column: if_passout
+        misperception_peer_column: misperception_inno3_peer
+        misperception_global_column: misperception_inno3_global
+        outcome_transform: positive_to_one
+  chapter7_saom:
+    enabled: true
+    description: "RSiena estimation and diagnostics for Chapter 7."
+    scripts_dir: reproduced/analyses/chapter7_saom/scripts
+    outputs_dir: reproduced/outputs/chapter7
+    cache_dir: reproduced/outputs/chapter7/cache
+    model_specs_file: reproduced/config/scenarios/saom_models.yml
+    default_model: base
+    required_inputs:
+      - reproduced/outputs/chapter4/data/network_arrays.rds
+      - reproduced/outputs/chapter5/tables/nam_summary.csv
+    baseline_model:
+      path: reproduced/outputs/chapter7/cache/base_fit.RData
+      description: "Baseline SAOM fit regenerated from sample data for Chapter 7 scaffolding."
+    target_coefficients:
+      peer_influence: 1.88
+      behaviour_linear_shape: -0.13
+    placeholder:
+      enabled: false
+      reason: "Placeholders are disabled. RSiena must be installed and estimation must run from real or proxy data."
+    resume:
+      enabled: true
+      checkpoint_dir: reproduced/outputs/chapter7/checkpoints
+      autoload: latest
+      preserve_on_refresh: false
+  chapter8_interventions:
+    enabled: false
+    description: "Scenario simulations built on RSiena results."
+    scripts_dir: reproduced/analyses/chapter8_interventions/scripts
+    outputs_dir: reproduced/outputs/chapter8
+    scenario_manifest: reproduced/outputs/chapter8/logs/scenario_manifest.json
+    default_batches: 10
+
+thesis:
+  packaging:
+    pack_script: reproduced/scripts/utils/pack_thesis_outputs.R
+    aggregate_root: reproduced/outputs/thesis
+    tables_dir: reproduced/outputs/thesis/tables
+    figures_dir: reproduced/outputs/thesis/figures
+    manifests_dir: reproduced/outputs/thesis/manifests
+    tables_manifest: reproduced/outputs/thesis/manifests/tables_manifest.json
+    figures_manifest: reproduced/outputs/thesis/manifests/figures_manifest.json
+    summary_manifest: reproduced/outputs/thesis/manifests/packaging_summary.json
+    include_chapters:
+      - chapter4_data_collection
+      - chapter5_descriptive_norms
+      - chapter6_injunctive_norms
+      - chapter7_saom
+      - chapter8_interventions
+    asset_patterns:
+      tables:
+        - "*.csv"
+        - "*.tsv"
+        - "*.xlsx"
+        - "*.tex"
+      figures:
+        - "*.png"
+        - "*.jpg"
+        - "*.jpeg"
+        - "*.pdf"
+        - "*.svg"
+  build:
+    render_script: reproduced/scripts/thesis/render_thesis.R
+    project_dir: reproduced/docs/thesis
+    source_file: reproduced/docs/thesis/index.qmd
+    default_formats:
+      - latex
+      - pdf
+
+rsiena:
+  package_version: "1.4.7"
+  source_url: "https://cran.r-project.org/src/contrib/Archive/RSiena/RSiena_1.4.7.tar.gz"
+  use_cached_results: false
+  cache_strategy: reuse
+  project_seed: 2022
+  resume:
+    enabled: false
+    checkpoint_dir: reproduced/outputs/chapter7/checkpoints
+    target_phase: null
+    convergence_tolerance: null
+  installation:
+    script_path: reproduced/scripts/00_setup/install_rsiena.R
+    cran_repo: "https://packagemanager.posit.co/cran/latest"
+    source_url: "https://cran.r-project.org/src/contrib/Archive/RSiena/RSiena_1.4.7.tar.gz"
+    download_dir: reproduced/data/vendor/rsiena
+    library_dir: reproduced/.Rlib
+    log_path: reproduced/outputs/chapter7/logs/rsiena_install_status.json
+  estimation:
+    seed: 2022
+    n3: 10000
+    n2: 200
+    nsub: 4
+    firstg: 0.1
+    reduceg: 0.5
+    diagonalize: 0.2
+    dolby: true
+    max_iterations: 8
+    target_phase_tolerance: 0.1
+  diagnostics:
+    save_convergence_plots: true
+    diagnostics_dir: reproduced/outputs/chapter7/logs
+    report_file: reproduced/outputs/chapter7/logs/saom_diagnostics.json
+    convergence_tolerance: 0.1
+    target_tolerance: 0.1
+  parallelization:
+    enabled: false
+    cores: 32
+    cluster_type: multisession
+
+visualisation:
+  microstep:
+    n_chains: 5           # chains to extract (1–20)
+    chain_index: 1         # which chain to animate (1-indexed)
+    fps: 2                 # frames per second
+    node_scale: 1.5        # node size multiplier
+    output_format: "html"  # "html" or "both" (html + mp4)
+  interactive_network:
+    physics: true          # enable vis.js physics layout
+    node_scale: 1.0        # node size multiplier
+    wave_captions:
+      2: "Baseline network at Wave 2 — initial friendship nominations and AUDIT-C scores establish the starting point for longitudinal analysis."
+      4: "Wave 4 — network density increases as participants form new connections; early signs of homophily in drinking behaviour emerge."
+      5: "Wave 5 — reciprocity strengthens and clustering around similar AUDIT-C scores becomes more pronounced."
+      6: "Wave 6 — final observation; peer influence effects are visible as connected participants show converging drinking patterns."
